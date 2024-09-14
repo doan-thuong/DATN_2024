@@ -82,6 +82,27 @@
             <h4 style="color:  rgb(0, 95, 0); text-align: center;">INSTAGRAM</h4>
         </div>
     </footer>
+
+    <script>
+        var app = angular.module("myApp", ['ngRoute'])
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/home', {
+                    templateUrl: 'view/home.html',
+                    controller: homeCtrl,
+                })
+                .when('/information', {
+                    templateUrl: 'view/information.html',
+                    controller: informationCtrl,
+                })
+                .otherwise({
+                    redirectTo: '/home',
+                })
+        })
+
+        app.controller('myCtrl', function ($scope) { })
+    </script>
 </body>
 
 </html>
