@@ -1,0 +1,91 @@
+nav {
+    display: flex;
+    width: 95%;
+    height: 60px;
+    margin: 20px auto;
+    padding: 5px 10px;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.5px solid lightgrey;
+    box-shadow: 3px 3px 2px rgb(205, 205, 205);
+    border-radius: 35px;
+}
+
+#information {
+    display: flex;
+    gap: 15px;
+}
+
+#notification {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(44, 44, 44);
+    border-radius: 50%;
+    cursor: pointer;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+    border: none;
+}
+
+.bell {
+    width: 18px;
+}
+
+.bell path {
+    fill: white;
+}
+
+#account {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 44, 44);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#text-acc {
+    color: white;
+}
+
+footer {
+    display: grid;
+    background-color: rgb(202, 230, 175);
+    padding: 20px;
+    margin-top: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.infor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.policy {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    h3 {
+        color: rgb(0, 95, 0);
+    }
+}
+
+span {
+    color: rgb(0, 95, 0);
+}

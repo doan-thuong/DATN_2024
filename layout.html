@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="./style/layout.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+
+    <script src="./controller/layout.js"></script>
+    <script src="./controller/home.js"></script>
+    <script src="./controller/information.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+    <nav>
+        <div id="logo">
+            <a href="#!/home">
+                <img src="" alt="Logo">
+            </a>
+        </div>
+        <div id="menu">
+
+        </div>
+        <div id="information">
+            <div id="notification">
+                <svg viewBox="0 0 448 512" class="bell">
+                    <path
+                        d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z">
+                    </path>
+                </svg>
+            </div>
+            <div id="account">
+                <a href="#!/information">
+                    <p id="text-acc">Đ</p>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div ng-controller="myCtrl">
+        <div ng-view></div>
+    </div>
+
+    <footer>
+        <div>
+            <img src="" alt="Logo hoặc ảnh tượng trưng">
+            <p>Chúng tôi hi vọng tất cả người tiêu dùng sẽ được sử dụng những sản phẩm chất lượng, giá trị, an toàn và
+                nâng cao sức khỏe.</p>
+        </div>
+        <div class="infor">
+            <div class="policy">
+                <h4 style="color:  rgb(0, 95, 0);">CHÍNH SÁCH</h4>
+                <a href="">Chính sách thanh toán</a>
+                <a href="">Chính sách về sử dụng</a>
+                <a href="">Chính sách bảo mật</a>
+                <a href="">Quà tặng tri ân</a>
+            </div>
+            <div>
+                <h4 style="color:  rgb(0, 95, 0);">THÔNG TIN CHUNG</h4>
+                <small><span>Địa chỉ: </span> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội, Việt Nam</small>
+                <br>
+                <small><span>Điện thoại: </span> 0987789543</small>
+                <h4 style="color:  rgb(0, 95, 0);">LIÊN KẾT SÀN</h4>
+                <div style="display: flex; gap: 5px;">
+                    <a href="https://zalo.me"><img src="https://zaloweb.me/wp-content/uploads/2022/01/zalo-web.jpg"
+                            alt="Zalo" width="20px" height="20px"></a>
+                    <a href="https://www.facebook.com"><img src="https://www.facebook.com/images/fb_icon_325x325.png"
+                            alt="Facebook" width="20px" height="20px"></a>
+                    <a href="https://www.instagram.com"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png"
+                            alt="Instagram" width="20px" height="20px"></a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h4 style="color:  rgb(0, 95, 0); text-align: center;">INSTAGRAM</h4>
+        </div>
+    </footer>
+</body>
+
+</html>
