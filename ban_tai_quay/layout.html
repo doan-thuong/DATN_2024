@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý cửa hàng</title>
+
+    <link rel="stylesheet" href="./style/layout.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+
+    <script src="./script/layout.js"></script>
+
+    <script src="./script/sanphamCtrl.js"></script>
+    <script src="./script/giamgia.js"></script>
+    <script src="./script/banhang.js"></script>
+    <script src="./script/nhansu.js"></script>
+    <script src="./script/khachhang.js"></script>
+    <script src="./script/thongke.js"></script>
+
+</head>
+
+<body ng-app="myApp">
+    <nav>
+        <div class="head-nav">
+            <div id="logo">
+                <img src="" alt="Logo">
+                <h3>Loopy</h3>
+            </div>
+            <div id="control-nav">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTNZW6PL4JspZ3qgXrEJB6PN_vbXZrnlSOhw&s"
+                    width="60px" height="50px">
+            </div>
+        </div>
+        <div id="body-nav">
+            <ul>
+                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9Vt0xzrT2ywY0udzw9luuwq7XXS__Pj8yb6hpXRt6fgMZkf1DJRMTPyTvyNmTtYd1Y8&usqp=CAU"
+                        width="23px" height="23px">Sản phẩm</li>
+                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6GLLy87AtDzMdy2zognPHmrrhSEiaqtoOEA&s"
+                        width="28px" height="28px"> Giảm giá</li>
+                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYdfuYtWLkowMVuTYOviYdWZ5gjZsXM90Nzg&s"
+                        width="40px" height="40px"> Bán hàng</li>
+                <li><img src="https://png.pngtree.com/png-vector/20190331/ourlarge/pngtree-employee-identity-card-icon-vector-in-outline-or-line-style-icon-png-image_876939.jpg"
+                        width="37px" height="37px"> Nhân sự</li>
+                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm1d-m9ugUB5As6rIj5OyBDTI2d19u9yj4eA&s"
+                        width="30px" height="30px"> Khách hàng</li>
+                <li><img src="https://media.istockphoto.com/id/1022030714/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-b%C3%A1o-c%C3%A1o-th%E1%BB%91ng-k%C3%AA.jpg?s=612x612&w=0&k=20&c=pjgjdL3Ui91jISScQTM1IAXt_CyR31at3Bk1lO2F19M="
+                        width="35px" height="35px"> Thống kê</li>
+            </ul>
+        </div>
+        <div id="control-account">
+            <button id="logout"><img id="icon-logout"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_9kJjX_ZaIFdanRsLeKYkaVkdmWJWH0uoCg&s">
+                Đăng xuất</button>
+        </div>
+    </nav>
+    <main ng-controller="myCtrl">
+        <div ng-view></div>
+    </main>
+</body>
+
+</html>
