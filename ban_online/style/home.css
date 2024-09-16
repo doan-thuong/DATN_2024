@@ -11,36 +11,25 @@
     .ribbon-wrapper {
         position: relative;
         width: 320px;
-        /* Kích thước sản phẩm */
         margin-bottom: 20px;
-    }
 
-    /* Ribbon */
-    .ribbon {
-        position: absolute;
-        width: 65px;
-        top: 0px;
-        right: -35px;
-        background-color: red;
-        color: white;
-        padding: 5px 15px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        transform: rotate(45deg);
-        z-index: 1;
+        .ribbon {
+            position: absolute;
+            width: 65px;
+            top: 0px;
+            right: -35px;
+            background-color: red;
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(45deg);
+            z-index: 1;
 
-        &:hover {
-            box-shadow: 0 0 3px 4px rgba(160, 160, 160, 0.3);
-        }
-    }
-
-    .name-product {
-        text-align: center;
-        margin-top: 5px;
-
-        h4 {
-            margin: 0 auto;
+            &:hover {
+                box-shadow: 0 0 3px 4px rgba(160, 160, 160, 0.3);
+            }
         }
     }
 
@@ -90,6 +79,20 @@
                 padding: 0 2px;
 
                 button {
+                    width: 95px;
+                    height: 30px;
+                    border: none;
+                    border-radius: 20px;
+                    background-color: rgba(255, 0, 0, 0.7);
+                    color: white;
+                    font-family: 'Times New Roman', Times, serif;
+                    font-size: 14px;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(255, 0, 0, 0.9);
+                    }
+
                     .cartIcon {
                         width: 14px;
                         height: fit-content;
@@ -105,22 +108,17 @@
                     }
                 }
             }
+        }
+    }
 
-            button {
-                width: 95px;
-                height: 30px;
-                border: none;
-                border-radius: 20px;
-                background-color: rgba(255, 0, 0, 0.7);
-                color: white;
-                font-family: 'Times New Roman', Times, serif;
-                font-size: 14px;
+    .name-product {
+        text-align: center;
+        margin-top: 5px;
+        content: "";
 
-                &:hover {
-                    cursor: pointer;
-                    background-color: rgba(255, 0, 0, 0.9);
-                }
-            }
+        .text-name {
+            content: "";
+            margin: 0 auto;
         }
     }
 
@@ -147,9 +145,6 @@
             button {
                 width: 100px;
                 height: 40px;
-                /* position: absolute;
-                right: 0;
-                bottom: 0px; */
                 font-family: 'Times New Roman', Times, serif;
                 border: 1px solid rgba(70, 70, 70, 0.3);
                 background: linear-gradient(to left, white, rgb(255, 255, 205));
