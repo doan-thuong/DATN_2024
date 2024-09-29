@@ -1,10 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const control_nav = document.getElementById("control-nav")
     const logo = document.getElementById("logo")
     const body_nav = document.getElementById("body-nav")
     const control_acc = document.getElementById("control-account")
     const nav = document.querySelector("nav")
+    const iconMenu = document.getElementById("icon-menu")
 
     let isOpen = true
 
@@ -18,14 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     logo.style.display = "none"
                     body_nav.style.display = "none"
                     control_acc.style.display = "none"
+                    iconMenu.src = "https://cdn-icons-png.flaticon.com/512/3388/3388823.png"
 
                 } else {
 
-                    nav.style.width = "220px"
+                    nav.style.width = "180px"
                     nav.style.borderRight = "0.5px solid rgb(210, 210, 210)"
                     logo.style.display = "flex"
                     body_nav.style.display = "block"
                     control_acc.style.display = "flex"
+                    iconMenu.src = "https://cdn4.iconfinder.com/data/icons/user-interface-131/32/close-512.png"
 
                 }
                 isOpen = !isOpen // Chuyển trạng thái

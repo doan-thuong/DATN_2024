@@ -1,8 +1,37 @@
 <div id="introduce">
+    <hr>
+    <form action="" id="find">
+        <input id="text-find" type="text" placeholder="Tìm kiếm ...">
+        <div class="btn-form">
+            <button id="btn-loc"><img id="icon-loc" alt="Lọc"
+                    src="https://cdn-icons-png.freepik.com/512/8338/8338790.png"></button>
+            <button id="btn-find">Tìm kiếm</button>
+        </div>
+    </form>
 
+    <form action="" id="filter" style="display: none;">
+        <div class="category-form">
+            <label for="category-filter">Loại</label>
+            <select name="" id="category-filter">
+                <option value="">-- Chọn loại --</option>
+                <option value="">abc</option>
+                <option value="">xyz</option>
+            </select>
+        </div>
+        <p>|</p>
+        <div class="price-form">
+            <label for=" price-min">Giá</label>
+            <input type=" text" id="price-min" placeholder="0">
+            <p>VND</p>
+            <p>-</p>
+            <input type="text" id="price-max" placeholder="1,000,000,000">
+            <p>VND</p>
+        </div>
+    </form>
+    <hr>
 </div>
-<div id="form-product">
-    <div class="ribbon-wrapper">
+<div class="form-product">
+    <div class="ribbon-wrapper hidden">
         <div class="ribbon">-50%</div>
     </div>
 
@@ -21,11 +50,12 @@
             </div>
         </div>
     </div>
-    <div class="name-product">
-        <h4 class="text-name">Áo thun MLB Basic Mega</h4>
-    </div>
+
     <div class="infor-product">
-        <div class="content-product">
+        <div class="name-product">
+            <h4 class="text-name">Áo thun MLB Basic Mega</h4>
+        </div>
+        <!-- <div class="content-product">
             <div>
                 <p>Chất liệu: Thun</p>
                 <p>Màu sắc: Xanh dương</p>
@@ -34,11 +64,11 @@
                 <p>Thương hiệu: MLB</p>
                 <p>Giới tính: Unisex</p>
             </div>
-        </div>
+        </div> -->
         <div class="buy">
             <div>
-                <p style="text-decoration: line-through;">Giá: 150,000đ</p>
-                <h3 style="color: red;">Giá ưu đãi: 75,000đ</h3>
+                <p class="price">Giá: 150,000đ</p>
+                <h3 class="price-discount hidden" style="color: red;">Giá ưu đãi: 75,000đ</h3>
             </div>
             <button class="button">Mua ngay</button>
         </div>

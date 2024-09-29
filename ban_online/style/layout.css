@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 nav {
     display: flex;
     width: 95%;
@@ -9,6 +14,21 @@ nav {
     border: 0.5px solid lightgrey;
     box-shadow: 3px 3px 2px rgb(205, 205, 205);
     border-radius: 35px;
+}
+
+#img-logo {
+    width: 90px;
+    height: 50px;
+    transition: transform 0.4s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(6px 3px 4px rgb(100, 100, 100));
+    }
+}
+
+#img-logo.selected {
+    border: none;
 }
 
 #information {
@@ -23,16 +43,18 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(115, 180, 240);
     border-radius: 50%;
     cursor: pointer;
     transition-duration: .3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
     border: none;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in;
 
     &:hover {
         transform: scale(1.1);
+        background-color: rgb(75, 170, 255);
+
     }
 }
 
@@ -51,14 +73,16 @@ nav {
     text-align: center;
     justify-content: center;
     align-items: center;
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(115, 180, 240);
     color: white;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in;
 
     &:hover {
         transform: scale(1.1);
+        background-color: rgb(75, 170, 255);
+
     }
 
     a {
@@ -72,12 +96,34 @@ nav {
 
 footer {
     display: grid;
-    background-color: rgb(202, 230, 175);
-    padding: 20px;
+    background-color: rgb(170, 205, 230);
+    padding: 10px;
     margin-top: 20px;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     gap: 10px;
+}
+
+.footer-content {
+    display: grid;
+    align-items: center;
+    padding: 20px;
+
+    p {
+        text-align: center;
+    }
+}
+
+#logo-footer {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin: auto;
+    transition: transform 0.4s ease-in;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .infor {
@@ -93,6 +139,10 @@ footer {
     a {
         text-decoration: none;
         color: black;
+
+        &:hover {
+            color: blue;
+        }
     }
 
     h3 {

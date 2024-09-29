@@ -10,6 +10,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/information.html',
             controller: informationCtrl,
         })
+        .when('/account', {
+            templateUrl: 'view/account.html',
+            controller: accountCtrl,
+        })
         .otherwise({
             redirectTo: '/home',
         })
