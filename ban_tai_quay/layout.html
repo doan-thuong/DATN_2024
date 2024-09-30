@@ -6,58 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý cửa hàng</title>
 
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./style/layout.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <span class="text">Loopy</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="#!/sanpham">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Product</span>
+                </a>
+            </li>
+            <li>
+                <a href="#!/banhang">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span class="text">My Store</span>
+                </a>
+            </li>
+            <li>
+                <a href="#!/giamgia">
+                    <i class='bx bxs-discount'></i>
+                    <span class="text">Discount</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">Personnel</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user-pin'></i>
+                    <span class="text">Client</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bxs-chart"></i>
+                    <span class="text">Charts</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu' id="bx_menu"></i>
+            <form action="#">
+                <div class="form-input" style="display: none;">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="">
+            </a>
+        </nav>
+    </section>
+    <main>
+        <div ng-view></div>
+    </main>
 
     <script src="./script/layout.js"></script>
 
-    <script src="./script/sanphamCtrl.js"></script>
+    <script src="./script/sanpham.js"></script>
     <script src="./script/giamgia.js"></script>
     <script src="./script/banhang.js"></script>
     <script src="./script/nhansu.js"></script>
     <script src="./script/khachhang.js"></script>
     <script src="./script/thongke.js"></script>
-
-</head>
-
-<body ng-app="myApp">
-    <nav>
-        <div class="head-nav">
-            <div id="logo">
-                <img src="https://uncutpoint.com/wp-content/uploads/loopy-logo-300x120.png" alt="Logo">
-            </div>
-            <div id="control-nav">
-                <img id="icon-menu" src="https://cdn4.iconfinder.com/data/icons/user-interface-131/32/close-512.png"
-                    width="40px" height="40px">
-            </div>
-        </div>
-        <div id="body-nav">
-            <ul>
-                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk9Vt0xzrT2ywY0udzw9luuwq7XXS__Pj8yb6hpXRt6fgMZkf1DJRMTPyTvyNmTtYd1Y8&usqp=CAU"
-                        width="23px" height="23px">Sản phẩm</li>
-                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6GLLy87AtDzMdy2zognPHmrrhSEiaqtoOEA&s"
-                        width="28px" height="28px"> Giảm giá</li>
-                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYdfuYtWLkowMVuTYOviYdWZ5gjZsXM90Nzg&s"
-                        width="40px" height="40px"> Bán hàng</li>
-                <li><img src="https://png.pngtree.com/png-vector/20190331/ourlarge/pngtree-employee-identity-card-icon-vector-in-outline-or-line-style-icon-png-image_876939.jpg"
-                        width="37px" height="37px"> Nhân sự</li>
-                <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm1d-m9ugUB5As6rIj5OyBDTI2d19u9yj4eA&s"
-                        width="30px" height="30px"> Khách hàng</li>
-                <li><img src="https://media.istockphoto.com/id/1022030714/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-b%C3%A1o-c%C3%A1o-th%E1%BB%91ng-k%C3%AA.jpg?s=612x612&w=0&k=20&c=pjgjdL3Ui91jISScQTM1IAXt_CyR31at3Bk1lO2F19M="
-                        width="35px" height="35px"> Thống kê</li>
-            </ul>
-        </div>
-        <div id="control-account">
-            <button id="logout"><img id="icon-logout"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_9kJjX_ZaIFdanRsLeKYkaVkdmWJWH0uoCg&s">
-                Đăng xuất</button>
-        </div>
-    </nav>
-    <main ng-controller="myCtrl">
-        <div ng-view></div>
-    </main>
 </body>
 
 </html>

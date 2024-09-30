@@ -1,46 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const control_nav = document.getElementById("control-nav")
-    const logo = document.getElementById("logo")
-    const body_nav = document.getElementById("body-nav")
-    const control_acc = document.getElementById("control-account")
-    const nav = document.querySelector("nav")
-    const iconMenu = document.getElementById("icon-menu")
-
-    let isOpen = true
-
-    if (control_nav) {
-        control_nav.addEventListener("click", () => {
-            if (nav) {
-                if (isOpen) {
-
-                    nav.style.width = "60px"
-                    nav.style.borderRight = "none"
-                    logo.style.display = "none"
-                    body_nav.style.display = "none"
-                    control_acc.style.display = "none"
-                    iconMenu.src = "https://cdn-icons-png.flaticon.com/512/3388/3388823.png"
-
-                } else {
-
-                    nav.style.width = "180px"
-                    nav.style.borderRight = "0.5px solid rgb(210, 210, 210)"
-                    logo.style.display = "flex"
-                    body_nav.style.display = "block"
-                    control_acc.style.display = "flex"
-                    iconMenu.src = "https://cdn4.iconfinder.com/data/icons/user-interface-131/32/close-512.png"
-
-                }
-                isOpen = !isOpen // Chuyển trạng thái
-            } else {
-                console.error("Element 'nav' not found.")
-            }
-
-        })
-    } else {
-        console.error("Element 'control-nav' not found.")
-    }
-})
-
 var app = angular.module("myApp", ['ngRoute'])
 
 app.config(function ($routeProvider) {
@@ -74,4 +31,26 @@ app.config(function ($routeProvider) {
         })
 })
 
-app.controller('myCtrl', function () { })
+app.controller('myCtrl', function ($scope, $http) { })
+
+document.addEventListener('DOMContentLoaded', function () {
+    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a')
+
+    allSideMenu.forEach(item => {
+        const li = item.parentElement
+
+        item.addEventListener('click', function () {
+            allSideMenu.forEach(i => {
+                i.parentElement.classList.remove('active')
+            })
+            li.classList.add('active')
+        })
+    })
+
+    const menuBar = document.querySelector('#bx_menu')
+    const sidebar = document.getElementById('sidebar')
+
+    menuBar.addEventListener('click', function () {
+        sidebar.classList.toggle('hide');
+    })
+})
