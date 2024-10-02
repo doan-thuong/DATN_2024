@@ -1,3 +1,3 @@
-app.banhangCtrl = ($scope) => {
+window.banhangCtrl = function ($scope) {
     const url = ""
 }

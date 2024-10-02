@@ -27,7 +27,7 @@ app.config(function ($routeProvider) {
             controller: thongkeCtrl
         })
         .otherwise({
-            redirectTo: '/sanpham'
+            redirectTo: '/sanpham',
         })
 })
 

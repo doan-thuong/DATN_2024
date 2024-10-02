@@ -1,3 +1,3 @@
-app.nhansuCtrl = ($scope) => {
+window.nhansuCtrl = function ($scope) {
     const url = ""
 }

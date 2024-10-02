@@ -1,3 +1,3 @@
-app.thongkeCtrl = ($scope) => {
+window.thongkeCtrl = function ($scope) {
     const url = ""
 }

@@ -1,3 +1,3 @@
-app.khachhangCtrl = ($scope) => {
+window.khachhangCtrl = function ($scope) {
     const url = ""
 }

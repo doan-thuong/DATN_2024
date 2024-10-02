@@ -9,11 +9,20 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./style/layout.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
+
+    <script src="./script/layout.js"></script>
+
+    <script src="./script/sanpham.js"></script>
+    <script src="./script/giamgia.js"></script>
+    <script src="./script/banhang.js"></script>
+    <script src="./script/nhansu.js"></script>
+    <script src="./script/khachhang.js"></script>
+    <script src="./script/thongke.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp">
     <section id="sidebar">
         <a href="#" class="brand">
             <span class="text">Loopy</span>
@@ -22,37 +31,37 @@
             <li class="active">
                 <a href="#!/sanpham">
                     <i class='bx bxs-dashboard'></i>
-                    <span class="text">Product</span>
+                    <span class="text">Sản phẩm</span>
                 </a>
             </li>
             <li>
                 <a href="#!/banhang">
                     <i class='bx bxs-shopping-bag-alt'></i>
-                    <span class="text">My Store</span>
+                    <span class="text">Cửa hàng</span>
                 </a>
             </li>
             <li>
                 <a href="#!/giamgia">
                     <i class='bx bxs-discount'></i>
-                    <span class="text">Discount</span>
+                    <span class="text">Giảm giá</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class='bx bxs-group'></i>
-                    <span class="text">Personnel</span>
+                    <span class="text">Nhân sự</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class='bx bxs-user-pin'></i>
-                    <span class="text">Client</span>
+                    <span class="text">Khách hàng</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="bx bxs-chart"></i>
-                    <span class="text">Charts</span>
+                    <span class="text">Thống kê</span>
                 </a>
             </li>
         </ul>
@@ -60,7 +69,7 @@
             <li>
                 <a href="#" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
-                    <span class="text">Logout</span>
+                    <span class="text">Đăng xuất</span>
                 </a>
             </li>
         </ul>
@@ -84,18 +93,9 @@
             </a>
         </nav>
     </section>
-    <main>
+    <main ng-controller="myCtrl">
         <div ng-view></div>
     </main>
-
-    <script src="./script/layout.js"></script>
-
-    <script src="./script/sanpham.js"></script>
-    <script src="./script/giamgia.js"></script>
-    <script src="./script/banhang.js"></script>
-    <script src="./script/nhansu.js"></script>
-    <script src="./script/khachhang.js"></script>
-    <script src="./script/thongke.js"></script>
 </body>
 
 </html>
