@@ -322,3 +322,7 @@ body {
 #content nav #switch-mode:checked+.switch-mode::before {
     left: calc(100% - (25px - 4px) - 2px);
 }
+
+main {
+    padding: 5px;
+}

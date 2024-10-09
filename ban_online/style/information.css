@@ -1,0 +1,116 @@
+.detailed-information {
+    display: flex;
+    padding: 0 25px;
+}
+
+.image {
+    width: 45%;
+    height: 300px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 300px;
+        height: 300px;
+        max-width: 600px;
+        max-height: 280px;
+    }
+}
+
+.description {
+    width: 65%;
+    display: grid;
+    gap: 20px;
+}
+
+.category-description {
+    display: flex;
+    gap: 20px;
+}
+
+.control-description {
+    display: flex;
+    gap: 40px;
+}
+
+.add-cart,
+.buy-now {
+    width: 150px;
+    height: 45px;
+    border: .5px solid red;
+    border-radius: 20px;
+    background-color: rgb(255, 90, 90);
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform .8s ease;
+    will-change: transform;
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: red;
+    }
+}
+
+.btn-category {
+    width: 80px;
+    height: 45px;
+    border-radius: 15px;
+    border: 1px solid rgb(80, 80, 255);
+    background-color: rgba(225, 225, 255, 0.8);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: rgb(80, 80, 255);
+        color: whitesmoke;
+    }
+}
+
+.active {
+    background-color: rgb(80, 80, 255);
+    color: whitesmoke;
+}
+
+.constituent,
+.instructions-for-use {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.title-constituent h3,
+.title-instructions h3 {
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.content-constituent,
+.content-instructions {
+    /* display: block; */
+    padding-left: 60px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 2s ease, height 1.2s ease;
+}
+
+.show {
+    opacity: 1;
+    height: auto;
+}
+
+.general-information {
+    display: grid;
+    padding: 0 25px;
+    gap: 10px;
+}

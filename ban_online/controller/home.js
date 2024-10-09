@@ -5,12 +5,11 @@ window.homeCtrl = function ($scope) {
     let btn_filter = document.querySelector("#btn-loc")
     let form_filter = document.querySelector("#filter")
 
-    btn_filter.addEventListener('click', function () {
-        if (form_filter.style.display == "none") {
-            form_filter.style.display = "flex"
-        } else {
-            form_filter.style.display = "none"
-        }
+    btn_filter.addEventListener('click', function (event) {
+        event.preventDefault()
+        let dpl = form_filter.style
+
+        dpl.display == "none" ? dpl.display = "flex" : dpl.display = "none"
     })
 
     let isDiscount = true
