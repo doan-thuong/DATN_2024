@@ -31,6 +31,10 @@
     }
 }
 
+label {
+    user-select: none;
+}
+
 .btn-form {
     display: flex;
     justify-content: center;
@@ -104,33 +108,23 @@
     }
 }
 
+.select-category {
+    display: flex;
+    gap: 25px;
+}
+
 .price-form {
     display: flex;
     gap: 15px;
     align-items: center;
 }
 
-#price-min {
+.price-filter {
     width: 120px;
     height: 40px;
     padding: 0;
     border: .5px solid rgb(130, 205, 255);
-    border-radius: 15px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 15px;
-    padding-left: 10px;
-
-    &:focus {
-        outline: none;
-    }
-}
-
-#price-max {
-    width: 120px;
-    height: 40px;
-    padding: 0;
-    border: .5px solid rgb(130, 205, 255);
-    border-radius: 15px;
+    border-radius: 10px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 15px;
     padding-left: 10px;
@@ -248,16 +242,22 @@ hr {
     padding: 0 15px;
 
     button {
+        display: grid;
+        justify-content: center;
+        align-items: center;
         width: 65px;
         height: 30px;
-        border: 1px solid blue;
+        border: none;
         border-radius: 20px;
         background-color: rgb(140, 140, 255);
         color: white;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 14px;
-        overflow: hidden;
+        font-size: 16px;
         cursor: pointer;
+        transition: transform .5s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 }
 
@@ -309,16 +309,15 @@ hr {
         font-family: 'Times New Roman', Times, serif;
         font-size: 16px;
         color: white;
-        border: 1px solid blue;
-        border-radius: 15px;
+        border: none;
+        border-radius: 20px;
         background-color: rgb(140, 140, 255);
-        transition: border-radius 1s ease;
+        cursor: pointer;
+        transition: transform .6s ease;
 
         &:hover {
             content: '';
-            /* background: linear-gradient(to left, rgb(255, 33, 33), rgb(255, 33, 33)); */
-            border-radius: 20px;
-            cursor: pointer;
+            transform: scale(1.04);
         }
     }
 }

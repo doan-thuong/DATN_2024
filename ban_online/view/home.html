@@ -13,21 +13,27 @@
         <div class="category-form">
             <label for="category-filter">Danh mục:</label>
             <div class="select-category">
-                <input type="checkbox" id="vitamin">
-                <label for="vitamin">Vitamin</label>
-                <input type="checkbox" id="cai-thien-da">
-                <label for="cai-thien-da">Cải thiện da</label>
-                <input type="checkbox" id="cham-soc-suc-khoe">
-                <label for="cham-soc-suc-khoe">Chăm sóc sức khỏe</label>
+                <div>
+                    <input type="checkbox" id="vitamin">
+                    <label for="vitamin">Vitamin</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="cai-thien-da">
+                    <label for="cai-thien-da">Cải thiện da</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="cham-soc-suc-khoe">
+                    <label for="cham-soc-suc-khoe">Chăm sóc sức khỏe</label>
+                </div>
             </div>
         </div>
         <p>|</p>
         <div class="price-form">
             <label for=" price-min">Giá</label>
-            <input type=" text" id="price-min" placeholder="0">
+            <input type=" text" id="price-min" class="price-filter" placeholder="0">
             <p>VND</p>
             <p>-</p>
-            <input type="text" id="price-max" placeholder="1,000,000,000">
+            <input type="text" id="price-max" class="price-filter" placeholder="1,000,000,000">
             <p>VND</p>
         </div>
     </form>
@@ -58,7 +64,7 @@
                                 </path>
                             </svg>
                         </button>
-                        <button><i class='bx bx-heart'></i></button>
+                        <button><i class='bx bxs-heart'></i></button>
                     </div>
                 </div>
             </div>
@@ -72,7 +78,7 @@
                         <p class="price">Giá: 150,000đ</p>
                         <h3 class="price-discount hidden" style="color: red;">Giá ưu đãi: 75,000đ</h3>
                     </div>
-                    <button class="button">Mua ngay</button>
+                    <a href="#!/information"><button class="button">Mua ngay</button></a>
                 </div>
             </div>
         </div>
@@ -103,7 +109,7 @@
                                 </path>
                             </svg>
                         </button>
-                        <button><i class='bx bx-heart'></i></button>
+                        <button><i class='bx bxs-heart'></i></button>
                     </div>
                 </div>
             </div>

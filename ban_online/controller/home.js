@@ -12,7 +12,7 @@ window.homeCtrl = function ($scope) {
         dpl.display == "none" ? dpl.display = "flex" : dpl.display = "none"
     })
 
-    let isDiscount = true
+    let isDiscount = false
     let priceElements = document.getElementsByClassName('price')
     let discountElements = document.getElementsByClassName('price-discount')
     let ribbonElements = document.getElementsByClassName('ribbon-wrapper')
@@ -38,6 +38,28 @@ window.homeCtrl = function ($scope) {
             ribbonElement.classList.remove('hidden')
         } else {
             ribbonElement.classList.add('hidden')
+        }
+    })
+
+    const prc_min = document.querySelector('#price-min')
+    const prc_max = document.querySelector('#price-max')
+
+    prc_min.addEventListener('input', (e) => {
+        prc_min.value = prc_min.value.replace(/\D/g, '')
+
+        if (parseInt(prc_min.value) > parseInt(prc_max.value)) {
+            prc_min.style.border = '1px solid red'
+        } else {
+            prc_min.style.border = '.5px solid rgb(130, 205, 255)'
+        }
+    })
+    prc_max.addEventListener('input', (e) => {
+        prc_max.value = prc_max.value.replace(/\D/g, '')
+
+        if (parseInt(prc_max.value) < parseInt(prc_min.value)) {
+            prc_max.style.border = '1px solid red'
+        } else {
+            prc_max.style.border = '.5px solid rgb(130, 205, 255)'
         }
     })
 }
