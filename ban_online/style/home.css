@@ -177,7 +177,7 @@ hr {
     margin: auto;
     padding: 10px;
     overflow: hidden;
-    border: .8px solid rgba(180, 225, 255, 0.5);
+    border-bottom: 2px solid rgb(80, 185, 255);
     background: linear-gradient(to right, rgb(225, 240, 255), rgba(200, 230, 250, 0.905), rgb(225, 240, 255));
 }
 
@@ -328,4 +328,13 @@ hr {
 
 .text-discount {
     text-decoration: line-through;
+}
+
+.discount-more,
+.all-more {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

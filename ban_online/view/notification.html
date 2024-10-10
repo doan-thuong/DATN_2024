@@ -1,0 +1,16 @@
+<h2>Notification</h2>
+
+<div ng-repeat="item in list track by $index" class="list-notification">
+    <div class="notification" ng-click="toggleDetail($index)">
+        <p>Title {{$index + 1}}</p>
+        <div class="preview-content">
+            <p>Nội dung {{$index + 1}}</p>
+        </div>
+    </div>
+
+    <!-- Chi tiết nội dung ẩn/hiện theo click -->
+    <div class="detail-content" ng-show="showDetail[$index]">
+        <p>Detail content {{$index + 1}}</p>
+        <button class="claim">Nhận</button>
+    </div>
+</div>

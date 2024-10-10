@@ -14,6 +14,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/account.html',
             controller: accountCtrl,
         })
+        .when('/notification', {
+            templateUrl: 'view/notification.html',
+            controller: notifiCtrl,
+        })
         .otherwise({
             redirectTo: '/home',
         })
