@@ -1,23 +1,61 @@
 <div class="detailed-information">
     <div class="image">
-        <img src="https://cdn.bestme.vn/images/bestme/w_620xh_620/image_U5Ij1Jx.png">
+        <div class="list-img-category">
+            <!-- ng-repeat để hiển thị ảnh -->
+            <div class="over-img">
+                <img class="img-category"
+                    src="https://media.hcdn.vn/catalog/product/v/i/vien-uong-dhc-bo-sung-vitamin-c-20-ngay-40-vien_img_680x680_d30c8d_fit_center.jpg">
+                <div class="overlay"></div>
+            </div>
+
+            <div class="over-img">
+                <img class="img-category"
+                    src="https://product.hstatic.net/1000141988/product/vien_uong_dhc_bo_sung_vitamin_c_goi_30_vien___30_ngay__53d8a89de20d4a58bc863600bebd3da5_1024x1024.png">
+                <div class="overlay"></div>
+            </div>
+
+            <div class="over-img">
+                <img class="img-category"
+                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/267/273/products/7a93ab6f-b6fb-479a-93a6-3e3a62beb909.png?v=1633583531857">
+                <div class="overlay"></div>
+            </div>
+
+            <div class="over-img">
+                <img class="img-category"
+                    src="https://nhathuoc365.vn/images/products/2020/05/28/original/vien-uong-vitamin-c-dhc-hard-capsule-90-ngay-1590639121.jpg">
+                <div class="overlay"></div>
+            </div>
+        </div>
+        <img id="review-image-product"
+            src="https://media.hcdn.vn/catalog/product/v/i/vien-uong-dhc-bo-sung-vitamin-c-20-ngay-40-vien_img_680x680_d30c8d_fit_center.jpg">
     </div>
     <div class="description">
         <div class="title-desciption">
-            <h4>Title_Description</h4>
+            <h3>{{sp.tenThuongHieu}} - {{sp.tenSP}}</h3>
         </div>
 
-        <div class="content-description">
-            <div class="category-description">
-                <a href=""><button class="btn-category thirty">30 ngày</button></a>
-                <a href=""><button class="btn-category sixty">60 ngày</button></a>
-                <a href=""><button class="btn-category ninety">90 ngày</button></a>
+        <div class="category-description">
+            <div ng-repeat="ctg in categorys">
+                <button class="btn-category">{{ctg}} ngày</button>
             </div>
         </div>
 
+        <div class="price-product-in-warehouse">
+            <p style="font-size: 20px; color: rgb(15, 30, 65);">Giá: ₫{{gia}}</p>
+        </div>
+        <div class="total-product-in-warehouse">
+            <smalll style="color: slategrey;">Kho còn: {{soLuong}}</smalll>
+        </div>
+
+        <div class="quatity-product">
+            <button class="quantity btn-minus" id="btn-minus">-</button>
+            <input type="text" class="quantity input-quantity" id="input-quantity" value="1">
+            <button class="quantity btn-plus" id="btn-plus">+</button>
+        </div>
+
         <div class="control-description">
-            <button class="add-cart">Thêm vào giỏ</button>
-            <button class="buy-now">Mua luôn</button>
+            <button class="add-cart" id="btn-add-cart">Thêm vào giỏ</button>
+            <button class="buy-now" id="btn-buy-now">Mua luôn</button>
         </div>
     </div>
 </div>
@@ -27,7 +65,9 @@
             <h3><i class='bx bx-chevron-down' style="color: black;"></i>Thông tin cơ bản</h3>
         </div>
         <div class="content-constituent">
-            <p>Description_of_basic_information</p>
+            <p>- Thành phần: {{sp.thanhPhan}}</p>
+            <p>- Công dụng: {{sp.congDung}}</p>
+            <p>- Mô tả: {{sp.moTa}}</p>
         </div>
     </div>
 
@@ -36,7 +76,9 @@
             <h3><i class='bx bx-chevron-down' style="color: black;"></i>Hướng dẫn sử dụng</h3>
         </div>
         <div class="content-instructions">
-            <p>Descriptio_of_instructions_for_use</p>
+            <p>Liều lượng: {{sp.hdsd}}</p>
         </div>
     </div>
 </div>
+
+<div id="effect-add-cart"></div>

@@ -1,19 +1,22 @@
-.ng-scope {
+.list-notification {
     display: grid;
     gap: 10px;
+    position: relative;
+    margin-bottom: 15px;
 }
 
 h2 {
     width: 125px;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 .notification {
-    width: 90%;
+    width: 80%;
     margin: auto;
     padding: 3px 20px;
-    border-bottom: .5px dashed rgb(80, 185, 255);
-    background-color: rgb(255, 255, 250);
+    border-bottom: .5px solid rgb(80, 185, 255);
+    box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     cursor: pointer;
     transition: transform 0.5s ease-in-out;
@@ -27,8 +30,8 @@ h2 {
     display: grid;
     opacity: 1;
     position: relative;
-    background-color: rgb(225, 240, 255);
-    width: 500px;
+    /* background-color: rgb(225, 240, 255); */
+    width: 80%;
     min-width: 300px;
     height: 250px;
     padding: 10px;
@@ -53,4 +56,22 @@ h2 {
     font-size: 16px;
     cursor: pointer;
     user-select: none;
+}
+
+.no-noti {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    p {
+        color: red;
+        text-align: center;
+        font: 16px 'Times New Roman';
+    }
+
+    hr {
+        width: 80%;
+    }
 }

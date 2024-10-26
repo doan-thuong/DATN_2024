@@ -1,0 +1,169 @@
+<div class="pay-layout">
+    <!-- ng-if: check nếu không đăng nhập thì hiển thị form cho người mua nhập -->
+    <div class="form-input-address" ng-if="!check_account">
+        <div class="top-form-address">
+            <div class="name-client-for-address">
+                <label for="name-client-noLogin" id="name_label_nologin">Họ tên</label>
+                <input type="text" id="name-client-noLogin" name="hoten" placeholder="Họ và tên">
+            </div>
+            <div class="phone-client-for-address">
+                <label for="">Số điện thoại</label>
+                <input type="text" id="phone-client-noLogin" name="sodienthoai" placeholder="Số điện thoại">
+            </div>
+        </div>
+        <div class="bottom-form-address">
+            <label for="">Địa chỉ</label>
+            <input type="text" id="address-client-noLogin" name="diachi" placeholder="Địa chỉ">
+        </div>
+    </div>
+
+    <!-- ng-if: check nếu có đăng nhập -->
+    <div class="select-address" ng-if="check_account">
+        <div class="select-address-main">
+            <div class="icon-map">
+                <i class='bx bx-map'></i>
+            </div>
+            <div class="address-main">
+                <div class="infor-client">
+                    <p><strong>Ho_Ten</strong></p>
+                    <small>So_Dien_Thoai</small>
+                </div>
+                <div class="address">
+                    <p>Dia_Chi</p>
+                </div>
+            </div>
+            <div id="option-add">
+                <i class='bx bx-chevron-down'></i>
+            </div>
+        </div>
+
+        <div class="drop-down-address">
+            <hr>
+            <div class="list-address-more"> <!--ng-repeat-->
+
+            </div>
+            <div class="add-address">
+                <button id="add-new-address">
+                    <i class='bx bx-plus-circle'></i>
+                    Thêm địa chỉ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-pay-product">
+        <div class="pay-product">
+            <h4>Đơn hàng</h4>
+            <div class="list-product-pay">
+                <div class="detail-product-pay" ng-repeat="ctdh in list_item_pay"> <!-- ng-repeat -->
+                    <div>
+                        <h4>{{ctdh.tenSanPhamTrongGio}}</h4>
+                        <div class="infor-product-pay">
+                            <small>Số lượng: {{ctdh.soLuongTrongGio}}</small>
+                            <small>Giá: ₫{{ctdh.gia}}</small>
+                        </div>
+                    </div>
+                    <div class="subtotal">
+                        <h4>₫{{ctdh.gia*ctdh.soLuongTrongGio}}</h4>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="voucher-pay">
+            <h4>Mã giảm giá</h4>
+            <div ng-if="!check_discount" class="check-discount">
+                <hr>
+                <p>Rất tiếc! Bạn chưa sở hữu mã giảm giá nào</p>
+                <hr>
+            </div>
+
+            <!-- ng-if: check nếu có mã thì mới repeat list -->
+            <div ng-if="check_discount" class="list-discount">
+                <!-- ng-repeat: list mã giảm giá -->
+                <div>
+                    <div class="discount-item">
+                        <div>
+                            <h5>Ma_giam_gia</h5>
+                            <small>Còn: So_ngay ngày</small>
+                        </div>
+                        <div>
+                            <p>Noi_dung_ma_giam_gia</p>
+                            <button>Dùng</button>
+                        </div>
+                    </div>
+                    <div class="discount-item">
+                        <div>
+                            <h5>Ma_giam_gia</h5>
+                            <small>Còn: So_ngay ngày</small>
+                        </div>
+                        <div>
+                            <p>Noi_dung_ma_giam_gia</p>
+                            <button>Dùng</button>
+                        </div>
+                    </div>
+                    <div class="discount-item">
+                        <div>
+                            <h5>Ma_giam_gia</h5>
+                            <small>Còn: So_ngay ngày</small>
+                        </div>
+                        <div>
+                            <p>Noi_dung_ma_giam_gia</p>
+                            <button>Dùng</button>
+                        </div>
+                    </div>
+                    <div class="discount-item">
+                        <div>
+                            <h5>Ma_giam_gia</h5>
+                            <small>Còn: So_ngay ngày</small>
+                        </div>
+                        <div>
+                            <p>Noi_dung_ma_giam_gia</p>
+                            <button>Dùng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-discount" ng-if="check_discount">
+                <h5>Ma_giam_gia</h5>
+                <p>Tiền giảm: <i class='bx bx-dollar' style="color: black;"></i> So_tien</p>
+            </div>
+        </div>
+    </div>
+    <div class="total-pay">
+        <div class="detail-pay">
+            <h4>Chi tiết thanh toán</h4>
+            <div>
+                <p>Tổng tiền hàng: </p>
+                <p id="total-money">
+                    ₫{{totalMoney}}
+                </p>
+            </div>
+            <div>
+                <p>Tiền giảm: </p>
+                <p id="discount-money">
+                    ₫{{discountMoney}}
+                </p>
+            </div>
+            <div>
+                <p>Tổng thanh toán: </p>
+                <p id="total-last-money">
+                    ₫{{totalLastMoney}}
+                </p>
+            </div>
+        </div>
+        <div class="form-of-payment">
+            <div>
+                <input type="radio" name="payment" id="cash" value="1">
+                <label for="cash">Thanh toán khi nhận hàng</label>
+            </div>
+            <div>
+                <input type="radio" name="payment" id="transfer" value="2">
+                <label for="transfer">Chuyển khoản</label>
+            </div>
+        </div>
+        <div class="button-pay">
+            <button id="btn-pay">Thanh toán</button>
+        </div>
+    </div>
+</div>

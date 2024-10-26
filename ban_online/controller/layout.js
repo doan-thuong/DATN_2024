@@ -9,6 +9,11 @@ app.config(function ($routeProvider) {
         .when('/information', {
             templateUrl: 'view/information.html',
             controller: informationCtrl,
+            resolve: {
+                delay: function ($timeout) {
+                    return $timeout(function () { }, 1000)
+                }
+            }
         })
         .when('/account', {
             templateUrl: 'view/account.html',
@@ -18,9 +23,21 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/notification.html',
             controller: notifiCtrl,
         })
+        .when('/pay', {
+            templateUrl: 'view/pay.html',
+            controller: payCtrl,
+        })
+        .when('/cart', {
+            templateUrl: 'view/cart.html',
+            controller: cartCtrl,
+        })
         .otherwise({
             redirectTo: '/home',
         })
 })
 
-app.controller('myCtrl', function ($scope) { })
+app.controller('myCtrl', function ($rootScope, $scope) {
+    $rootScope.$on('$routeChangeSuccess', function () {
+        window.scrollTo(0, 0)
+    })
+})

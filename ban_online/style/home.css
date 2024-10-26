@@ -1,7 +1,11 @@
 #introduce {
     display: grid;
+    width: 95%;
+    border-radius: 15px;
+    margin: auto;
     padding: 8px;
     gap: 10px;
+    box-shadow: 0 0 2px 1px rgb(220, 220, 220);
     background-color: rgb(255, 255, 250);
 
     hr {
@@ -49,8 +53,10 @@ label {
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    font: 16px "Times New Roman";
 
     &:hover {
+        color: rgb(130, 205, 255);
         transform: scale(1.055);
     }
 }
@@ -141,37 +147,52 @@ label {
     padding-right: 20px;
 }
 
-#btn-allprd {
-    border: none;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 16px;
-    color: blue;
-    background: none;
-    cursor: pointer;
-}
-
-.title-discount {
+.title-new {
     display: flex;
     justify-content: space-between;
     padding-left: 30px;
     padding-right: 20px;
 }
 
+@keyframes colorChange {
+    0% {
+        color: black;
+    }
+
+    25% {
+        color: rgb(255, 80, 80);
+    }
+
+    50% {
+        color: red;
+    }
+
+    75% {
+        color: rgb(255, 80, 80);
+    }
+
+    100% {
+        color: black;
+    }
+}
+
+#text-new-product {
+    animation: colorChange 3s infinite;
+}
+
 hr {
     width: 85%;
 }
 
-#btn-discprd {
-    border: none;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 16px;
-    color: blue;
-    background: none;
-    cursor: pointer;
+.list-product {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 0 25px;
 }
 
 .form-product {
-    width: 280px;
+    width: 230px;
     height: 320px;
     border-radius: 10px;
     margin: auto;
@@ -191,19 +212,20 @@ hr {
     position: absolute;
     width: 65px;
     top: -1px;
-    right: 5px;
+    right: 55px;
     background-color: red;
     color: white;
     padding: 5px 15px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+    cursor: default;
     transform: rotate(45deg);
     z-index: 1;
 }
 
 .ribbon:hover {
-    box-shadow: 0 0 4px 2px rgb(215, 215, 215);
+    box-shadow: 0 0 3px 2px rgb(215, 215, 215);
 }
 
 .img {
@@ -223,7 +245,6 @@ hr {
 }
 
 .cart {
-    /* display: none; */
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -238,7 +259,7 @@ hr {
 .option {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 15px;
 
     button {
@@ -259,15 +280,6 @@ hr {
             transform: scale(1.05);
         }
     }
-}
-
-.cartIcon {
-    width: 14px;
-    height: fit-content;
-}
-
-.cartIcon path {
-    fill: white;
 }
 
 .bx {
@@ -322,6 +334,31 @@ hr {
     }
 }
 
+@keyframes colorNoData {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: rgb(255, 80, 80);
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+.no-data-from-be {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h3 {
+        animation: colorNoData 2s infinite;
+    }
+}
+
 .hidden {
     display: none;
 }
@@ -337,4 +374,53 @@ hr {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.page {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    .pagination {
+        display: flex;
+
+        .page-item {
+            width: 40px;
+            height: 40px;
+            border: .1px solid rgb(220, 220, 220);
+            display: grid;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                background-color: rgb(229, 229, 229);
+            }
+
+            a {
+                text-decoration: none;
+                color: blue;
+                user-select: none;
+
+                span {
+                    color: blue;
+                }
+            }
+        }
+    }
+}
+
+.page-item:nth-child(1) {
+    border-radius: 10px 0 0 10px;
+}
+
+.page-item:nth-last-child(1) {
+    border-radius: 0 10px 10px 0;
+}
+
+.active-page {
+    background-color: rgb(80, 185, 255);
+}
+
+.disabled {
+    pointer-events: none;
 }

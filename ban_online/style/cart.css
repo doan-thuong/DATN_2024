@@ -1,0 +1,143 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+    padding: 0 10px;
+    box-shadow: 0 0 3px 1px rgb(225, 225, 225);
+    gap: 20px;
+}
+
+.container input {
+    display: none;
+}
+
+.container {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+}
+
+.checkmark {
+    position: relative;
+    height: 1.3em;
+    width: 1.3em;
+    background-color: #2196f300;
+    border-radius: 0.25em;
+    transition: transform 0.2s;
+}
+
+.container input:checked~.checkmark {
+    background-color: rgb(155, 215, 255);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.15em;
+    height: 1.15em;
+    border-radius: 0.25em;
+    border: 0.1em solid rgb(155, 215, 255);
+}
+
+.container input:checked~.checkmark:after {
+    left: 0.46em;
+    top: 0.26em;
+    width: 0.25em;
+    height: 0.5em;
+    border-color: #fff0 white white #fff0;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+    min-width: 500px;
+    width: 850px;
+
+    img {
+        width: 90px;
+        height: 90px;
+        border-radius: 5px;
+        box-shadow: 0 0 3px 2px rgb(225, 225, 225);
+    }
+}
+
+.information-product {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-cart {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: rgb(255, 55, 55);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 3px 2px rgb(210, 210, 210);
+    }
+
+    .bx-trash {
+        font-size: 20px;
+    }
+}
+
+.buy-cart {
+    display: grid;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 40px;
+
+    button {
+        width: 100px;
+        height: 45px;
+        border: .5px solid rgb(75, 120, 255);
+        background-color: white;
+        border-radius: 10px;
+        font: 16px 'Times New Roman';
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            content: '';
+            background-color: rgb(75, 120, 255);
+            color: white;
+        }
+
+        i {
+            position: absolute;
+            top: -7px;
+            right: -7px;
+            width: 23px;
+            height: 23px;
+            background-color: red;
+            color: rgb(255, 255, 255);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font: 13px 'Times New Roman';
+        }
+    }
+}

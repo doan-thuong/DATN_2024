@@ -1,65 +1,46 @@
-window.homeCtrl = function ($scope) {
-    const url = ""
-    $scope.title = "Home"
+import * as homeService from "./service/home_service.js"
 
-    let btn_filter = document.querySelector("#btn-loc")
-    let form_filter = document.querySelector("#filter")
+window.homeCtrl = function ($scope, $http) {
 
-    btn_filter.addEventListener('click', function (event) {
-        event.preventDefault()
-        let dpl = form_filter.style
+    $scope.noDataNewProduct = true
 
-        dpl.display == "none" ? dpl.display = "flex" : dpl.display = "none"
-    })
+    homeService.handleShoWHiddenFormFilter()
 
-    let isDiscount = false
-    let priceElements = document.getElementsByClassName('price')
-    let discountElements = document.getElementsByClassName('price-discount')
-    let ribbonElements = document.getElementsByClassName('ribbon-wrapper')
+    // check discount
+    let isDiscount = true;
+    let elementsMap = [
+        { elements: document.getElementsByClassName('price'), addClass: 'text-discount', toggleClass: false },
+        { elements: document.getElementsByClassName('price-discount'), addClass: 'hidden', toggleClass: true },
+        { elements: document.getElementsByClassName('ribbon-wrapper'), addClass: 'hidden', toggleClass: true }
+    ];
 
-    Array.from(priceElements).forEach(function (priceElement) {
-        if (isDiscount) {
-            priceElement.classList.add('text-discount')
-        } else {
-            priceElement.classList.remove('text-discount')
-        }
-    })
+    elementsMap.forEach(({ elements, addClass, toggleClass }) => {
+        Array.from(elements).forEach(element => {
+            if (isDiscount) {
+                toggleClass ? element.classList.remove(addClass) : element.classList.add(addClass);
+            } else {
+                toggleClass ? element.classList.add(addClass) : element.classList.remove(addClass);
+            }
+        });
+    });
 
-    Array.from(discountElements).forEach(function (discountElement) {
-        if (isDiscount) {
-            discountElement.classList.remove('hidden')
-        } else {
-            discountElement.classList.add('hidden')
-        }
-    })
 
-    Array.from(ribbonElements).forEach(function (ribbonElement) {
-        if (isDiscount) {
-            ribbonElement.classList.remove('hidden')
-        } else {
-            ribbonElement.classList.add('hidden')
-        }
-    })
+    //check input price
+    homeService.handleCheckInputFindPrice()
 
-    const prc_min = document.querySelector('#price-min')
-    const prc_max = document.querySelector('#price-max')
+    // // ghep api page
+    $http.get('http://localhost:8080/san-pham/getSanPham-online')
+        .then((response) => {
+            const data = response.data.data
+            const totalPages = response.data.total
 
-    prc_min.addEventListener('input', (e) => {
-        prc_min.value = prc_min.value.replace(/\D/g, '')
+            $scope.listSP = data
 
-        if (parseInt(prc_min.value) > parseInt(prc_max.value)) {
-            prc_min.style.border = '1px solid red'
-        } else {
-            prc_min.style.border = '.5px solid rgb(130, 205, 255)'
-        }
-    })
-    prc_max.addEventListener('input', (e) => {
-        prc_max.value = prc_max.value.replace(/\D/g, '')
+            homeService.generatePagination(1, totalPages)
+        }).catch((err) => {
+            console.error(err)
+            $scope.noData = true
+        })
 
-        if (parseInt(prc_max.value) < parseInt(prc_min.value)) {
-            prc_max.style.border = '1px solid red'
-        } else {
-            prc_max.style.border = '.5px solid rgb(130, 205, 255)'
-        }
-    })
+    // chuyen trang
 }

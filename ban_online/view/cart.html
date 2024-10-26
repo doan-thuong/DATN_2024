@@ -1,0 +1,51 @@
+<div class="main-cart">
+    <h2>Giỏ hàng</h2>
+
+    <!-- ng-repeat -->
+    <!-- <div ng-repeat="item in listCart track by $index"> -->
+    <div ng-if="!checkList">
+        <hr>
+        <h4 style="text-align: center; color: rgb(255, 70, 70); margin: 50px 0;">Rất tiếc! Bạn không có đơn hàng nào
+            trong giỏ</h4>
+        <hr>
+    </div>
+    <div ng-if="checkList">
+        <div class="cart-item" ng-repeat="cart in litsCart">
+            <div class="check-box">
+                <label class="container">
+                    <input type="checkbox" value="{{cart.id}}" />
+                    <div class="checkmark"></div>
+                </label>
+            </div>
+            <div class="product-info">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGsLekIAnS67lv6lPbK8VciW9aJaRoFoZ28w&s"
+                    alt="">
+                <div class="information-product">
+                    <h4>{{cart.tenSanPhamTrongGio}}</h4>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <p>{{cart.soNgaySuDung}} ngày</p>
+                        |
+                        <p>
+                            ₫{{cart.gia}}
+                        </p>
+                    </div>
+                </div>
+                <div class="quantity-cart">
+                    <button class="quantity btn-minus">-</button>
+                    <input type="text" class="quantity input-quantity" ng-value="cart.soLuongTrongGio">
+                    <button class="quantity btn-plus">+</button>
+                </div>
+            </div>
+            <div class="control-cart-item">
+                <button class="remove-cart" title="Xóa khỏi giỏ hàng">
+                    <i class='bx bx-trash'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- </div> -->
+    <div class="buy-cart" ng-if="checkList">
+        <button class="btn-buy-cart">Mua hàng <i class="total-item-cart">{{totalList}}</i></button>
+    </div>
+</div>

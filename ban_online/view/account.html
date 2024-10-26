@@ -1,17 +1,141 @@
-<div>
+<div class="account-control">
     <div class="menu-control">
         <div class="avatar">
             <div class="user-avatar">
-                <p id="user-text">Đ</p>
+                <p id="user-text">?</p>
             </div>
-            <p>Ma_khach</p>
+            <p id="code-client">Ma_khach</p>
         </div>
         <ul>
-            <li>Thông tin chung</li>
-            <li>Đơn hàng</li>
-            <li><i class='bx bx-log-out-circle'></i>Đăng xuất</li>
+            <li class="general-menu menu">Thông tin chung</li>
+            <li class="address-menu menu">Địa chỉ giao hàng</li>
+            <li class="order-menu menu">Đơn hàng</li>
+            <li id="logout"><i class='bx bx-log-out-circle'></i>Đăng xuất</li>
         </ul>
     </div>
 
-    <div class="content-account"></div>
+    <div class="content-account">
+        <div class="content-general content-acc">
+            <form>
+                <div>
+                    <label for="name">Họ và tên</label>
+                    <input type="text" id="name" name="hoten" placeholder="Họ và tên">
+                </div>
+                <div>
+                    <label for="gender">Giới tính</label>
+                    <div>
+                        <input type="radio" id="male" name="gioitinh" value="1">
+                        <label for="male">Nam</label>
+                        <input type="radio" id="female" name="gioitinh" value="0">
+                        <label for="female">Nữ</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="sodienthoai" placeholder="Số điện thoại">
+                </div>
+                <div>
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" name="diachi" placeholder="Địa chỉ">
+                </div>
+                <div class="change-password">
+                    <a href="#">
+                        <i class='bx bx-key'></i>
+                        Đổi mật khẩu
+                    </a>
+                </div>
+                <div class="button">
+                    <button>Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-address content-acc">
+
+            <!-- ng-repeat: repeat address -->
+            <div class="item-address">
+
+                <!-- ng-if: check default address -->
+                <div class="view-control-default" title="Địa chi mặc định">
+                    <i class='bx bx-map'></i>
+                </div>
+
+                <div class="content-item-address">
+                    <div class="information-client">
+                        <h3>Ho_Ten</h3>
+                        <small>So_dien_thoai</small>
+                    </div>
+
+                    <div class="address-client">
+                        <p>Dia_chi</p>
+                    </div>
+                </div>
+
+                <div class="remove-address" ng-if="check_default">
+                    <button>
+                        <i class='bx bx-trash'></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="item-address">
+
+                <!-- ng-if: check default address -->
+                <div class="view-control-default">
+                    <div ng-if="check_default">
+                        <i class='bx bx-map' title="Địa chi mặc định"></i>
+                    </div>
+                </div>
+
+                <div class="content-item-address">
+                    <div class="information-client">
+                        <h3>Ho_Ten</h3>
+                        <small>So_dien_thoai</small>
+                    </div>
+
+                    <div class="address-client">
+                        <p>Dia_chi</p>
+                    </div>
+                </div>
+
+                <div class="remove-address" ng-if="!check_default">
+                    <button>
+                        <i class='bx bx-trash'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- add new address -->
+            <div class="add-new-address">
+                <button id="add-new-address-account">
+                    <i class='bx bx-plus-circle'></i>
+                    Thêm địa chỉ
+                </button>
+            </div>
+        </div>
+        <div class="content-order content-acc">order</div>
+    </div>
+</div>
+
+<div class="overlay-address"></div>
+
+<div class="form-add-new-address">
+    <div class="close-popup-address">
+        <i class='bx bx-collapse' title="Đóng"></i>
+    </div>
+    <form>
+        <div>
+            <label for="">Họ và tên</label>
+            <input type="text" id="name-new-address" name="hoten" placeholder="Họ và tên">
+        </div>
+        <div>
+            <label for="">Số điện thoại</label>
+            <input type="text" id="phone-new-address" name="sodienthoai" placeholder="Số điện thoại">
+        </div>
+        <div>
+            <label for="">Địa chỉ</label>
+            <input type="text" id="address-new-address" name="diachi" placeholder="Địa chỉ">
+        </div>
+        <button>Xác nhận</button>
+    </form>
 </div>

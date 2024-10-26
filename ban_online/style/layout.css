@@ -2,7 +2,15 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #F6F8FA;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    /* Ẩn thanh cuộn trên Chrome */
 }
 
 nav {
@@ -18,14 +26,19 @@ nav {
     border-radius: 35px;
 }
 
-#img-logo {
+#logo-text {
     width: 90px;
     height: 50px;
+    margin: 0;
+    text-align: center;
+    color: rgb(105, 195, 255);
+    font: 35px 'Brush Script MT', cursive;
     transition: transform 0.4s ease-in;
+    user-select: none;
 
     &:hover {
-        transform: scale(1.05);
-        filter: drop-shadow(6px 3px 4px rgb(100, 100, 100));
+        transform: scale(1.08);
+        filter: drop-shadow(6px 3px 4px rgb(200, 200, 200));
     }
 }
 
@@ -38,36 +51,8 @@ nav {
     gap: 15px;
 }
 
-#notification {
-    width: 40px;
-    height: 40px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(115, 180, 240);
-    border-radius: 50%;
-    cursor: pointer;
-    transition-duration: .3s;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
-    border: none;
-    transition: transform 0.3s ease-in;
-
-    &:hover {
-        transform: scale(1.1);
-        background-color: rgb(75, 170, 255);
-
-    }
-}
-
-.bell {
-    width: 18px;
-}
-
-.bell path {
-    fill: white;
-}
-
+#cart-items,
+#notification,
 #account {
     width: 40px;
     height: 40px;
@@ -78,7 +63,9 @@ nav {
     background-color: rgb(115, 180, 240);
     color: white;
     border-radius: 50%;
+    position: relative;
     cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
     transition: transform 0.3s ease-in;
 
     &:hover {
@@ -86,14 +73,62 @@ nav {
         background-color: rgb(75, 170, 255);
 
     }
+}
 
-    a {
-        text-decoration: none;
-    }
+#number-cart,
+#number-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -15px;
+    left: 25px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font: 10px 'Times New Roman';
 }
 
 #text-acc {
     color: white;
+}
+
+.link-cart,
+.link-notification,
+.link-account {
+    text-decoration: none;
+}
+
+@keyframes ringBell {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(-15deg);
+    }
+
+    75% {
+        transform: rotate(8deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.bxs-bell-ring {
+    animation: ringBell 2s ease-in-out infinite;
+}
+
+.ctrl {
+    flex: 1;
 }
 
 footer {

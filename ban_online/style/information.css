@@ -1,32 +1,81 @@
 .detailed-information {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
     padding: 0 25px;
 }
 
+.over-img {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border: none;
+    box-shadow: 0 0 3px 1px rgb(215, 215, 215);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(35, 35, 35, 0.5);
+    /* Màu đen với độ mờ 50% */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.no-overlay {
+    display: none;
+}
+
 .image {
-    width: 45%;
-    height: 300px;
+    width: 50%;
+    height: 450px;
     display: grid;
+    grid-template-columns: repeat(2, auto);
     align-items: center;
     justify-content: center;
+
+    .list-img-category {
+        display: grid;
+        width: 100px;
+        gap: 10px;
+
+        img {
+            width: 70px;
+            height: 70px;
+            mix-blend-mode: multiply;
+            border-radius: 5px;
+        }
+    }
 
     img {
         width: 300px;
         height: 300px;
         max-width: 600px;
         max-height: 280px;
+        border-radius: 15px;
     }
 }
 
 .description {
-    width: 65%;
+    width: 50%;
     display: grid;
-    gap: 20px;
+    align-items: center;
+}
+
+.title-desciption {
+    height: 80px;
 }
 
 .category-description {
     display: flex;
     gap: 20px;
+    height: 50px;
 }
 
 .control-description {
@@ -67,14 +116,62 @@
     user-select: none;
 
     &:hover {
-        background-color: rgb(80, 80, 255);
+        background-color: rgb(135, 135, 255);
         color: whitesmoke;
     }
 }
 
 .active {
-    background-color: rgb(80, 80, 255);
+    background-color: rgb(80, 80, 255) !important;
     color: whitesmoke;
+}
+
+.img-active {
+    filter: blur(.5px);
+}
+
+.quatity-product {
+    display: flex;
+    gap: 0;
+    align-items: center;
+}
+
+.quantity {
+    height: 40px;
+    border: .5px solid rgb(75, 170, 255);
+    outline: none;
+}
+
+.btn-minus,
+.btn-plus {
+    width: 40px;
+    background-color: white;
+    color: rgb(70, 130, 255);
+    font-size: 20px;
+    cursor: pointer;
+
+    &:hover {
+        content: "";
+        background-color: rgb(75, 170, 255);
+        color: white;
+    }
+}
+
+.quantity:nth-child(1) {
+    border-radius: 20px 0 0 20px;
+    border-right: none;
+}
+
+.input-quantity {
+    width: 60px;
+    box-sizing: border-box;
+    text-align: center;
+    font: 16px 'Times New Roman';
+}
+
+.quantity:nth-last-child(1) {
+    border-radius: 0 20px 20px 0;
+    border-left: none;
 }
 
 .constituent,
@@ -113,4 +210,18 @@
     display: grid;
     padding: 0 25px;
     gap: 10px;
+}
+
+#effect-add-cart {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    opacity: 0;
+    transition: transform 1.5s ease-in-out;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
+        0 0 50px rgba(255, 0, 0, 0.4),
+        0 0 100px rgba(255, 0, 0, 0.2);
+    filter: blur(1px);
 }
