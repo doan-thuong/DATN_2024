@@ -6,6 +6,10 @@ export function handleEventCart(maxQuantity) {
         const btn_minus_cart = cart.querySelector(".btn-minus")
         const btn_plus_cart = cart.querySelector(".btn-plus")
 
+        const error_message = document.querySelector('.notification-error')
+        const error_text = document.querySelector('#content-error')
+        const progress_error = document.querySelector('.progress-bar-error')
+
         let quantity = parseInt(input_quantity_cart.value) || 1 // Khởi tạo quantity với giá trị từ input hoặc 1
 
         input_quantity_cart.addEventListener('input', () => {
@@ -20,6 +24,19 @@ export function handleEventCart(maxQuantity) {
             if (quantity > 1) {
                 quantity--
                 input_quantity_cart.value = quantity
+            } else {
+                error_message.style.display = 'flex'
+                error_text.textContent = 'Số lượng phải lớn hơn 0'
+
+                progress_error.style.width = '0%'
+                setTimeout(() => {
+                    progress_error.style.width = '100%'
+                }, 100)
+
+                setTimeout(() => {
+                    error_message.style.display = 'none'
+                    progress_error.style.width = '0%'
+                }, 2000)
             }
         })
 
@@ -27,6 +44,19 @@ export function handleEventCart(maxQuantity) {
             if (quantity < maxQuantity) {
                 quantity++
                 input_quantity_cart.value = quantity
+            } else {
+                error_message.style.display = 'flex'
+                error_text.textContent = 'Số lượng đã quá số trong kho '
+
+                progress_error.style.width = '0%'
+                setTimeout(() => {
+                    progress_error.style.width = '100%'
+                }, 100)
+
+                setTimeout(() => {
+                    error_message.style.display = 'none'
+                    progress_error.style.width = '0%'
+                }, 2000)
             }
         })
     })

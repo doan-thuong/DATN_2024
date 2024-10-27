@@ -43,4 +43,8 @@ window.homeCtrl = function ($scope, $http) {
         })
 
     // chuyen trang
+    homeService.handleCallAPIPage().then(({ data, index, size }) => {
+        $scope.listSP = data
+        homeService.generatePagination(index, size)
+    })
 }

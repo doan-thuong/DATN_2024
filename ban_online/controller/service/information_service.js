@@ -54,6 +54,10 @@ export function handleChangeTotal(maxTotal) {
     const btn_minus = document.querySelector("#btn-minus")
     const btn_plus = document.querySelector("#btn-plus")
 
+    const error_message = document.querySelector('.notification-error')
+    const error_text = document.querySelector('#content-error')
+    const progress_error = document.querySelector('.progress-bar-error')
+
     let quantity = 1
 
     if (input_quantity) {
@@ -75,6 +79,19 @@ export function handleChangeTotal(maxTotal) {
         if (quantity > 1) {
             quantity--
             input_quantity.value = quantity
+        } else {
+            error_message.style.display = 'flex'
+            error_text.textContent = 'Số lượng phải lớn hơn 0'
+
+            progress_error.style.width = '0%'
+            setTimeout(() => {
+                progress_error.style.width = '100%'
+            }, 100)
+
+            setTimeout(() => {
+                error_message.style.display = 'none'
+                progress_error.style.width = '0%'
+            }, 2000)
         }
     })
 
@@ -82,6 +99,19 @@ export function handleChangeTotal(maxTotal) {
         if (quantity < maxTotal) {
             quantity++
             input_quantity.value = quantity
+        } else {
+            error_message.style.display = 'flex'
+            error_text.textContent = 'Số lượng đã quá số trong kho'
+
+            progress_error.style.width = '0%'
+            setTimeout(() => {
+                progress_error.style.width = '100%'
+            }, 100)
+
+            setTimeout(() => {
+                error_message.style.display = 'none'
+                progress_error.style.width = '0%'
+            }, 2000)
         }
     })
 }

@@ -186,7 +186,7 @@ hr {
 
 .list-product {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 0 25px;
 }
@@ -394,16 +394,6 @@ hr {
 
             &:hover {
                 background-color: rgb(229, 229, 229);
-            }
-
-            a {
-                text-decoration: none;
-                color: blue;
-                user-select: none;
-
-                span {
-                    color: blue;
-                }
             }
         }
     }
