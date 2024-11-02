@@ -110,7 +110,10 @@ export function handleAddNewAddress() {
             input_new_address.style.borderBottom = '1px solid rgb(45, 130, 255)'
         }
 
-        // call api để thêm address
+        let dataFormAddress = getFormAddInForAddress(input_new_name, input_new_phone, input_new_address)
+        console.log(dataFormAddress)
+
+        // call api để add address
     })
 }
 
@@ -132,4 +135,12 @@ export function getInformationClient(idClient) {
         })
 
     return client
+}
+
+export function getFormAddInForAddress(newName, newPhone, newAddress) {
+    return {
+        newName: newName.value,
+        newPhone: newPhone.value,
+        newAddress: newAddress.value
+    }
 }

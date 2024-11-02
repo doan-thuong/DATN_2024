@@ -92,7 +92,7 @@ export function handleCallAPIPage() {
 
     return new Promise((resolve) => {
         if (pageIndex.length == 0) {
-            setTimeout(handleCallAPIPage, 1000)
+            setTimeout(handleCallAPIPage, 800)
             return
         }
 
@@ -113,5 +113,39 @@ export function handleCallAPIPage() {
                 }
             })
         })
+    })
+}
+
+export function getDataForFilter() {
+    const textFind = document.querySelector('#text-find')
+    const categoryVitamin = document.querySelector('#vitamin')
+    const categoryImproveSkin = document.querySelector('#cai-thien-da')
+    const categoryHealthCare = document.querySelector('#cham-soc-suc-khoe')
+    const categoryOther = document.querySelector('#khac')
+    const priceMin = document.querySelector('#price-min')
+    const priceMax = document.querySelector('#price-max')
+
+    return {
+        textFind: textFind.value.trim() ? textFind.value.trim() : null,
+        vitamin: categoryVitamin.checked ? true : false,
+        improveSkin: categoryImproveSkin.checked ? true : false,
+        healthCare: categoryHealthCare.checked ? true : false,
+        other: categoryOther.checked ? true : false,
+        priceMin: priceMin.value.trim() ? textFind.value.trim() : null,
+        priceMax: priceMax.value.trim() ? textFind.value.trim() : null
+    }
+}
+
+export function callAPIgetDataFilter() {
+    const btn_find = document.querySelector('#btn-find')
+
+    btn_find.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        let dataFormFilter = getDataForFilter()
+        //call api để lấy data
+        console.log(dataFormFilter)
+
+        //sử lý ẩn table data new product
     })
 }

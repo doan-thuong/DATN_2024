@@ -47,4 +47,6 @@ window.homeCtrl = function ($scope, $http) {
         $scope.listSP = data
         homeService.generatePagination(index, size)
     })
+
+    homeService.callAPIgetDataFilter()
 }

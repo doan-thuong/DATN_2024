@@ -35,7 +35,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/web400.html'
         })
         .otherwise({
-            redirectTo: '/web400',
+            redirectTo: '/home',
         })
 })
 
