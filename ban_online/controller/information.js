@@ -105,7 +105,7 @@ window.informationCtrl = function ($scope, $http, $location) {
 
             let productExists = false;
 
-            //check nếu sản phẩm đã có thì cập nhật số lượng
+            //check sản phẩm đã có thì cập nhật sl
             list_item_product_detail.forEach((item) => {
                 if (item.id == data[index_category].id) {
                     item.soLuongTrongGio = parseInt(item.soLuongTrongGio) || 0

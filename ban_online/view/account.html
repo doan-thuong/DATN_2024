@@ -10,6 +10,7 @@
             <li class="general-menu menu">Thông tin chung</li>
             <li class="address-menu menu">Địa chỉ giao hàng</li>
             <li class="order-menu menu">Đơn hàng</li>
+            <li class="voucher-menu menu">Khuyến mãi</li>
             <li id="logout"><i class='bx bx-log-out-circle'></i>Đăng xuất</li>
         </ul>
     </div>
@@ -113,7 +114,31 @@
                 </button>
             </div>
         </div>
+
         <div class="content-order content-acc">order</div>
+
+        <div class="content-voucher content-acc">
+            <div class="filter-voucher">
+                <input type="text" id="search-voucher" placeholder="Tìm kiếm khuyến mãi">
+                <button class="btn-voucher">Tìm</button>
+            </div>
+            <div class="list-voucher">
+                <div class="item-voucher"> <!-- ng-repeat: load list voucher-->
+                    <div class="img-item-vc">
+                        <i class='bx bxs-discount'></i>
+                    </div>
+                    <div class="main-item-vc">
+                        <div class="title-item-vc">
+                            <h4>Title</h4>
+                        </div>
+                        <div class="content-item-vc">
+                            <p class="condition">Đơn tối thiểu ---</p>
+                            <small class="expiration-date">Ngày hết: dd/mm/yyyy</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -136,6 +161,6 @@
             <label for="">Địa chỉ</label>
             <input type="text" id="address-new-address" name="diachi" placeholder="Địa chỉ">
         </div>
-        <button>Xác nhận</button>
+        <button id="btn-new-submit">Xác nhận</button>
     </form>
 </div>

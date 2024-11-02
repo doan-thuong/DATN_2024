@@ -11,7 +11,7 @@ app.config(function ($routeProvider) {
             controller: informationCtrl,
             resolve: {
                 delay: function ($timeout) {
-                    return $timeout(function () { }, 1000)
+                    return $timeout(function () { }, 500)
                 }
             }
         })
@@ -31,8 +31,11 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/cart.html',
             controller: cartCtrl,
         })
+        .when('/web400', {
+            templateUrl: 'view/web400.html'
+        })
         .otherwise({
-            redirectTo: '/home',
+            redirectTo: '/web400',
         })
 })
 

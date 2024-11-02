@@ -22,7 +22,8 @@ ul {
 
 .general-menu,
 .address-menu,
-.order-menu {
+.order-menu,
+.voucher-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,6 +62,7 @@ ul {
     .bx-log-out-circle {
         color: black;
         font-size: 20px;
+        transition: all .6s;
     }
 }
 
@@ -316,6 +318,7 @@ ul {
             }
 
             input {
+                width: 350px;
                 border: none;
                 border-bottom: 1px solid rgb(45, 130, 255);
                 font: 16px 'Times New Roman';
@@ -348,4 +351,97 @@ ul {
     color: rgb(45, 135, 255);
     font-size: 24px;
     cursor: pointer;
+}
+
+.content-voucher {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-voucher {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.list-voucher {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 500px;
+    padding: 10px 0;
+    overflow-y: auto;
+}
+
+.list-voucher::-webkit-scrollbar {
+    display: none;
+}
+
+#search-voucher {
+    width: 300px;
+    height: 45px;
+    outline: none;
+    border-radius: 15px;
+    border: .5px solid rgb(75, 170, 255);
+    box-sizing: border-box;
+    padding-left: 15px;
+    font: 16px 'Times New Roman';
+}
+
+.btn-voucher {
+    width: 80px;
+    height: 45px;
+    border-radius: 15px;
+    outline: none;
+    border: .5px solid rgb(75, 170, 255);
+    background-color: white;
+    font: 17px 'Times New Roman';
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(75, 170, 255);
+        color: white;
+    }
+}
+
+.item-voucher {
+    display: flex;
+    width: 85%;
+    height: 120px;
+    margin: auto;
+    gap: 25px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 2px rgb(225, 225, 225);
+
+    .img-item-vc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.bxs-discount {
+    font-size: 32px;
+    color: rgb(75, 170, 255);
+    transform: rotate(45deg);
+}
+
+.main-item-vc {
+    width: 100%;
+}
+
+.content-item-vc {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+
+    small {
+        color: darkgray;
+    }
 }

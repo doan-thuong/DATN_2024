@@ -1,0 +1,21 @@
+.bad-request {
+    display: grid;
+    grid-template-columns: repeat(1, 2fr 1fr);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-bad-request {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+        text-align: center;
+    }
+}
+
+.img-bad-request {
+    width: 250px;
+    height: 250px;
+}

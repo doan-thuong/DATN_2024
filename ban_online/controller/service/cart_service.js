@@ -1,72 +1,58 @@
-export function handleEventCart(maxQuantity) {
-    const quantityCarts = document.querySelectorAll(".quantity-cart")
+import * as notiConfig from "./notification_config.js"
 
-    quantityCarts.forEach(cart => {
-        const input_quantity_cart = cart.querySelector(".input-quantity")
-        const btn_minus_cart = cart.querySelector(".btn-minus")
-        const btn_plus_cart = cart.querySelector(".btn-plus")
+export function handleEventCart(maxQuantity, index) {
+    const cart = document.querySelectorAll(".quantity-cart")
 
-        const error_message = document.querySelector('.notification-error')
-        const error_text = document.querySelector('#content-error')
-        const progress_error = document.querySelector('.progress-bar-error')
+    // quantityCarts.forEach(cart => {
+    const input_quantity_cart = cart[index].querySelector(".input-quantity")
+    const btn_minus_cart = cart[index].querySelector(".btn-minus")
+    const btn_plus_cart = cart[index].querySelector(".btn-plus")
 
-        let quantity = parseInt(input_quantity_cart.value) || 1 // Khởi tạo quantity với giá trị từ input hoặc 1
+    let quantity = parseInt(input_quantity_cart.value) || 1 // Khởi tạo quantity với giá trị từ input hoặc 1
 
-        input_quantity_cart.addEventListener('input', () => {
-            input_quantity_cart.value = input_quantity_cart.value.replace(/\D/g, '')
-            if (input_quantity_cart.value === '') {
-                input_quantity_cart.value = 1
-            }
-            quantity = parseInt(input_quantity_cart.value)
-        })
+    input_quantity_cart.addEventListener('input', () => {
+        input_quantity_cart.value = input_quantity_cart.value.replace(/\D/g, '')
+        if (input_quantity_cart.value === '' || input_quantity_cart.value == 0) {
+            input_quantity_cart.value = 1
+        } else if (input_quantity_cart.value > maxQuantity) {
+            input_quantity_cart.value = maxQuantity
 
-        btn_minus_cart.addEventListener("click", function () {
-            if (quantity > 1) {
-                quantity--
-                input_quantity_cart.value = quantity
-            } else {
-                error_message.style.display = 'flex'
-                error_text.textContent = 'Số lượng phải lớn hơn 0'
-
-                progress_error.style.width = '0%'
-                setTimeout(() => {
-                    progress_error.style.width = '100%'
-                }, 100)
-
-                setTimeout(() => {
-                    error_message.style.display = 'none'
-                    progress_error.style.width = '0%'
-                }, 2000)
-            }
-        })
-
-        btn_plus_cart.addEventListener("click", function () {
-            if (quantity < maxQuantity) {
-                quantity++
-                input_quantity_cart.value = quantity
-            } else {
-                error_message.style.display = 'flex'
-                error_text.textContent = 'Số lượng đã quá số trong kho '
-
-                progress_error.style.width = '0%'
-                setTimeout(() => {
-                    progress_error.style.width = '100%'
-                }, 100)
-
-                setTimeout(() => {
-                    error_message.style.display = 'none'
-                    progress_error.style.width = '0%'
-                }, 2000)
-            }
-        })
+            let mess = 'Số lượng đã quá số trong kho'
+            notiConfig.configNotificationError(mess)
+        }
+        quantity = parseInt(input_quantity_cart.value)
     })
+
+    btn_minus_cart.addEventListener("click", function () {
+        if (quantity > 1) {
+            quantity--
+            input_quantity_cart.value = quantity
+        } else {
+            let mess = 'Số lượng phải lớn hơn 0'
+            notiConfig.configNotificationError(mess)
+        }
+    })
+
+    btn_plus_cart.addEventListener("click", function () {
+        if (quantity < maxQuantity) {
+            quantity++
+            input_quantity_cart.value = quantity
+        } else {
+            let mess = 'Số lượng đã quá số trong kho'
+            notiConfig.configNotificationError(mess)
+            input_quantity_cart.value = maxQuantity
+        }
+    })
+    // })
 }
 
 export function hanldeClickButtonBuy(listItem) {
     const btn_buy = document.querySelector('.btn-buy-cart')
-    console.log(listItem)
 
-    if (!btn_buy) return
+    if (!btn_buy) {
+        console.error('Button buy cart not found')
+        return
+    }
 
     if (!Array.isArray(listItem) || listItem.length === 0) {
         console.error('listItem phải là một mảng hợp lệ và có ít nhất một phần tử')

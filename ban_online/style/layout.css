@@ -226,12 +226,13 @@ span {
     flex-direction: column;
     justify-content: end;
     align-items: center;
-    top: 90px;
+    top: 95px;
     right: 0;
-    border-radius: 10px 0 0 10px;
+    border-radius: 15px 0 0 15px;
     background-color: white;
     box-shadow: 0 0 6px 3px rgb(200, 200, 200);
     overflow: hidden;
+    z-index: 100;
 }
 
 .content-notifi {
@@ -246,7 +247,7 @@ span {
 
 .progress-notifi {
     height: 5px;
-    transition: width 1.8s ease-in-out;
+    transition: width 2.8s ease-in-out;
 }
 
 .progress-bar-success {
