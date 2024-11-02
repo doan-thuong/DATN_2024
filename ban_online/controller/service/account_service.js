@@ -137,10 +137,6 @@ export function getInformationClient(idClient) {
     return client
 }
 
-export function getFormAddInForAddress(newName, newPhone, newAddress) {
-    return {
-        newName: newName.value,
-        newPhone: newPhone.value,
-        newAddress: newAddress.value
-    }
+export function getFormAddInForAddress({ value: newName }, { value: newPhone }, { value: newAddress }) {
+    return { newName, newPhone, newAddress };
 }
