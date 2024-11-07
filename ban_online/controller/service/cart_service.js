@@ -65,9 +65,19 @@ export function hanldeClickButtonBuy(listItem) {
             sessionStorage.removeItem('listItemSelected')
             sessionStorage.setItem('listItemSelected', JSON.stringify(listItem))
 
-            window.location.hash = '#!/pay';
+            window.location.hash = '#!/pay'
         } catch (error) {
-            console.error('Lỗi khi lưu listItem vào sessionStorage:', error);
+            console.error('Lỗi khi lưu listItem vào sessionStorage:', error)
         }
     })
+}
+
+export async function getListCartClient(idKhach) {
+    try {
+        const response = await fetch(`http://localhost:8083/giohangchitiet/detailByIdKhach?idKhach=${idKhach}`)
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu từ API:', error)
+    }
 }

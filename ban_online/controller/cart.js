@@ -6,12 +6,13 @@ window.cartCtrl = function ($scope) {
 
     $scope.totalList = 0
 
-    if (!$scope.checkAccount) {
-        $scope.litsCart = JSON.parse(sessionStorage.getItem('item_product_detail')) || []
-        $scope.checkList = $scope.litsCart.length > 0
-    } else {
+    if ($scope.checkAccount) {
         //call api để get list cart
+        $scope.litsCart = cartService.getListCartClient($scope.checkAccount.id) || []
+    } else {
+        $scope.litsCart = JSON.parse(sessionStorage.getItem('item_product_detail')) || []
     }
+    $scope.checkList = $scope.litsCart.length > 0
 
     const updateSelectedList = () => {
         const list_checkBox = document.querySelectorAll('input[type="checkbox"]:checked')
@@ -33,9 +34,6 @@ window.cartCtrl = function ($scope) {
         } else {
             // checkAccount là false, lưu tạm vào session
             sessionStorage.setItem('item_product_detail', JSON.stringify($scope.litsCart))
-
-            console.log($scope.litsCart)
-            console.log(listSelected)
         }
         updateTotalList(listSelected)
     }

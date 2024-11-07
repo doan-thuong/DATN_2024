@@ -180,6 +180,32 @@ label {
     animation: colorChange 3s infinite;
 }
 
+@keyframes colorChangeAllProduct {
+    0% {
+        color: black;
+    }
+
+    25% {
+        color: rgb(60, 130, 200);
+    }
+
+    50% {
+        color: rgb(75, 170, 255);
+    }
+
+    75% {
+        color: rgb(60, 130, 200);
+    }
+
+    100% {
+        color: black;
+    }
+}
+
+#text-all-product {
+    animation: colorChangeAllProduct 3s infinite;
+}
+
 hr {
     width: 85%;
 }

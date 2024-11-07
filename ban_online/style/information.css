@@ -175,7 +175,8 @@
 }
 
 .constituent,
-.instructions-for-use {
+.instructions-for-use,
+.evaluate {
     background-color: #fff;
     border-radius: 15px;
     padding: 5px;
@@ -224,4 +225,48 @@
         0 0 50px rgba(255, 0, 0, 0.4),
         0 0 100px rgba(255, 0, 0, 0.2);
     filter: blur(1px);
+}
+
+.title-evaluate {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+        text-align: center;
+    }
+}
+
+.content-evaluate {
+    display: flex;
+    gap: 100px;
+    margin-left: 50px;
+}
+
+.comment-evaluate {
+    height: 600px;
+    margin: 0 60px;
+    padding: 15px;
+    border: .1px solid rgb(235, 235, 235);
+    overflow-y: scroll;
+}
+
+.comment-evaluate::-webkit-scrollbar {
+    display: none;
+}
+
+.item-evaluate {
+    p {
+        margin: 25px 15px;
+    }
+
+    hr {
+        width: 100%;
+    }
+}
+
+.item-evaluate:nth-last-child(1) {
+    hr {
+        display: none;
+    }
 }

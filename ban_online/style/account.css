@@ -6,7 +6,9 @@
 .menu-control {
     width: 20%;
     padding: 15px;
-    border-right: 1px solid lightgray;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-right: 10px;
 }
 
 ul {
@@ -98,6 +100,7 @@ ul {
 .content-account {
     position: relative;
     width: 80%;
+    border-left: 1px solid lightgray;
 }
 
 .content-general {
@@ -351,6 +354,69 @@ ul {
     color: rgb(45, 135, 255);
     font-size: 24px;
     cursor: pointer;
+}
+
+.content-order {
+    gap: 20px;
+    max-height: 1095px;
+    overflow-y: auto;
+}
+
+.content-order::-webkit-scrollbar {
+    display: none;
+}
+
+.item-order {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 15px;
+    width: 90%;
+    margin: auto;
+}
+
+.img-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.content-item {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    align-items: center;
+    padding-left: 50px;
+    flex: 1;
+
+    .text-content-item {
+        display: flex;
+        gap: 50px;
+
+        p {
+            color: darkgray;
+        }
+    }
+}
+
+.btn-detail-item {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    a {
+        text-align: center;
+        text-decoration: none;
+        color: rgb(75, 170, 255);
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+    }
 }
 
 .content-voucher {
