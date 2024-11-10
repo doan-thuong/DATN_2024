@@ -1,6 +1,6 @@
 import * as homeService from "./service/home_service.js"
 
-window.homeCtrl = function ($scope, $http) {
+window.homeCtrl = function ($scope, $http, $timeout) {
 
     $scope.noDataNewProduct = true
 
@@ -29,7 +29,7 @@ window.homeCtrl = function ($scope, $http) {
     homeService.handleCheckInputFindPrice()
 
     // // ghep api page
-    $http.get('http://localhost:8080/san-pham/getSanPham-online')
+    $http.get('http://localhost:8083/san-pham/getSanPham-online')
         .then((response) => {
             const data = response.data.data
             const totalPages = response.data.total
@@ -43,10 +43,39 @@ window.homeCtrl = function ($scope, $http) {
         })
 
     // chuyen trang
-    homeService.handleCallAPIPage().then(({ data, index, size }) => {
-        $scope.listSP = data
-        homeService.generatePagination(index, size)
-    })
+    $scope.handleCallAPIPage = function () {
+        const pageIndex = document.querySelectorAll('.page-item')
+
+        if (pageIndex.length == 0) {
+            setTimeout($scope.handleCallAPIPage, 800)
+            return
+        }
+
+        pageIndex.forEach((item, ind) => {
+            item.addEventListener('click', () => {
+                let page = item.innerText
+
+                console.log(ind)
+
+                if (Number.isInteger(parseInt(page))) {
+                    $http.get("http://localhost:8083/san-pham/getSanPham-online?page=" + (parseInt(page) - 1))
+                        .then((response) => {
+                            const data = response.data
+                            const total = response.data.total
+
+                            $scope.listSP = data.data
+
+                            homeService.generatePagination(ind, total)
+                        })
+                        .catch((err) => {
+                            console.error("Error getting data:", err)
+                        })
+                }
+            })
+        })
+    }
+
+    $scope.handleCallAPIPage()
 
     homeService.callAPIgetDataFilter()
 }

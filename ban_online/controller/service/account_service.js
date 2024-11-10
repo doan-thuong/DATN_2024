@@ -4,11 +4,13 @@ export function handleCloseForm() {
     const overlay = document.querySelector('.overlay-address')
     const form_add_address = document.querySelector('.form-add-new-address')
     const btn_cancel = document.querySelector('.bx-collapse')
+    const loader = document.querySelector('.loader')
 
     const closeForm_address = () => {
         if (overlay.style.display == 'block') {
             overlay.style.display = 'none'
             form_add_address.style.display = 'none'
+            loader.style.display = 'none'
         }
     }
 
@@ -124,19 +126,52 @@ export function getInformationClient(idClient) {
         return null
     }
 
-    let client
-    fetch('http://localhost:8080/khachhang/detail/' + idClient)
+    const name = document.querySelector('#name')
+    const male = document.querySelector('#male')
+    const female = document.querySelector('#female')
+    const phone = document.querySelector('#phone')
+    const email = document.querySelector('#email')
+    const address = document.querySelector('#address')
+
+    const user_text = document.querySelector('#user-text')
+    const text_acc = document.querySelector('#text-acc')
+    const text_code_client = document.querySelector('#code-client')
+
+    fetch('http://localhost:8083/khachhang/detail/' + idClient)
         .then((response) => {
             return response.json()
         }).then((data) => {
-            client = data
+            user_text.textContent = data.ten[0].toUpperCase()
+            text_acc.textContent = data.ten[0].toUpperCase()
+            text_code_client.textContent = data.ma
+
+            name.value = data.ten
+            phone.value = data.sdt
+            address.value = data.diaChi
+            email.value = data.email
+            data.gioiTinh == 1 ? male.checked = true : female.checked = true
         }).catch((e) => {
             console.error(e)
         })
-
-    return client
 }
 
 export function getFormAddInForAddress({ value: newName }, { value: newPhone }, { value: newAddress }) {
     return { newName, newPhone, newAddress };
+}
+
+export function getDataFromClient(idClient) {
+    let name = document.querySelector('#name').value
+    let gender = document.querySelector('input[name="gioitinh"]:checked').value
+    let phone = document.querySelector('#phone').value
+    let email = document.querySelector('#email').value
+    let address = document.querySelector('#address').value
+
+    return {
+        id: idClient,
+        ten: name,
+        email: email,
+        gioiTinh: gender,
+        sdt: phone,
+        diaChi: address
+    }
 }

@@ -101,9 +101,10 @@ export function handleCallAPIPage() {
                 let page = item.innerHTML
                 index = ind
                 if (Number.isInteger(parseInt(page))) {
-                    fetch("http://localhost:8080/san-pham/page?page=" + page)
+                    fetch("http://localhost:8083/san-pham/getSanPham-online?page=" + (parseInt(page) - 1))
                         .then((response) => response.json())
                         .then((data) => {
+                            console.log("click")
                             let size = Array.isArray(data) ? data.length : 1
                             resolve({ data, index, size })
                         })

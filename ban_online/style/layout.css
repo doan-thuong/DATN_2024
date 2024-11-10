@@ -48,7 +48,7 @@ nav {
 
 #information {
     display: flex;
-    gap: 15px;
+    gap: 30px;
 }
 
 #cart-items,
@@ -125,6 +125,81 @@ nav {
 
 .bxs-bell-ring {
     animation: ringBell 2s ease-in-out infinite;
+}
+
+.popup-confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 0 0 5px 3px rgb(200, 200, 200);
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 999;
+}
+
+.head-popup {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #30ff8a;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    animation: animate .6s linear alternate-reverse infinite;
+    transition: .6s ease;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.09);
+    }
+}
+
+.btn-popup {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+
+    button {
+        width: 85px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #fff;
+        font: 16px 'Times New Roman';
+        cursor: pointer;
+        color: #fff;
+
+        &:hover {
+            box-shadow: inset 0 0 5px 3px rgb(227, 227, 227);
+        }
+    }
+}
+
+#confirm {
+    background-color: rgb(0, 220, 0);
+}
+
+#cancel {
+    background-color: rgb(165, 165, 165);
+}
+
+.popup {
+    display: none;
 }
 
 .ctrl {
@@ -246,6 +321,8 @@ span {
 }
 
 .progress-notifi {
+    position: absolute;
+    bottom: 0;
     height: 5px;
     transition: width 2.8s ease-in-out;
 }
@@ -261,7 +338,7 @@ span {
 .notification-success {
     display: none;
 
-    span {
+    pre {
         color: green;
     }
 }
@@ -269,7 +346,7 @@ span {
 .notification-error {
     display: none;
 
-    span {
+    pre {
         color: red;
     }
 }

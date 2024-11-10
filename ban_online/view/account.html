@@ -1,10 +1,10 @@
 <div class="account-control">
     <div class="menu-control">
         <div class="avatar">
-            <div class="user-avatar">
+            <div class="user-avatar" title="Avatar-user">
                 <p id="user-text">?</p>
             </div>
-            <p id="code-client">Ma_khach</p>
+            <p id="code-client" title="Mã khách">Ma_khach</p>
         </div>
         <ul>
             <li class="general-menu menu">Thông tin chung</li>
@@ -36,6 +36,10 @@
                     <input type="text" id="phone" name="sodienthoai" placeholder="Số điện thoại">
                 </div>
                 <div>
+                    <label for="phone">Email</label>
+                    <input type="text" id="email" name="mail" placeholder="Email">
+                </div>
+                <div>
                     <label for="address">Địa chỉ</label>
                     <input type="text" id="address" name="diachi" placeholder="Địa chỉ">
                 </div>
@@ -46,7 +50,7 @@
                     </a>
                 </div>
                 <div class="button">
-                    <button>Lưu thay đổi</button>
+                    <button id="save-changes">Lưu thay đổi</button>
                 </div>
             </form>
         </div>
@@ -208,6 +212,8 @@
 </div>
 
 <div class="overlay-address"></div>
+
+<div class="loader"></div>
 
 <div class="form-add-new-address">
     <div class="close-popup-address">

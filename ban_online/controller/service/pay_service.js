@@ -90,7 +90,7 @@ export function animationInputAddress() {
 }
 
 export function checkSingleSP(idctsp) {
-    fetch('http://localhost:8080/chi-tiet-san-pham/detail?id=' + idctsp).then((response) => {
+    fetch('http://localhost:8083/chi-tiet-san-pham/detail?id=' + idctsp).then((response) => {
         return response.json()
     }).catch((error) => {
         console.log(error)

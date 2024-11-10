@@ -1,12 +1,11 @@
 import * as inforService from './service/information_service.js'
 
 window.informationCtrl = function ($scope, $http, $location) {
-    const itemCarts = document.querySelector('#cart-items');
 
     const sp = $location.search().sp
 
-    let api_getSPCT = $http.get('http://localhost:8080/chi-tiet-san-pham?idSP=' + sp)
-    let api_getSP = $http.get('http://localhost:8080/san-pham/detail?idSP=' + sp)
+    let api_getSPCT = $http.get('http://localhost:8083/chi-tiet-san-pham/getByIDSP?idSP=' + sp)
+    let api_getSP = $http.get('http://localhost:8083/san-pham/detail?idSP=' + sp)
 
     var data
     var index_category = 0
@@ -89,6 +88,7 @@ window.informationCtrl = function ($scope, $http, $location) {
     // }
 
     const btn_cart = document.querySelector('.add-cart')
+    const number_cart = document.querySelector('#number-cart')
     btn_cart.addEventListener('click', function (e) {
         e.preventDefault()
         setTimeout(() => {
@@ -117,6 +117,7 @@ window.informationCtrl = function ($scope, $http, $location) {
 
             if (!productExists) list_item_product_detail.push(data[index_category])
 
+            number_cart.textContent = list_item_product_detail.length
             sessionStorage.setItem('item_product_detail', JSON.stringify(list_item_product_detail))
         }, 800)
 

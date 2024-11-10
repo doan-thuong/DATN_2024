@@ -417,6 +417,7 @@ hr {
             display: grid;
             justify-content: center;
             align-items: center;
+            user-select: none;
 
             &:hover {
                 background-color: rgb(229, 229, 229);
@@ -434,7 +435,8 @@ hr {
 }
 
 .active-page {
-    background-color: rgb(80, 185, 255);
+    color: white !important;
+    background-color: rgb(80, 185, 255) !important;
 }
 
 .disabled {
