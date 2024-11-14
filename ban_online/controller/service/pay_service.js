@@ -1,3 +1,5 @@
+import * as noti from './notification_config.js'
+
 export function hanldeDropdownAddress() {
     const option_address = document.querySelector("#option-add")
     const drop_down_address = document.querySelector(".drop-down-address")
@@ -94,5 +96,59 @@ export function checkSingleSP(idctsp) {
         return response.json()
     }).catch((error) => {
         console.log(error)
+    })
+}
+
+export async function getDataClient(idClient, callback) {
+    try {
+        const client = await fetch('http://localhost:8083/khachhang/detail/' + idClient)
+        if (client.status == 200) {
+            const dataClient = await client.json()
+            callback(dataClient)
+        } else {
+            noti.configNotificationError('Lỗi (' + client.status + ')')
+        }
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+export async function getDataAddressClient(idClient) {
+    const apiGetAddress = await fetch('http://localhost:8083/thongtingiaohang/detailByKhach/' + idClient)
+
+    if (apiGetAddress.status == 200) {
+
+    }
+}
+
+export function handleSelectAddress(callback) {
+    const drop_down = document.querySelector('#option-add')
+    let prevIndex = 0
+    drop_down.addEventListener('click', (e) => {
+        e.stopPropagation()
+
+        const selectAddress = document.querySelectorAll('.select-address-main')
+
+        Array.from(selectAddress).forEach((address, index) => {
+            const icons = document.querySelectorAll('.icon-map .bx-map')
+
+            if (prevIndex == 0) {
+                icons.forEach(icon => {
+                    icon.style.display = 'none'
+                })
+                icons[0].style.display = 'block'
+            }
+
+            address.addEventListener('click', function () {
+                icons.forEach(icon => {
+                    icon.style.display = 'none'
+                })
+
+                icons[index].style.display = 'block'
+                prevIndex = index
+
+                callback(index)
+            })
+        })
     })
 }

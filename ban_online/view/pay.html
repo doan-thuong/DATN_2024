@@ -25,11 +25,11 @@
             </div>
             <div class="address-main">
                 <div class="infor-client">
-                    <p><strong>Ho_Ten</strong></p>
-                    <small>So_Dien_Thoai</small>
+                    <p><strong>{{client.ten}}</strong></p>
+                    <small>{{client.sdt}}</small>
                 </div>
                 <div class="address">
-                    <p>Dia_Chi</p>
+                    <p>{{client.diaChi}}</p>
                 </div>
             </div>
             <div id="option-add">
@@ -39,8 +39,21 @@
 
         <div class="drop-down-address">
             <hr>
-            <div class="list-address-more"> <!--ng-repeat-->
-
+            <div class="list-address-more">
+                <div class="select-address-main address-more" ng-repeat="address in list_address_client">
+                    <div class="icon-map">
+                        <i class='bx bx-map'></i>
+                    </div>
+                    <div class="address-main">
+                        <div class="infor-client">
+                            <p><strong>{{address.tenNguoiNhan}}</strong></p>
+                            <small>{{address.sdtNguoiNhan}}</small>
+                        </div>
+                        <div class="address">
+                            <p>{{address.dcNguoiNhan}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="add-address">
                 <button id="add-new-address">
@@ -82,51 +95,21 @@
             <div ng-if="check_discount" class="list-discount">
                 <!-- ng-repeat: list mã giảm giá -->
                 <div>
-                    <div class="discount-item">
+                    <div class="discount-item" ng-repeat="item in list_voucher">
                         <div>
-                            <h5>Ma_giam_gia</h5>
-                            <small>Còn: So_ngay ngày</small>
+                            <h5>{{item.voucher.ma}}</h5>
+                            <small>Còn: {{item.deffDay}} ngày</small>
                         </div>
                         <div>
-                            <p>Noi_dung_ma_giam_gia</p>
-                            <button>Dùng</button>
-                        </div>
-                    </div>
-                    <div class="discount-item">
-                        <div>
-                            <h5>Ma_giam_gia</h5>
-                            <small>Còn: So_ngay ngày</small>
-                        </div>
-                        <div>
-                            <p>Noi_dung_ma_giam_gia</p>
-                            <button>Dùng</button>
-                        </div>
-                    </div>
-                    <div class="discount-item">
-                        <div>
-                            <h5>Ma_giam_gia</h5>
-                            <small>Còn: So_ngay ngày</small>
-                        </div>
-                        <div>
-                            <p>Noi_dung_ma_giam_gia</p>
-                            <button>Dùng</button>
-                        </div>
-                    </div>
-                    <div class="discount-item">
-                        <div>
-                            <h5>Ma_giam_gia</h5>
-                            <small>Còn: So_ngay ngày</small>
-                        </div>
-                        <div>
-                            <p>Noi_dung_ma_giam_gia</p>
-                            <button>Dùng</button>
+                            <p>{{item.voucher.ten}}</p>
+                            <button ng-click="useVoucher(item.voucher)">Dùng</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="result-discount" ng-if="check_discount">
-                <h5>Ma_giam_gia</h5>
-                <p>Tiền giảm: <i class='bx bx-dollar' style="color: black;"></i> So_tien</p>
+                <h5>{{discountCode}}</h5>
+                <p>Tiền giảm: ₫{{reducedMoney}}</p>
             </div>
         </div>
     </div>

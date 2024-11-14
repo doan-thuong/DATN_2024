@@ -218,11 +218,11 @@ ul {
 
 .information-client {
     display: flex;
-    gap: 10px;
+    gap: 60px;
     align-items: center;
 
-    small {
-        color: gray;
+    span {
+        color: rgb(85, 85, 85);
     }
 }
 
@@ -281,7 +281,7 @@ ul {
 
 .overlay-address {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

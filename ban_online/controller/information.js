@@ -4,7 +4,7 @@ window.informationCtrl = function ($scope, $http, $location) {
 
     const sp = $location.search().sp
 
-    let api_getSPCT = $http.get('http://localhost:8083/chi-tiet-san-pham/getByIDSP?idSP=' + sp)
+    let api_getSPCT = $http.get('http://localhost:8083/chi-tiet-san-pham/getAllCTSP?idSP=' + sp)
     let api_getSP = $http.get('http://localhost:8083/san-pham/detail?idSP=' + sp)
 
     var data
@@ -26,7 +26,6 @@ window.informationCtrl = function ($scope, $http, $location) {
                 $scope.categorys.push(ctps.soNgaySuDung)
             })
 
-            console.log(data)
             inforService.handleChangeTotal($scope.soLuong)
 
             delay_spct

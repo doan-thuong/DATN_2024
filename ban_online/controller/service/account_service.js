@@ -71,18 +71,21 @@ export function handleControlMenu() {
     })
 }
 
-export function handleAddNewAddress() {
+export function handleAddNewAddress(callback) {
     const input_new_name = document.querySelector("#name-new-address")
     const input_new_phone = document.querySelector("#phone-new-address")
     const input_new_address = document.querySelector("#address-new-address")
     const btn_new_submit = document.querySelector("#btn-new-submit")
+
+    const overlay = document.querySelector('.overlay-address')
+    const form_add_address = document.querySelector('.form-add-new-address')
 
     if (!input_new_name || !input_new_phone || !input_new_address) {
         console.error('No card name or phone or address')
         return
     }
 
-    btn_new_submit.addEventListener('click', (e) => {
+    btn_new_submit.addEventListener('click', async (e) => {
         e.preventDefault()
 
         if (input_new_name.value.trim() == '' || !input_new_name.value) {
@@ -113,9 +116,31 @@ export function handleAddNewAddress() {
         }
 
         let dataFormAddress = getFormAddInForAddress(input_new_name, input_new_phone, input_new_address)
-        console.log(dataFormAddress)
 
-        // call api để add address
+        try {
+            const res = await fetch('https://localhost:8083/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataFormAddress)
+            })
+
+            if (res == 200) {
+                callback(dataFormAddress)
+                noti.configNotificationSuccess('Thêm thành công!')
+                form_add_address.display = 'none'
+                overlay.style.display = 'none'
+            } else {
+                noti.configNotificationError('Thêm thất bại! (' + res.status + ')')
+                form_add_address.display = 'none'
+                overlay.style.display = 'none'
+            }
+        } catch (e) {
+            noti.configNotificationError('Thêm thất bại!')
+            form_add_address.display = 'none'
+            overlay.style.display = 'none'
+        }
     })
 }
 
@@ -145,6 +170,8 @@ export function getInformationClient(idClient) {
             text_acc.textContent = data.ten[0].toUpperCase()
             text_code_client.textContent = data.ma
 
+            sessionStorage.setItem('user', JSON.stringify(data))
+
             name.value = data.ten
             phone.value = data.sdt
             address.value = data.diaChi
@@ -159,7 +186,7 @@ export function getFormAddInForAddress({ value: newName }, { value: newPhone }, 
     return { newName, newPhone, newAddress };
 }
 
-export function getDataFromClient(idClient) {
+export function getDataFromClient() {
     let name = document.querySelector('#name').value
     let gender = document.querySelector('input[name="gioitinh"]:checked').value
     let phone = document.querySelector('#phone').value
@@ -167,11 +194,56 @@ export function getDataFromClient(idClient) {
     let address = document.querySelector('#address').value
 
     return {
-        id: idClient,
         ten: name,
         email: email,
         gioiTinh: gender,
         sdt: phone,
         diaChi: address
     }
+}
+
+export function updateClient(idClient) {
+    const btn_save_changes = document.querySelector('#save-changes')
+
+    btn_save_changes.addEventListener('click', async function () {
+        const overlay = document.querySelector('.overlay-address')
+        const loading = document.querySelector('.loader')
+        let data, status
+
+        overlay.style.display = 'block'
+        loading.style.display = 'block'
+        try {
+            const response = await fetch('http://localhost:8083/khachhang/updateOnline/' + idClient,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(getDataFromClient())
+                })
+            data = await response.text()
+            status = response.status
+
+        } catch {
+            er => { console.error(er) }
+        } finally {
+            overlay.style.display = 'none'
+            loading.style.display = 'none'
+
+            switch (status) {
+                case 200:
+                    noti.configNotificationSuccess(data)
+                    break
+                case 400:
+                case 404:
+                    noti.configNotificationError(data)
+                    break
+                case 500:
+                    noti.configNotificationError('Internal Server Error')
+                    break
+                default:
+                    console.warn("Unhandled status:", status)
+            }
+        }
+    })
 }

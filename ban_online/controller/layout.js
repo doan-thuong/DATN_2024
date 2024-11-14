@@ -43,4 +43,12 @@ app.controller('myCtrl', function ($rootScope, $scope) {
     $rootScope.$on('$routeChangeSuccess', function () {
         window.scrollTo(0, 0)
     })
+
+    const text_acc = document.querySelector('#text-acc')
+    let acc = JSON.parse(sessionStorage.getItem('user'))
+    if (acc) {
+        text_acc.textContent = acc.ten[0]
+    } else {
+        text_acc.textContent = '?'
+    }
 })

@@ -58,9 +58,9 @@
         <div class="content-address content-acc">
 
             <!-- ng-repeat: repeat address -->
-            <div class="item-address">
+            <!-- <div class="item-address">
 
-                <!-- ng-if: check default address -->
+                ng-if: check default address
                 <div class="view-control-default" title="Địa chi mặc định">
                     <i class='bx bx-map'></i>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="content-item-address">
                     <div class="information-client">
                         <h3>Ho_Ten</h3>
-                        <small>So_dien_thoai</small>
+                        <span>So_dien_thoai</span>
                     </div>
 
                     <div class="address-client">
@@ -81,9 +81,9 @@
                         <i class='bx bx-trash'></i>
                     </button>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="item-address">
+            <div class="item-address" ng-repeat="ttgh in listTTGH">
 
                 <!-- ng-if: check default address -->
                 <div class="view-control-default">
@@ -94,17 +94,17 @@
 
                 <div class="content-item-address">
                     <div class="information-client">
-                        <h3>Ho_Ten</h3>
-                        <small>So_dien_thoai</small>
+                        <h3>{{ttgh.tenNguoiNhan}}</h3>
+                        <span>{{ttgh.sdtNguoiNhan}}</span>
                     </div>
 
                     <div class="address-client">
-                        <p>Dia_chi</p>
+                        <p>{{ttgh.dcNguoiNhan}}</p>
                     </div>
                 </div>
 
                 <div class="remove-address" ng-if="!check_default">
-                    <button>
+                    <button ng-click="delete(ttgh)">
                         <i class='bx bx-trash'></i>
                     </button>
                 </div>
