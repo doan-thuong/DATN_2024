@@ -49,3 +49,24 @@ export function configNotificationSuccess(message) {
         progress_success.style.width = '0%'
     }, 3000)
 }
+
+export function getConfirm(callback) {
+    const popup = document.querySelector('.popup-confirm')
+    const btn_confirm = document.querySelector('#confirm')
+    const btn_cancel = document.querySelector('#cancel')
+    let checkConfirm = false
+
+    // if (popup.style.display == 'none') {
+    popup.style.display = 'flex'
+    // }
+
+    btn_confirm.addEventListener('click', () => { handleConfirmClick(true) })
+
+    btn_cancel.addEventListener('click', () => { handleConfirmClick(false) })
+
+    const handleConfirmClick = (confirm) => {
+        checkConfirm = confirm;
+        popup.style.display = 'none'
+        callback(checkConfirm);
+    }
+}

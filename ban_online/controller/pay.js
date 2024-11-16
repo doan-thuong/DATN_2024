@@ -1,14 +1,17 @@
 import * as payService from './service/pay_service.js'
+import * as noti from './service/notification_config.js'
 
 window.payCtrl = function ($scope, $http) {
 
     let idClient
+    const btn_pay = document.querySelector('#btn-pay')
+    const payment = document.querySelectorAll('[name="payment"]')
 
     $scope.totalMoney = 0
     $scope.discountMoney = 0
     $scope.totalLastMoney = 0
     $scope.check_discount = false
-    $scope.check_account = sessionStorage.getItem('check_account') ? true : false
+    $scope.check_account = (sessionStorage.getItem('check_account') == null) ? true : false
     $scope.list_item_pay = []
     $scope.discountCode = 'Chưa có'
     $scope.reducedMoney = 0
@@ -32,7 +35,7 @@ window.payCtrl = function ($scope, $http) {
                 $scope.list_address_client = res.data
             })
             .catch(err => {
-                console.error(err)
+                // console.error(err)
             })
 
         $http.get('http://localhost:8083/chi-tiet-voucher/getByIdKhach/' + idClient)
@@ -67,9 +70,7 @@ window.payCtrl = function ($scope, $http) {
         if ($scope.check_account === true) {
             payService.hanldeDropdownAddress()
             payService.handleSelectAddress(index => {
-                $scope.$apply(function () {
-                    $scope.index_address = index
-                })
+                $scope.index_address = index
             })
             $scope.useVoucher = function (voucher) {
                 $scope.discountCode = voucher.ma
@@ -91,4 +92,26 @@ window.payCtrl = function ($scope, $http) {
     })
 
     $scope.totalLastMoney = $scope.totalMoney - $scope.discountMoney
+
+    btn_pay.addEventListener('click', () => {
+        // let inforClient
+        // if ($scope.check_account) {
+        //     console.log($scope.index_address)
+        //     console.log($scope.discountCode)
+        // } else {
+        //     payService.getDataClientNoLogin(acc => {
+        //         inforClient = acc
+        //         console.log(inforClient)
+        //     })
+        // }
+        // console.log($scope.list_item_pay)
+        // payment.forEach(pm => {
+        //     if (pm.checked) {
+        //         console.log(pm.value)
+        //     }
+        // })
+        noti.getConfirm((data) => {
+            console.log("choose: " + data)
+        })
+    })
 }

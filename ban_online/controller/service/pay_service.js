@@ -152,3 +152,28 @@ export function handleSelectAddress(callback) {
         })
     })
 }
+
+export function getDataClientNoLogin(callback) {
+    const name = document.querySelector('#name-client-noLogin')
+    const phone = document.querySelector('#phone-client-noLogin')
+    const address = document.querySelector('#address-client-noLogin')
+
+    if (!name.value || name.value.trim() == '') {
+        noti.configNotificationError('Vui lòng nhập họ tên của bạn')
+        return
+    }
+    if (!phone.value || phone.value.trim() == '') {
+        noti.configNotificationError('Vui lòng nhập số điện thoại của bạn')
+        return
+    }
+    if (!address.value || address.value.trim() == '') {
+        noti.configNotificationError('Vui lòng nhập địa chỉ của bạn')
+        return
+    }
+
+    callback({
+        nameNoLogin: name.value,
+        phoneNoLogin: phone.value,
+        addressNoLogin: address.value
+    })
+}
