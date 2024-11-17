@@ -60,13 +60,17 @@ export function getConfirm(callback) {
     popup.style.display = 'flex'
     // }
 
+    btn_confirm.removeEventListener('click', () => handleConfirmClick(true))
+
+    btn_cancel.removeEventListener('click', () => handleConfirmClick(false))
+
     btn_confirm.addEventListener('click', () => { handleConfirmClick(true) })
 
     btn_cancel.addEventListener('click', () => { handleConfirmClick(false) })
 
     const handleConfirmClick = (confirm) => {
-        checkConfirm = confirm;
+        checkConfirm = confirm
         popup.style.display = 'none'
-        callback(checkConfirm);
+        callback(checkConfirm)
     }
 }

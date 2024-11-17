@@ -177,3 +177,20 @@ export function getDataClientNoLogin(callback) {
         addressNoLogin: address.value
     })
 }
+
+export async function postDataPay(data, callback) {
+    const apiPostPay = await fetch('http://localhost:8083/donhang', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    if (apiPostPay.status == 200) {
+        callback(true)
+        noti.configNotificationSuccess('Đặt hàng thành công')
+    } else {
+        noti.configNotificationError('Lỗi (' + apiPostPay.status + ')')
+    }
+}
