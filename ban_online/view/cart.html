@@ -5,12 +5,13 @@
     <!-- <div ng-repeat="item in listCart track by $index"> -->
     <div ng-if="!checkList">
         <hr>
-        <h4 style="text-align: center; color: rgb(255, 70, 70); margin: 50px 0;">Rất tiếc! Bạn không có đơn hàng nào
-            trong giỏ</h4>
+        <h4 style="text-align: center; color: rgb(255, 70, 70); margin: 50px 0;">
+            Rất tiếc! Bạn không có đơn hàng nào trong giỏ
+        </h4>
         <hr>
     </div>
     <div ng-if="checkList">
-        <div class="cart-item" ng-repeat="cart in litsCart">
+        <div class="cart-item" ng-repeat="cart in litsCart track by $index">
             <div class="check-box">
                 <label class="container">
                     <input type="checkbox" value="{{cart.id}}" />
@@ -22,6 +23,9 @@
                     alt="">
                 <div class="information-product">
                     <h4>{{cart.tenSanPhamTrongGio}}</h4>
+                    <div>
+                        <p style="color: darkgray;">Còn: {{cart.soLuong}}</p>
+                    </div>
                     <div style="display: flex; align-items: center; gap: 5px;">
                         <p>{{cart.soNgaySuDung}} ngày</p>
                         |
@@ -37,7 +41,7 @@
                 </div>
             </div>
             <div class="control-cart-item">
-                <button class="remove-cart" title="Xóa khỏi giỏ hàng">
+                <button class="remove-cart" ng-click="removeCartItem($index)" title="Xóa khỏi giỏ hàng">
                     <i class='bx bx-trash'></i>
                 </button>
             </div>

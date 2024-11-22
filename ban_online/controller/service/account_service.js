@@ -227,23 +227,48 @@ export function updateClient(idClient) {
         } catch {
             er => { console.error(er) }
         } finally {
-            overlay.style.display = 'none'
-            loading.style.display = 'none'
+            setTimeout(() => {
+                overlay.style.display = 'none'
+                loading.style.display = 'none'
 
-            switch (status) {
-                case 200:
-                    noti.configNotificationSuccess(data)
-                    break
-                case 400:
-                case 404:
-                    noti.configNotificationError(data)
-                    break
-                case 500:
-                    noti.configNotificationError('Internal Server Error')
-                    break
-                default:
-                    console.warn("Unhandled status:", status)
-            }
+                switch (status) {
+                    case 200:
+                        noti.configNotificationSuccess(data)
+                        break
+                    case 400:
+                    case 404:
+                        noti.configNotificationError(data)
+                        break
+                    case 500:
+                        noti.configNotificationError('Internal Server Error')
+                        break
+                    default:
+                        console.warn("Unhandled status:", status)
+                }
+            }, 1000)
         }
     })
+}
+
+export async function getVoucherClient(idClient, callback) {
+    const response = await fetch('http://localhost:8083/chi-tiet-voucher/getByIdKhach/' + idClient)
+
+    if (response.status == 200) {
+        const data = await response.json()
+        callback(data)
+    } else {
+        console.error(await response.text())
+    }
+}
+
+export async function getOrderByClient(idClient, callback) {
+    const response = await fetch('http://localhost:8083/hoadon/getHDbyClientID?idKH=' + idClient)
+
+    if (response.status == 200) {
+        const data = await response.json()
+        callback(data)
+    } else {
+        const mess = await response.text()
+        noti.configNotificationError(mess)
+    }
 }

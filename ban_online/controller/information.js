@@ -3,12 +3,13 @@ import * as inforService from './service/information_service.js'
 window.informationCtrl = function ($scope, $http, $location) {
 
     const sp = $location.search().sp
+    const check_account = sessionStorage.getItem('check_account')
 
     let api_getSPCT = $http.get('http://localhost:8083/chi-tiet-san-pham/getAllCTSP?idSP=' + sp)
     let api_getSP = $http.get('http://localhost:8083/san-pham/detail?idSP=' + sp)
 
     var data
-    var index_category = 0
+    let index_category = 0
 
     // get data spct
     api_getSPCT
@@ -80,44 +81,48 @@ window.informationCtrl = function ($scope, $http, $location) {
     inforService.handleActiveInformation()
 
     // control quantity
-
-    const check_account = false
-
-    // if (!check_account) {
-    // }
-
     const btn_cart = document.querySelector('.add-cart')
     const number_cart = document.querySelector('#number-cart')
     btn_cart.addEventListener('click', function (e) {
         e.preventDefault()
         setTimeout(() => {
-            let list_item_product_detail = JSON.parse(sessionStorage.getItem('item_product_detail'))
+            if (!check_account) {
+                let list_item_product_detail = JSON.parse(sessionStorage.getItem('item_product_detail'))
 
-            if (list_item_product_detail == null) {
-                list_item_product_detail = []
-            }
-
-            let data_get = data[index_category]
-            data_get['soLuongTrongGio'] = parseInt(document.querySelector("#input-quantity").value)
-            data_get['tenSanPhamTrongGio'] = $scope.sp.tenSP
-            data_get['isSelected'] = false
-
-            let productExists = false;
-
-            //check sản phẩm đã có thì cập nhật sl
-            list_item_product_detail.forEach((item) => {
-                if (item.id == data[index_category].id) {
-                    item.soLuongTrongGio = parseInt(item.soLuongTrongGio) || 0
-                    item.soLuongTrongGio += parseInt(document.querySelector("#input-quantity").value)
-                    productExists = true
-                    return
+                if (list_item_product_detail == null) {
+                    list_item_product_detail = []
                 }
-            })
 
-            if (!productExists) list_item_product_detail.push(data[index_category])
+                let data_get = data[index_category]
+                data_get['soLuongTrongGio'] = parseInt(document.querySelector("#input-quantity").value)
+                data_get['tenSanPhamTrongGio'] = $scope.sp.tenSP
 
-            number_cart.textContent = list_item_product_detail.length
-            sessionStorage.setItem('item_product_detail', JSON.stringify(list_item_product_detail))
+                let productExists = false;
+
+                //check sản phẩm đã có thì cập nhật sl
+                list_item_product_detail.forEach((item) => {
+                    if (item.id == data[index_category].id) {
+                        item.soLuongTrongGio = parseInt(item.soLuongTrongGio) || 0
+                        item.soLuongTrongGio += parseInt(document.querySelector("#input-quantity").value)
+                        productExists = true
+                        return
+                    }
+                })
+
+                if (!productExists) list_item_product_detail.push(data[index_category])
+
+                number_cart.textContent = list_item_product_detail.length
+                sessionStorage.setItem('item_product_detail', JSON.stringify(list_item_product_detail))
+            } else {
+                let data_cartKhack = {}
+                data_cartKhack['idCTSP'] = data[index_category].id
+                data_cartKhack['idKH'] = check_account
+                data_cartKhack['soLuong'] = parseInt(document.querySelector("#input-quantity").value)
+
+                inforService.handleAddCartForClient(data_cartKhack, get => {
+                    number_cart.textContent = get
+                })
+            }
         }, 800)
 
         inforService.handleEffectAddCart()

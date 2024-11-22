@@ -56,36 +56,7 @@
         </div>
 
         <div class="content-address content-acc">
-
-            <!-- ng-repeat: repeat address -->
-            <!-- <div class="item-address">
-
-                ng-if: check default address
-                <div class="view-control-default" title="Địa chi mặc định">
-                    <i class='bx bx-map'></i>
-                </div>
-
-                <div class="content-item-address">
-                    <div class="information-client">
-                        <h3>Ho_Ten</h3>
-                        <span>So_dien_thoai</span>
-                    </div>
-
-                    <div class="address-client">
-                        <p>Dia_chi</p>
-                    </div>
-                </div>
-
-                <div class="remove-address" ng-if="check_default">
-                    <button>
-                        <i class='bx bx-trash'></i>
-                    </button>
-                </div>
-            </div> -->
-
             <div class="item-address" ng-repeat="ttgh in listTTGH">
-
-                <!-- ng-if: check default address -->
                 <div class="view-control-default">
                     <div ng-if="check_default">
                         <i class='bx bx-map' title="Địa chi mặc định"></i>
@@ -120,62 +91,23 @@
         </div>
 
         <div class="content-order content-acc">
-            <div class="item-order"> <!--ng-repeat-->
+            <div class="item-order" ng-repeat="order in listOrder"> <!--ng-repeat="order in listOrder"-->
                 <div class="img-item">
                     <img
                         src="https://myphamnhatonline.com/Uploaded_products/img_product_small/vien-uong-trang-da-dhc-20.jpg">
                 </div>
                 <div class="content-item">
-                    <h3>Tên sản phẩm</h3>
+                    <h3>{{order.maHD}}</h3>
                     <div class="text-content-item">
-                        <p>Giá: ₫---</p>
-                        <p>Số lượng: ---</p>
+                        <p>Giá: ₫{{order.thanhTien}}</p>
+                        <p>Trạng thái: {{order.trangThai}}</p>
                     </div>
                 </div>
                 <div class="btn-detail-item">
-                    <a href="#">
+                    <p> <!--ng-click='detailOrder(order.id)'-->
                         <i class='bx bx-info-circle' style="color: rgb(75, 170, 255);"></i>
                         Xem chi tiết
-                    </a>
-                </div>
-            </div>
-
-            <div class="item-order"> <!--ng-repeat-->
-                <div class="img-item">
-                    <img
-                        src="https://myphamnhatonline.com/Uploaded_products/img_product_small/vien-uong-trang-da-dhc-20.jpg">
-                </div>
-                <div class="content-item">
-                    <h3>Tên sản phẩm</h3>
-                    <div class="text-content-item">
-                        <p>Giá: ₫---</p>
-                        <p>Số lượng: ---</p>
-                    </div>
-                </div>
-                <div class="btn-detail-item">
-                    <a href="#">
-                        <i class='bx bx-info-circle' style="color: rgb(75, 170, 255);"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-            <div class="item-order"> <!--ng-repeat-->
-                <div class="img-item">
-                    <img
-                        src="https://myphamnhatonline.com/Uploaded_products/img_product_small/vien-uong-trang-da-dhc-20.jpg">
-                </div>
-                <div class="content-item">
-                    <h3>Tên sản phẩm</h3>
-                    <div class="text-content-item">
-                        <p>Giá: ₫---</p>
-                        <p>Số lượng: ---</p>
-                    </div>
-                </div>
-                <div class="btn-detail-item">
-                    <a href="#">
-                        <i class='bx bx-info-circle' style="color: rgb(75, 170, 255);"></i>
-                        Xem chi tiết
-                    </a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -192,17 +124,20 @@
                 <button class="btn-voucher">Tìm</button>
             </div>
             <div class="list-voucher">
-                <div class="item-voucher"> <!-- ng-repeat: load list voucher-->
+                <div class="item-voucher" ng-repeat="vc in listVC">
                     <div class="img-item-vc">
                         <i class='bx bxs-discount'></i>
+                        <p><Strong>{{vc.ma}}</Strong></p>
                     </div>
                     <div class="main-item-vc">
                         <div class="title-item-vc">
-                            <h4>Title</h4>
+                            <h4 style="color: rgb(75, 170, 255);">{{vc.ten}}</h4>
                         </div>
                         <div class="content-item-vc">
-                            <p class="condition">Đơn tối thiểu ---</p>
-                            <small class="expiration-date">Ngày hết: dd/mm/yyyy</small>
+                            <p class="condition">
+                                <b style="color: rgb(60, 60, 60);">Điều kiện:</b> {{vc.dieuKien}}
+                            </p>
+                            <small class="expiration-date">Ngày hết: {{vc.ngayKetThuc}}</small>
                         </div>
                     </div>
                 </div>

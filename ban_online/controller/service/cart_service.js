@@ -1,12 +1,12 @@
 import * as notiConfig from "./notification_config.js"
 
-export function handleEventCart(maxQuantity, index) {
+export function handleEventCart(maxQuantity, index, callback) {
     const cart = document.querySelectorAll(".quantity-cart")
-
-    // quantityCarts.forEach(cart => {
     const input_quantity_cart = cart[index].querySelector(".input-quantity")
     const btn_minus_cart = cart[index].querySelector(".btn-minus")
     const btn_plus_cart = cart[index].querySelector(".btn-plus")
+
+    let change_cart = false
 
     let quantity = parseInt(input_quantity_cart.value) || 1 // Khởi tạo quantity với giá trị từ input hoặc 1
 
@@ -21,6 +21,8 @@ export function handleEventCart(maxQuantity, index) {
             notiConfig.configNotificationError(mess)
         }
         quantity = parseInt(input_quantity_cart.value)
+        change_cart = true
+        callback(change_cart)
     })
 
     btn_minus_cart.addEventListener("click", function () {
@@ -31,6 +33,8 @@ export function handleEventCart(maxQuantity, index) {
             let mess = 'Số lượng phải lớn hơn 0'
             notiConfig.configNotificationError(mess)
         }
+        change_cart = true
+        callback(change_cart)
     })
 
     btn_plus_cart.addEventListener("click", function () {
@@ -42,8 +46,9 @@ export function handleEventCart(maxQuantity, index) {
             notiConfig.configNotificationError(mess)
             input_quantity_cart.value = maxQuantity
         }
+        change_cart = true
+        callback(change_cart)
     })
-    // })
 }
 
 export function hanldeClickButtonBuy(listItem) {
@@ -55,7 +60,7 @@ export function hanldeClickButtonBuy(listItem) {
     }
 
     if (!Array.isArray(listItem) || listItem.length === 0) {
-        console.error('listItem phải là một mảng hợp lệ và có ít nhất một phần tử')
+        // console.error('listItem phải là một mảng hợp lệ và có ít nhất một phần tử')
         return
     }
 
@@ -72,12 +77,43 @@ export function hanldeClickButtonBuy(listItem) {
     })
 }
 
-export async function getListCartClient(idKhach) {
+export async function getListCartClient(idKhach, callback) {
     try {
         const response = await fetch(`http://localhost:8083/giohangchitiet/detailByIdKhach?idKhach=${idKhach}`)
-        const data = await response.json()
-        return data
+        if (response.status == 200) {
+            const data = await response.json()
+            callback(data)
+        } else {
+            // const er = await response.text()
+            callback(null)
+        }
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu từ API:', error)
+    }
+}
+
+export async function updateQuantityInCart(id, quantity) {
+    try {
+        const response = await fetch(`http://localhost:8083/giohangchitiet/updateQuantity?id=${id}&quantity=${quantity}`)
+        if (response.status != 200) {
+            const er = await response.text()
+            notiConfig.configNotificationError(er)
+        }
+    } catch (error) {
+        console.error('Lỗi khi cập nhật số lượng:', error)
+    }
+}
+
+export async function deleteProductInCart(id) {
+    try {
+        const response = await fetch(`http://localhost:8083/giohangchitiet/delete/${id}`, { method: 'DELETE' })
+        if (response.status != 200) {
+            const er = await response.text()
+            notiConfig.configNotificationError(er)
+        } else {
+            notiConfig.configNotificationSuccess('Xóa sản phẩm thành công')
+        }
+    } catch (error) {
+        console.error('Lỗi khi xóa sản phẩm:', error)
     }
 }

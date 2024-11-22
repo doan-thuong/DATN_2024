@@ -160,15 +160,15 @@ export function getDataClientNoLogin(callback) {
 
     if (!name.value || name.value.trim() == '') {
         noti.configNotificationError('Vui lòng nhập họ tên của bạn')
-        return
+        return false
     }
     if (!phone.value || phone.value.trim() == '') {
         noti.configNotificationError('Vui lòng nhập số điện thoại của bạn')
-        return
+        return false
     }
     if (!address.value || address.value.trim() == '') {
         noti.configNotificationError('Vui lòng nhập địa chỉ của bạn')
-        return
+        return false
     }
 
     callback({
@@ -176,6 +176,7 @@ export function getDataClientNoLogin(callback) {
         phoneNoLogin: phone.value,
         addressNoLogin: address.value
     })
+    return true
 }
 
 export async function postDataPay(data, callback) {

@@ -114,13 +114,13 @@ window.payCtrl = function ($scope, $location, $http) {
             console.log($scope.index_address)
             console.log($scope.discountCode)
         } else {
-            payService.getDataClientNoLogin(acc => {
+            let checkData = payService.getDataClientNoLogin(acc => {
                 inforClient = acc
                 console.log(inforClient)
                 // add infor khách nếu không đăng nhập
                 dataPay.inforNoLogin = inforClient
             })
-
+            if (!checkData) return
         }
 
         console.log($scope.list_item_pay)
@@ -145,6 +145,8 @@ window.payCtrl = function ($scope, $location, $http) {
             if (checkConfirm) {
                 //check nếu payment là tt online sẽ sang bên vnpay
                 if (getPayment == 2) {
+                    // console.log('http://localhost:8083/payment/vn-pay?amount=' + $scope.totalLastMoney + '&bankCode=NCB')
+                    // return
                     fetch('http://localhost:8083/payment/vn-pay?amount=' + $scope.totalLastMoney + '&bankCode=NCB')
                         .then(response => response.json())
                         .then(data => {
@@ -154,7 +156,7 @@ window.payCtrl = function ($scope, $location, $http) {
                             console.error('Error:', error)
                         })
                 } else {
-                    // payService.postDataPay(data)
+                    payService.postDataPay(data)
                 }
                 console.log(dataPay)
             }
@@ -170,9 +172,9 @@ window.payCtrl = function ($scope, $location, $http) {
         if (status === '00') {
             noti.showSuccess('Thanh toán thành công')
             payService.postDataPay(dataPay)
-            setTimeout(() => {
-                window.location.hash = '#!/home'
-            }, 2000)
+            // setTimeout(() => {
+            window.location.hash = '#!/home'
+            // }, 2000)
         } else {
             noti.showError('Thanh toán thất bại')
         }

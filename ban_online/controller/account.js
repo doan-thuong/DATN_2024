@@ -3,19 +3,19 @@ import * as noti from './service/notification_config.js'
 
 window.accountCtrl = function ($scope, $http) {
     const client = sessionStorage.getItem('client')
-    const btn_new_submit = document.querySelector("#btn-new-submit")
+    // const idClient = sessionStorage.getItem('check_account')
 
     // sessionStorage.setItem('index_menu', 0)
 
     if (!client) {
         // window.location.hash = '#!/web400';
-        accService.getInformationClient('08C2AA4E')
-        sessionStorage.setItem('check_account', '08C2AA4E')
+        accService.getInformationClient('BFD28409')
+        sessionStorage.setItem('check_account', 'BFD28409')
     }
 
     $scope.check_default = false
 
-    $http.get('http://localhost:8083/thongtingiaohang/detailByKhach/08C2AA4E')
+    $http.get('http://localhost:8083/thongtingiaohang/detailByKhach/BFD28409')
         .then(res => {
             $scope.listTTGH = res.data
         })
@@ -40,11 +40,23 @@ window.accountCtrl = function ($scope, $http) {
 
     accService.handleCloseForm()
 
+    accService.getVoucherClient('BFD28409', (list) => {
+        $scope.$apply(() => {
+            $scope.listVC = list
+        })
+    })
+
+    accService.getOrderByClient('BFD28409', (order) => {
+        $scope.$apply(() => {
+            $scope.listOrder = order
+        })
+    })
+
     accService.handleAddNewAddress((data) => {
         if (data) {
             $scope.listTTGH.push(data)
         }
     })
 
-    accService.updateClient('08C2AA4E')
+    accService.updateClient('BFD28409')
 }

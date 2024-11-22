@@ -485,6 +485,7 @@ ul {
 
     .img-item-vc {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 120px;
@@ -509,7 +510,7 @@ ul {
     align-items: center;
 
     small {
-        color: darkgray;
+        color: red;
     }
 }
 

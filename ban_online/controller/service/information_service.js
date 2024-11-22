@@ -93,3 +93,37 @@ export function handleChangeTotal(maxTotal) {
         }
     })
 }
+
+export async function handleAddCartForClient(data, callback) {
+    try {
+        const addResponse = await fetch("http://localhost:8083/giohangchitiet/addOnline", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const message = await addResponse.text()
+
+        if (addResponse.status === 200) {
+            notiConfig.configNotificationSuccess(message)
+
+            const detailResponse = await fetch(
+                `http://localhost:8083/giohangchitiet/detailByIdKhach?idKhach=${data.idKh}`
+            )
+
+            if (!detailResponse.ok) {
+                throw new Error(`Error fetching cart details: ${detailResponse.status}`)
+            }
+
+            const detailData = await detailResponse.json()
+
+            callback(detailData.length)
+        } else {
+            notiConfig.configNotificationError(message)
+        }
+    } catch (error) {
+        console.error("Lỗi khi xử lý giỏ hàng:", error)
+    }
+}
