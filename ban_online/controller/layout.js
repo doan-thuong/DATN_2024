@@ -31,6 +31,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'view/cart.html',
             controller: cartCtrl,
         })
+        .when('/order', {
+            templateUrl: 'view/order.html',
+            controller: orderCtrl,
+        })
         .when('/web400', {
             templateUrl: 'view/web400.html'
         })

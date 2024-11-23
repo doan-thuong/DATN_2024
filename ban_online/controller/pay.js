@@ -44,7 +44,7 @@ window.payCtrl = function ($scope, $location, $http) {
 
                     const today = new Date();
                     res.data.forEach(item => {
-                        const targetDay = new Date(item.voucher.ngayKetThuc)
+                        const targetDay = new Date(item.ngayKetThuc)
                         let deffDay = Math.ceil((targetDay - today) / (1000 * 60 * 60 * 24))
                         item.deffDay = deffDay
                     })
@@ -66,17 +66,40 @@ window.payCtrl = function ($scope, $location, $http) {
     }
 
     setTimeout(() => {
-        if ($scope.check_account === true) {
+        if ($scope.check_account == true) {
             payService.hanldeDropdownAddress()
             payService.handleSelectAddress(index => {
                 $scope.index_address = index
             })
+
+            payService.handleFormDataAddress()
+            payService.handleSubmitAddress(idClient, data => {
+                $scope.$apply(() => {
+                    $scope.list_address_client = data
+                })
+            })
+
             $scope.useVoucher = function (voucher) {
                 $scope.discountCode = voucher.ma
                 $scope.reducedMoney = $scope.totalMoney * (voucher.giamGia / 100)
                 $scope.discountMoney = $scope.reducedMoney
                 $scope.totalLastMoney = $scope.totalMoney - $scope.discountMoney
             }
+
+            // action cancel discount
+            setTimeout(() => {
+                const btn_cancel_disc = document.querySelector('#cancel-discount')
+                btn_cancel_disc.addEventListener('click', () => {
+                    if ($scope.discountCode != 'Chưa có') {
+                        $scope.$apply(() => {
+                            $scope.discountCode = 'Chưa có'
+                            $scope.reducedMoney = 0
+                            $scope.discountMoney = 0
+                            $scope.totalLastMoney = $scope.totalMoney
+                        })
+                    }
+                })
+            }, 500)
         } else {
             payService.animationInputName()
             payService.animationInputPhone()
@@ -127,9 +150,9 @@ window.payCtrl = function ($scope, $location, $http) {
         // add list sản phẩm vào data
         dataPay.listProduct = $scope.list_item_pay
 
+        //check rồi gán giá trị cho phương thức tt
         payment.forEach(pm => {
             if (pm.checked) {
-                console.log(pm.value)
                 getPayment = pm.value
                 return
             }
@@ -145,8 +168,7 @@ window.payCtrl = function ($scope, $location, $http) {
             if (checkConfirm) {
                 //check nếu payment là tt online sẽ sang bên vnpay
                 if (getPayment == 2) {
-                    // console.log('http://localhost:8083/payment/vn-pay?amount=' + $scope.totalLastMoney + '&bankCode=NCB')
-                    // return
+
                     fetch('http://localhost:8083/payment/vn-pay?amount=' + $scope.totalLastMoney + '&bankCode=NCB')
                         .then(response => response.json())
                         .then(data => {
@@ -155,7 +177,9 @@ window.payCtrl = function ($scope, $location, $http) {
                         .catch(error => {
                             console.error('Error:', error)
                         })
+
                 } else {
+
                     payService.postDataPay(data)
                 }
                 console.log(dataPay)

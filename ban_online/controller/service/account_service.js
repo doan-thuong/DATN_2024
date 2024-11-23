@@ -272,3 +272,21 @@ export async function getOrderByClient(idClient, callback) {
         noti.configNotificationError(mess)
     }
 }
+
+export function filterVouchers(listCachedVC, query, callback) {
+    if (!listCachedVC) {
+        return
+    }
+    if (!query.trim()) {
+        callback(listCachedVC)
+        return
+    }
+
+    let queryFind = query.toLowerCase()
+
+    var listFind = listCachedVC.filter(voucher =>
+        voucher.ten.toLowerCase().includes(queryFind) ||
+        voucher.ma.toLowerCase().includes(queryFind)
+    )
+    callback(listFind)
+}

@@ -113,12 +113,112 @@ export async function getDataClient(idClient, callback) {
     }
 }
 
-export async function getDataAddressClient(idClient) {
-    const apiGetAddress = await fetch('http://localhost:8083/thongtingiaohang/detailByKhach/' + idClient)
+export function handleFormDataAddress() {
+    const btn_add_new_address = document.querySelector('#add-new-address')
+    const view_add = document.querySelector('.form-add-new-address')
+    const overlay_add = document.querySelector('.overlay-address')
+    const btn_close_add = document.querySelector('.bx-collapse')
 
-    if (apiGetAddress.status == 200) {
+    btn_add_new_address.addEventListener('click', () => {
+        if (view_add.style.display == 'none' || !overlay_add.style.display) {
+            view_add.style.display = 'block'
+            overlay_add.style.display = 'block'
+        }
+    })
 
+    btn_close_add.addEventListener('click', () => {
+        view_add.style.display = 'none'
+        overlay_add.style.display = 'none'
+    })
+
+    overlay_add.addEventListener('click', () => {
+        view_add.style.display = 'none'
+        overlay_add.style.display = 'none'
+    })
+}
+
+export function handleSubmitAddress(idClient, callback) {
+    const name = document.querySelector('#name-new-address')
+    const phone = document.querySelector('#phone-new-address')
+    const address = document.querySelector('#address-new-address')
+    const btnSubmitAddress = document.querySelector('#btn-new-submit')
+    const drop_down_address = document.querySelector(".drop-down-address")
+
+    const view_add = document.querySelector('.form-add-new-address')
+    const overlay_add = document.querySelector('.overlay-address')
+
+    const phoneRegex = /^0\d{9}$/
+
+    btnSubmitAddress.disabled = true
+
+    function validateField(field, validator) {
+        const value = field.value.trim()
+        const isValid = validator(value)
+
+        field.style.borderBottom = isValid
+            ? '.5px solid rgb(155, 215, 255)'
+            : '.5px solid red'
+
+        return isValid
     }
+
+    function validateForm() {
+        const isNameValid = validateField(name, value => value !== "")
+        const isPhoneValid = validateField(phone, value => phoneRegex.test(value))
+        const isAddressValid = validateField(address, value => value !== "")
+
+        const isFormValid = isNameValid && isPhoneValid && isAddressValid
+
+        btnSubmitAddress.disabled = !isFormValid
+        return isFormValid
+    }
+
+    [name, phone, address].forEach(field => {
+        field.addEventListener('input', validateForm)
+    })
+
+    async function submitAddress(callback) {
+        const dataAddress = {
+            idKH: idClient,
+            tenNguoiNhan: name.value.trim(),
+            sdtNguoiNhan: phone.value.trim(),
+            dcNguoiNhan: address.value.trim()
+        }
+
+        try {
+            const response = await fetch('http://localhost:8083/thongtingiaohang/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataAddress),
+            })
+
+            if (!response.ok) {
+                const mess = await response.text()
+                noti.configNotificationError(mess)
+                throw new Error('Failed to save address')
+            }
+
+            const listAddresses = await response.json()
+
+            callback(listAddresses)
+            view_add.style.display = 'none'
+            overlay_add.style.display = 'none'
+            drop_down_address.style.display = 'none'
+        } catch (error) {
+            console.error('Error submitting address:', error)
+        }
+    }
+
+    btnSubmitAddress.addEventListener('click', () => {
+        if (validateForm()) {
+            submitAddress(listAddresses => {
+                callback(listAddresses)
+            })
+        }
+    })
+
 }
 
 export function handleSelectAddress(callback) {

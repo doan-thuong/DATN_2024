@@ -409,8 +409,9 @@ ul {
     display: flex;
     justify-content: center;
     align-items: end;
+    cursor: pointer;
 
-    a {
+    p {
         text-align: center;
         text-decoration: none;
         color: rgb(75, 170, 255);
@@ -447,7 +448,7 @@ ul {
 }
 
 #search-voucher {
-    width: 300px;
+    width: 500px;
     height: 45px;
     outline: none;
     border-radius: 15px;
@@ -455,22 +456,6 @@ ul {
     box-sizing: border-box;
     padding-left: 15px;
     font: 16px 'Times New Roman';
-}
-
-.btn-voucher {
-    width: 80px;
-    height: 45px;
-    border-radius: 15px;
-    outline: none;
-    border: .5px solid rgb(75, 170, 255);
-    background-color: white;
-    font: 17px 'Times New Roman';
-    cursor: pointer;
-
-    &:hover {
-        background-color: rgb(75, 170, 255);
-        color: white;
-    }
 }
 
 .item-voucher {

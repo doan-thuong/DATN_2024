@@ -262,7 +262,7 @@ footer {
     }
 }
 
-span {
+.text-for-footer {
     color: rgb(0, 95, 0);
 }
 
@@ -295,12 +295,14 @@ span {
 }
 
 .notifi {
-    width: 300px;
+    min-width: 300px;
     height: 60px;
     position: fixed;
     flex-direction: column;
     justify-content: end;
     align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
     top: 95px;
     right: 0;
     border-radius: 15px 0 0 15px;

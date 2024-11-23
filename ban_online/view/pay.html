@@ -97,19 +97,24 @@
                 <div>
                     <div class="discount-item" ng-repeat="item in list_voucher">
                         <div>
-                            <h5>{{item.voucher.ma}}</h5>
+                            <h5>{{item.ma}}</h5>
                             <small>Còn: {{item.deffDay}} ngày</small>
                         </div>
                         <div>
-                            <p>{{item.voucher.ten}}</p>
-                            <button ng-click="useVoucher(item.voucher)">Dùng</button>
+                            <p>{{item.ten}}</p>
+                            <button ng-click="useVoucher(item)">Dùng</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="result-discount" ng-if="check_discount">
-                <h5>{{discountCode}}</h5>
-                <p>Tiền giảm: ₫{{reducedMoney}}</p>
+                <div>
+                    <h5>{{discountCode}}</h5>
+                    <p>Tiền giảm: ₫{{reducedMoney}}</p>
+                </div>
+                <div>
+                    <button id="cancel-discount">Hủy</button>
+                </div>
             </div>
         </div>
     </div>
@@ -149,4 +154,27 @@
             <button id="btn-pay">Thanh toán</button>
         </div>
     </div>
+</div>
+
+<div class="overlay-address"></div>
+
+<div class="form-add-new-address">
+    <div class="close-popup-address">
+        <i class='bx bx-collapse' title="Đóng"></i>
+    </div>
+    <form>
+        <div>
+            <label for="">Họ và tên</label>
+            <input type="text" id="name-new-address" name="hoten" placeholder="Họ và tên">
+        </div>
+        <div>
+            <label for="">Số điện thoại</label>
+            <input type="text" id="phone-new-address" name="sodienthoai" placeholder="Số điện thoại">
+        </div>
+        <div>
+            <label for="">Địa chỉ</label>
+            <input type="text" id="address-new-address" name="diachi" placeholder="Địa chỉ">
+        </div>
+        <button id="btn-new-submit">Xác nhận</button>
+    </form>
 </div>

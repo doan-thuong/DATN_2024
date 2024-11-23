@@ -1,6 +1,8 @@
 <div class="main-cart">
     <h2>Giỏ hàng</h2>
-
+    <div class="redirect-order" ng-if="!checkAccount">
+        <p class="text-url-order">Kiểm tra đơn hàng <a href="#!/order" class="order-url">Tại đây</a></p>
+    </div>
     <!-- ng-repeat -->
     <!-- <div ng-repeat="item in listCart track by $index"> -->
     <div ng-if="!checkList">

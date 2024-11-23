@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./style/account.css">
     <link rel="stylesheet" href="./style/pay.css">
     <link rel="stylesheet" href="./style/cart.css">
+    <link rel="stylesheet" href="./style/order.css">
     <link rel="stylesheet" href="./style/web400.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -29,6 +30,7 @@
     <script src="./controller/notification.js"></script>
     <script type="module" src="./controller/pay.js"></script>
     <script type="module" src="./controller/cart.js"></script>
+    <script type="module" src="./controller/order.js"></script>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl">
@@ -112,9 +114,10 @@
             </div>
             <div>
                 <h4 style="color:  rgb(0, 95, 0);">THÔNG TIN CHUNG</h4>
-                <small><span>Địa chỉ: </span> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội, Việt Nam</small>
+                <small><span class="text-for-footer">Địa chỉ: </span> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội, Việt
+                    Nam</small>
                 <br>
-                <small><span>Điện thoại: </span> 0987789543</small>
+                <small><span class="text-for-footer">Điện thoại: </span> 0987789543</small>
                 <h4 style="color:  rgb(0, 95, 0);">LIÊN KẾT SÀN</h4>
                 <div style="display: flex; gap: 5px;">
                     <a href="https://zalo.me"><img class="img-connect"
