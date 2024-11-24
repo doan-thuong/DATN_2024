@@ -65,9 +65,13 @@ window.accountCtrl = function ($scope, $http) {
 
     setTimeout(() => {
         let btnOrder = document.querySelectorAll(".text-detail-order-acc")
+
+        accService.handleFormCancelOrder()
+
         btnOrder.forEach(ele => {
             ele.addEventListener("click", () => {
                 let idOrd = ele.dataset.orderIdAcc
+                document.querySelector('.content-reason').style.display = 'none'
 
                 orderService.getDataOrderByOrderId(idOrd, (od) => {
                     $scope.$apply(() => {

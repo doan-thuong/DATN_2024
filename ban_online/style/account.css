@@ -421,6 +421,47 @@ ul {
     }
 }
 
+.cancel-order {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-cancel-order {
+    width: 105px;
+    height: 35px;
+    border: .5px solid red;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font: 16px "times new roman";
+
+    &:hover {
+        background-color: red;
+        color: white;
+    }
+}
+
+.reason-cancel {
+    flex: 1;
+}
+
+.content-reason {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+#inp-reason {
+    width: 240px !important;
+    height: 40px !important;
+    font: 15px "Times New Roman";
+    border: .5px solid rgb(75, 170, 255);
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
 .content-voucher {
     display: flex;
     flex-direction: column;

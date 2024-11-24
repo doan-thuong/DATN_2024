@@ -6,25 +6,6 @@ window.homeCtrl = function ($scope, $http, $timeout) {
 
     homeService.handleShoWHiddenFormFilter()
 
-    // check discount
-    let isDiscount = true;
-    let elementsMap = [
-        { elements: document.getElementsByClassName('price'), addClass: 'text-discount', toggleClass: false },
-        { elements: document.getElementsByClassName('price-discount'), addClass: 'hidden', toggleClass: true },
-        { elements: document.getElementsByClassName('ribbon-wrapper'), addClass: 'hidden', toggleClass: true }
-    ];
-
-    elementsMap.forEach(({ elements, addClass, toggleClass }) => {
-        Array.from(elements).forEach(element => {
-            if (isDiscount) {
-                toggleClass ? element.classList.remove(addClass) : element.classList.add(addClass);
-            } else {
-                toggleClass ? element.classList.add(addClass) : element.classList.remove(addClass);
-            }
-        });
-    });
-
-
     //check input price
     homeService.handleCheckInputFindPrice()
 

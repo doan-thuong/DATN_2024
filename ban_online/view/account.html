@@ -146,6 +146,18 @@
                     <p style="color: red;">- ₫{{oDtl.tienGiam}}</p>
                 </div>
             </div>
+
+            <div class="cancel-order">
+                <div class="reason-cancel">
+                    <div class="content-reason">
+                        <label for="inp-reason">Lý do</label>
+                        <textarea name="text-reason" id="inp-reason"></textarea>
+                    </div>
+                </div>
+                <button class="btn-cancel-order" ng-click="cancelOrder(detailOrder.id)">
+                    Hủy đơn hàng
+                </button>
+            </div>
         </div>
 
         <div class="content-voucher content-acc">

@@ -5,12 +5,14 @@ export function handleCloseForm() {
     const form_add_address = document.querySelector('.form-add-new-address')
     const btn_cancel = document.querySelector('.bx-collapse')
     const loader = document.querySelector('.loader')
+    const detailOd = document.querySelector('.detail-order')
 
     const closeForm_address = () => {
         if (overlay.style.display == 'block') {
             overlay.style.display = 'none'
             form_add_address.style.display = 'none'
             loader.style.display = 'none'
+            detailOd.style.display = 'none'
         }
     }
 
@@ -289,4 +291,25 @@ export function filterVouchers(listCachedVC, query, callback) {
         voucher.ma.toLowerCase().includes(queryFind)
     )
     callback(listFind)
+}
+
+export function handleFormCancelOrder() {
+    const btn_cancel_order = document.querySelector('.btn-cancel-order')
+    const contReason = document.querySelector('.content-reason')
+    const textReason = document.querySelector('#inp-reason')
+
+    btn_cancel_order.addEventListener('click', () => {
+
+        if (contReason.style.display == 'none' || contReason.style.display == "") {
+            contReason.style.display = 'flex'
+        } else {
+            let valueReason = textReason.value
+            if (valueReason.trim() == "") {
+                noti.configNotificationError('Vui lòng nhập lý do hủy đơn hàng!')
+            } else {
+                //sẽ call api để gửi thông tin hủy đơn
+                console.log(valueReason)
+            }
+        }
+    })
 }

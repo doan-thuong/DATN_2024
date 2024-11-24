@@ -41,7 +41,12 @@
         </div>
 
         <div class="price-product-in-warehouse">
-            <p style="font-size: 20px; color: rgb(15, 30, 65);">Giá: ₫{{gia}}</p>
+            <p ng-class="{'text-discount' : sp.giamGia != 0}" style="font-size: 20px; color: rgb(15, 30, 65);">
+                Giá: ₫{{gia}}
+            </p>
+            <p ng-class="{'hidden' : sp.giamGia == 0}" style="font-size: 20px; color: rgb(255, 70, 70);">
+                Giá ưu đãi: ₫{{gia - sp.giamGia}}
+            </p>
         </div>
         <div class="total-product-in-warehouse">
             <smalll style="color: slategrey;">Kho còn: {{soLuong}}</smalll>
