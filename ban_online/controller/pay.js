@@ -139,14 +139,12 @@ window.payCtrl = function ($scope, $location, $http) {
         } else {
             let checkData = payService.getDataClientNoLogin(acc => {
                 inforClient = acc
-                console.log(inforClient)
                 // add infor khách nếu không đăng nhập
                 dataPay.inforNoLogin = inforClient
             })
             if (!checkData) return
         }
 
-        console.log($scope.list_item_pay)
         // add list sản phẩm vào data
         dataPay.listProduct = $scope.list_item_pay
 
@@ -163,7 +161,6 @@ window.payCtrl = function ($scope, $location, $http) {
 
         noti.getConfirm((check) => {
             checkConfirm = check
-            console.log("choose: " + check)
 
             if (checkConfirm) {
                 //check nếu payment là tt online sẽ sang bên vnpay
@@ -179,10 +176,12 @@ window.payCtrl = function ($scope, $location, $http) {
                         })
 
                 } else {
-
-                    payService.postDataPay(data)
+                    payService.postDataPay(dataPay, check => {
+                        if (check) {
+                            window.location.hash = '#!home'
+                        }
+                    })
                 }
-                console.log(dataPay)
             }
         })
     })

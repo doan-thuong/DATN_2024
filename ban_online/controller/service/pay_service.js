@@ -280,7 +280,7 @@ export function getDataClientNoLogin(callback) {
 }
 
 export async function postDataPay(data, callback) {
-    const apiPostPay = await fetch('http://localhost:8083/donhang', {
+    const apiPostPay = await fetch('http://localhost:8083/hoadon/add-hD-online', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
