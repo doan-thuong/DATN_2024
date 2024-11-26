@@ -70,6 +70,7 @@ export function hanldeClickButtonBuy(listItem) {
             sessionStorage.removeItem('listItemSelected')
             sessionStorage.setItem('listItemSelected', JSON.stringify(listItem))
 
+            console.log(listItem)
             window.location.hash = '#!/pay'
         } catch (error) {
             console.error('Lỗi khi lưu listItem vào sessionStorage:', error)

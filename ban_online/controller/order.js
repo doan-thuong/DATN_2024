@@ -6,7 +6,6 @@ window.orderCtrl = function ($scope) {
     const mainOdDtl = document.querySelector(".detail-order")
     const overLayDtl = document.querySelector(".over-lay-order")
 
-
     const btnSearch = document.querySelector("#button-search-order")
     btnSearch.addEventListener("click", () => {
         orderService.getDataOrder((orders => {
@@ -15,54 +14,46 @@ window.orderCtrl = function ($scope) {
             })
         }))
 
-        let btnOrder = document.querySelectorAll(".text-detail-order")
+        function attachOrderClickHandler() {
+            const btnOrder = document.querySelectorAll(".text-detail-order")
 
-        if (btnOrder.length > 0) {
             btnOrder.forEach(ele => {
-                ele.addEventListener("click", () => {
-                    let idOrd = ele.dataset.orderId
+                ele.addEventListener("click", async () => {
+                    const idOrd = ele.dataset.orderId
 
-                    orderService.getDataOrderByOrderId(idOrd, (od) => {
+                    try {
+                        const order = await orderService.getDataOrderByOrderId(idOrd)
+                        const orderDetails = await orderService.getDataOrderDetails(idOrd)
+
+                        let tongTiens = 0
+                        for (const cthd of orderDetails) {
+                            tongTiens += cthd.soLuong * cthd.giaSauGiam
+                        }
+
                         $scope.$apply(() => {
-                            $scope.detailOrder = od
-                        })
-                    })
-
-                    orderService.getDataOrderDetails(idOrd, (odDtl) => {
-                        $scope.$apply(() => {
-                            $scope.listOdDtl = odDtl
-                        })
-                    })
-
-                    mainOdDtl.style.display = 'block'
-                    overLayDtl.style.display = 'block'
-                })
-            })
-        } else {
-            setTimeout(() => {
-                btnOrder = document.querySelectorAll(".text-detail-order")
-                btnOrder.forEach(ele => {
-                    ele.addEventListener("click", () => {
-                        let idOrd = ele.dataset.orderId
-
-                        orderService.getDataOrderByOrderId(idOrd, (od) => {
-                            $scope.$apply(() => {
-                                $scope.detailOrder = od
-                            })
-                        })
-
-                        orderService.getDataOrderDetails(idOrd, (odDtl) => {
-                            $scope.$apply(() => {
-                                $scope.listOdDtl = odDtl
-                            })
+                            $scope.detailOrder = order
+                            $scope.listOdDtl = orderDetails
+                            $scope.tongTienDtl = tongTiens
                         })
 
                         mainOdDtl.style.display = 'block'
                         overLayDtl.style.display = 'block'
-                    })
+                    } catch (err) {
+                        console.error("Error fetching order data:", err)
+                    }
                 })
-            }, 1000)
+            })
         }
+
+        attachOrderClickHandler()
+
+        // Sử dụng MutationObserver để theo dõi các thay đổi trong DOM
+        const observer = new MutationObserver(() => {
+            attachOrderClickHandler()
+        })
+
+        // Theo dõi toàn bộ body hoặc phần tử cha cụ thể
+        observer.observe(document.body, { childList: true, subtree: true })
     })
 
     $scope.closeFormOdDtl = function () {

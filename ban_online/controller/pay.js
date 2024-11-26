@@ -7,6 +7,9 @@ window.payCtrl = function ($scope, $location, $http) {
     const btn_pay = document.querySelector('#btn-pay')
     const payment = document.querySelectorAll('[name="payment"]')
     let dataPay = {}
+    const number_cart = document.querySelector('#number-cart')
+
+    number_cart.textContent = JSON.parse(sessionStorage.getItem("item_product_detail")).length
 
     $scope.totalMoney = 0
     $scope.discountMoney = 0
@@ -178,6 +181,8 @@ window.payCtrl = function ($scope, $location, $http) {
                 } else {
                     payService.postDataPay(dataPay, check => {
                         if (check) {
+                            sessionStorage.removeItem("product_buy_now")
+                            sessionStorage.removeItem("listItemSelected")
                             window.location.hash = '#!home'
                         }
                     })

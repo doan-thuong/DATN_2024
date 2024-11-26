@@ -24,12 +24,12 @@
                 <hr>
                 <div class="child-element-order order-pay">
                     <span class="text-title-order">Tổng tiền</span>
-                    <span><b>₫{{od.thanhTien}}</b></span>
+                    <span><b>₫{{od.tongTien}}</b></span>
                 </div>
                 <hr>
                 <div class="child-element-order order-status">
                     <span class="text-title-order">Trạng thái</span>
-                    <span><b>{{od.trangThai == 1 ? 'Đang chờ xác nhận' : 'Ok'}}</b></span>
+                    <span><b>{{od.trangThai == 0 ? 'Đang chờ xác nhận' : 'Ok'}}</b></span>
                 </div>
             </div>
             <div class="btn-detail-order">
@@ -52,7 +52,7 @@
             <div>
                 <p><b>Mã đơn hàng:</b> {{detailOrder.maHD}}</p>
                 <p><b>Ngày đặt hàng:</b> {{detailOrder.ngayTao}}</p>
-                <p><b>Trạng thái:</b> {{detailOrder.trangThai == 1? 'Đang chờ xác nhận' : 'Ok'}}</p>
+                <p><b>Trạng thái:</b> {{detailOrder.trangThai == 0 ? 'Đang chờ xác nhận' : 'Ok'}}</p>
             </div>
 
             <div>
@@ -62,17 +62,16 @@
             </div>
         </div>
 
-        <p style="font-weight: bold;">Tổng tiền: ₫{{detailOrder.thanhTien}}</p>
+        <p style="font-weight: bold;">Tổng tiền: ₫{{tongTienDtl}}</p>
     </div>
 
     <div class="tb-orderDtl">
         <div class="item-orderDtl" ng-repeat="oDtl in listOdDtl">
             <img src="" alt="anh">
-            <p>{{oDtl.tenSP}}</p>
-            <p>{{oDtl.soNgaySuDung}} ngày</p>
+            <p>{{oDtl.tenSP}} ({{oDtl.soNgaySuDung}} ngày)</p>
             <p>Số lượng: {{oDtl.soLuong}}</p>
-            <p>₫{{oDtl.giaBan}}</p>
-            <p style="color: red;">- ₫{{oDtl.tienGiam}}</p>
+            <p>₫{{oDtl.giaSauGiam}}</p>
+            <p style="color: red;">- ₫{{oDtl.giaBan - oDtl.giaSauGiam}}</p>
         </div>
     </div>
 </div>

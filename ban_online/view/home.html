@@ -87,7 +87,7 @@
     <div class="list-product"> <!-- ng-repeat=""-->
         <div class="form-product" ng-repeat="sp in listSP">
             <div class="ribbon-wrapper" ng-class="{'hidden' : sp.giamgia == 0}">
-                <div class="ribbon">-₫{{sp.giamgia}}</div>
+                <div class="ribbon">-{{sp.giamgia}}%</div>
             </div>
 
             <div class="img">
@@ -103,7 +103,9 @@
                     <div>
                         <p class="price" ng-class="{'text-discount' : sp.giamgia != 0}">Chỉ từ: ₫{{sp.gia}}</p>
                         <h3 class="price-discount" ng-class="{'hidden' : sp.giamgia == 0}" style="color: red;">
-                            Giá ưu đãi ₫{{ ((sp.gia || 0) - (sp.giamgia || 0)) > 0 ? (sp.gia - sp.giamgia) : 0 }}
+                            Giá ưu đãi ₫{{ ((sp.gia || 0) - ((sp.gia || 0) * (sp.giamgia || 0) / 100)) > 0
+                            ? ((sp.gia || 0) - ((sp.gia || 0) * (sp.giamgia || 0) / 100))
+                            : 0 }}
                         </h3>
                     </div>
                     <a href="#!/information?sp={{sp.id}}">

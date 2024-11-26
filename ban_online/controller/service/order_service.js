@@ -14,6 +14,25 @@ export async function getDataOrder(callback) {
 
         if (response.status === 200) {
             const data = await response.json()
+
+            for (const hd of data) {
+                const result = await fetch("http://localhost:8083/chitiethoadon/getAllByOrderId?idHD=" + hd.id)
+
+                if (result.status != 200) {
+                    noti.configNotificationError(await result.text())
+                    return
+                }
+
+                const dataDetail = await result.json()
+                let tongtien = 0
+
+                Array.from(dataDetail).forEach(ele => {
+                    tongtien += ele.soLuong * ele.giaSauGiam
+                })
+
+                hd.tongTien = tongtien
+            }
+
             callback(data)
         } else {
             const mess = await response.text()
@@ -24,12 +43,12 @@ export async function getDataOrder(callback) {
     }
 }
 
-export async function getDataOrderDetails(idHD, callback) {
+export async function getDataOrderDetails(idHD) {
     try {
         const response = await fetch('http://localhost:8083/chitiethoadon/getAllByOrderId?idHD=' + idHD)
 
         if (response.status === 200) {
-            callback(await response.json())
+            return response.json()
         } else {
             const mess = await response.text()
             noti.configNotificationError(mess)
@@ -39,12 +58,12 @@ export async function getDataOrderDetails(idHD, callback) {
     }
 }
 
-export async function getDataOrderByOrderId(idHD, callback) {
+export async function getDataOrderByOrderId(idHD) {
     try {
         const response = await fetch('http://localhost:8083/hoadon/detail?idHD=' + idHD)
 
         if (response.status === 200) {
-            callback(await response.json())
+            return response.json()
         } else {
             const mess = await response.text()
             noti.configNotificationError(mess)

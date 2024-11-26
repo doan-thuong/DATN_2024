@@ -99,8 +99,9 @@
                 <div class="content-item">
                     <h3>{{order.maHD}}</h3>
                     <div class="text-content-item">
-                        <p>Tổng tiền: ₫{{order.thanhTien}}</p>
-                        <p>Trạng thái: {{order.trangThai}}</p>
+                        <p>Tổng tiền: ₫{{order.tongTien}}</p>
+                        <p>Trạng thái: {{order.trangThai == 0 ? 'Chờ xác nhận' : (order.trangThai == 4 ? 'Đã hủy' : 'Đã
+                            xác nhận')}}</p>
                     </div>
                 </div>
                 <div class="btn-detail-item">
@@ -127,20 +128,19 @@
                     </div>
 
                     <div>
-                        <p><b>Người đặt hàng:</b> {{detailOrder.tenNguoiNhan}}</p>
+                        <p><b>Người nhận:</b> {{detailOrder.tenNguoiNhan}}</p>
                         <p><b>Số điện thoại:</b> {{detailOrder.sdtNguoiNhan}}</p>
                         <p><b>Địa chỉ:</b> {{detailOrder.diaChiNguoiNhan}}</p>
                     </div>
                 </div>
 
-                <p style="font-weight: bold;">Tổng tiền: ₫{{detailOrder.thanhTien}}</p>
+                <p style="font-weight: bold;">Tổng tiền: ₫{{tongTienDtl}}</p>
             </div>
 
             <div class="tb-orderDtl">
                 <div class="item-orderDtl" ng-repeat="oDtl in listOdDtl">
-                    <img src="" alt="anh">
-                    <p>{{oDtl.tenSP}}</p>
-                    <p>{{oDtl.soNgaySuDung}} ngày</p>
+                    <img src="./image/vitaminE.jpg" alt="anh">
+                    <p>{{oDtl.tenSP}} ({{oDtl.soNgaySuDung}} ngày)</p>
                     <p>Số lượng: {{oDtl.soLuong}}</p>
                     <p>₫{{oDtl.giaBan}}</p>
                     <p style="color: red;">- ₫{{oDtl.tienGiam}}</p>

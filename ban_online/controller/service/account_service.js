@@ -268,6 +268,25 @@ export async function getOrderByClient(idClient, callback) {
 
     if (response.status == 200) {
         const data = await response.json()
+
+        for (const hd of data) {
+            const result = await fetch("http://localhost:8083/chitiethoadon/getAllByOrderId?idHD=" + hd.id)
+
+            if (result.status != 200) {
+                noti.configNotificationError(await result.text())
+                return
+            }
+
+            const dataDetail = await result.json()
+            let tongtien = 0
+
+            Array.from(dataDetail).forEach(ele => {
+                tongtien += ele.soLuong * ele.giaSauGiam
+            })
+
+            hd.tongTien = tongtien
+        }
+
         callback(data)
     } else {
         const mess = await response.text()
@@ -298,18 +317,22 @@ export function handleFormCancelOrder() {
     const contReason = document.querySelector('.content-reason')
     const textReason = document.querySelector('#inp-reason')
 
-    btn_cancel_order.addEventListener('click', () => {
+    try {
+        btn_cancel_order.addEventListener('click', () => {
 
-        if (contReason.style.display == 'none' || contReason.style.display == "") {
-            contReason.style.display = 'flex'
-        } else {
-            let valueReason = textReason.value
-            if (valueReason.trim() == "") {
-                noti.configNotificationError('Vui lòng nhập lý do hủy đơn hàng!')
+            if (contReason.style.display == 'none' || contReason.style.display == "") {
+                contReason.style.display = 'flex'
             } else {
-                //sẽ call api để gửi thông tin hủy đơn
-                console.log(valueReason)
+                let valueReason = textReason.value
+                if (valueReason.trim() == "") {
+                    noti.configNotificationError('Vui lòng nhập lý do hủy đơn hàng!')
+                } else {
+                    //sẽ call api để gửi thông tin hủy đơn
+                    console.log(valueReason)
+                }
             }
-        }
-    })
+        })
+    } catch (err) {
+        //
+    }
 }

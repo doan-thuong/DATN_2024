@@ -8,7 +8,9 @@ window.accountCtrl = function ($scope, $http) {
     const detailOd = document.querySelector('.detail-order')
     const inp_findVC = document.querySelector('#search-voucher')
     let cachedVoucher = []
+    const number_cart = document.querySelector('#number-cart')
 
+    number_cart.textContent = ''
     if (!client) {
         accService.getInformationClient('BFD28409')
         sessionStorage.setItem('check_account', 'BFD28409')
@@ -58,38 +60,51 @@ window.accountCtrl = function ($scope, $http) {
     })
 
     accService.getOrderByClient('BFD28409', (order) => {
+
         $scope.$apply(() => {
             $scope.listOrder = order
         })
     })
 
-    setTimeout(() => {
+    function attachOrderClickHandler() {
         let btnOrder = document.querySelectorAll(".text-detail-order-acc")
 
         accService.handleFormCancelOrder()
 
         btnOrder.forEach(ele => {
-            ele.addEventListener("click", () => {
+            ele.addEventListener("click", async () => {
                 let idOrd = ele.dataset.orderIdAcc
                 document.querySelector('.content-reason').style.display = 'none'
 
-                orderService.getDataOrderByOrderId(idOrd, (od) => {
-                    $scope.$apply(() => {
-                        $scope.detailOrder = od
-                    })
-                })
+                const order = await orderService.getDataOrderByOrderId(idOrd)
+                const orderDetails = await orderService.getDataOrderDetails(idOrd)
 
-                orderService.getDataOrderDetails(idOrd, (odDtl) => {
-                    $scope.$apply(() => {
-                        $scope.listOdDtl = odDtl
-                    })
+                let tongTiens = 0
+                for (const cthd of orderDetails) {
+                    tongTiens += cthd.soLuong * cthd.giaSauGiam
+                }
+
+                $scope.$apply(() => {
+                    $scope.detailOrder = order
+                    $scope.listOdDtl = orderDetails
+                    $scope.tongTienDtl = tongTiens
                 })
 
                 detailOd.style.display = 'block'
                 overlayAcc.style.display = 'block'
             })
         })
-    }, 1000)
+    }
+
+    attachOrderClickHandler()
+
+    // Sử dụng MutationObserver để theo dõi các thay đổi trong DOM
+    const observer = new MutationObserver(() => {
+        attachOrderClickHandler()
+    })
+
+    // Theo dõi toàn bộ body hoặc phần tử cha cụ thể
+    observer.observe(document.body, { childList: true, subtree: true })
 
     accService.handleAddNewAddress((data) => {
         if (data) {
