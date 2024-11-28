@@ -367,6 +367,22 @@ ul {
     display: none;
 }
 
+.url-evaluate {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+
+    a {
+        text-decoration: none;
+        color: rgb(40, 40, 255);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 .item-order {
     display: flex;
     justify-content: space-between;

@@ -5,7 +5,9 @@
         <div class="btn-form">
             <button id="btn-find">Tìm kiếm</button>
             <button id="btn-loc"><img id="icon-loc" alt="Lọc"
-                    src="https://cdn-icons-png.freepik.com/512/8338/8338790.png"> Lọc</button>
+                    src="https://cdn-icons-png.freepik.com/512/8338/8338790.png">
+                Lọc
+            </button>
         </div>
     </form>
 
@@ -44,7 +46,7 @@
     <hr>
 </div>
 
-<div class="new-products"> <!-- ng-if: check tìm kiếm, ẩn khi tìm kiếm-->
+<div class="new-products" ng-if="!checkFind"> <!-- ng-if: check tìm kiếm, ẩn khi tìm kiếm-->
     <div class="title-new">
         <h3 id="text-new-product">Sản phẩm mới nhất</h3>
     </div>

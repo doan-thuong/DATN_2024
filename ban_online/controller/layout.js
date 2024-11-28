@@ -37,7 +37,7 @@ app.config(function ($routeProvider) {
         })
         .when('/evaluate', {
             templateUrl: 'view/evaluate.html',
-            // controller: orderCtrl,
+            controller: evaluateCtrl,
         })
         .when('/web400', {
             templateUrl: 'view/web400.html'

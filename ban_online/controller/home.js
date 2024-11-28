@@ -3,11 +3,18 @@ import * as homeService from "./service/home_service.js"
 window.homeCtrl = function ($scope, $http, $timeout) {
 
     $scope.noDataNewProduct = true
+    $scope.checkFind = false
 
     homeService.handleShoWHiddenFormFilter()
 
     //check input price
     homeService.handleCheckInputFindPrice()
+
+    homeService.handleClickButtonFind(check => {
+        $scope.$apply(() => {
+            $scope.checkFind = check
+        })
+    })
 
     // // ghep api page
     $http.get('http://localhost:8083/san-pham/getSanPham-online')

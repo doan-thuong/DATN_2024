@@ -9,7 +9,7 @@ window.payCtrl = function ($scope, $location, $http) {
     let dataPay = {}
     const number_cart = document.querySelector('#number-cart')
 
-    number_cart.textContent = JSON.parse(sessionStorage.getItem("item_product_detail")).length
+    number_cart.textContent = JSON.parse(sessionStorage.getItem("item_product_detail")) ? JSON.parse(sessionStorage.getItem("item_product_detail")).length : 0
 
     $scope.totalMoney = 0
     $scope.discountMoney = 0

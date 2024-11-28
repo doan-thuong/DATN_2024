@@ -150,3 +150,12 @@ export function callAPIgetDataFilter() {
         //sử lý ẩn table data new product
     })
 }
+
+export function handleClickButtonFind(callback) {
+    const btn_find = document.querySelector('#btn-find')
+
+    btn_find.addEventListener('click', (e) => {
+        e.preventDefault()
+        callback(true)
+    })
+}
