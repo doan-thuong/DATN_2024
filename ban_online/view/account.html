@@ -103,8 +103,10 @@
                     <h3>{{order.maHD}}</h3>
                     <div class="text-content-item">
                         <p>Tổng tiền: ₫{{order.tongTien}}</p>
-                        <p>Trạng thái: {{order.trangThai == 0 ? 'Chờ xác nhận' : (order.trangThai == 4 ? 'Đã hủy' : 'Đã
-                            xác nhận')}}</p>
+                        <p>Trạng thái:
+                            {{order.trangThai == 0 ? 'Chờ xác nhận' :
+                            (order.trangThai == 4 ? 'Đã hủy' : 'Đã xác nhận')}}
+                        </p>
                     </div>
                 </div>
                 <div class="btn-detail-item">
@@ -127,7 +129,11 @@
                     <div>
                         <p><b>Mã đơn hàng:</b> {{detailOrder.maHD}}</p>
                         <p><b>Ngày đặt hàng:</b> {{detailOrder.ngayTao}}</p>
-                        <p><b>Trạng thái:</b> {{detailOrder.trangThai == 1? 'Đang chờ xác nhận' : 'Ok'}}</p>
+                        <p>
+                            <b>Trạng thái:</b>
+                            {{detailOrder.trangThai == 0 ? 'Chờ xác nhận' :
+                            (detailOrder.trangThai == 4 ? 'Đã hủy' : 'Đã xác nhận')}}
+                        </p>
                     </div>
 
                     <div>

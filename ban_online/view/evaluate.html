@@ -11,63 +11,41 @@
         </div>
 
         <div class="form-nodone-eval f-evaluate">
-            <div class="item-nodone">
-                <div class="infor-item-for-eval-nodone">
-                    <img src="" alt="anh sp">
-                    <p>Tên sản phẩm</p>
-                    <p>Loại sản phẩm</p>
+            <div ng-if="listNoDone.length == 0 || !listNoDone">
+                <h3 style="color: red; text-align: center;">
+                    Bạn chưa đánh giá sản phẩm nào
+                </h3>
+            </div>
+            <div ng-if="listNoDone.length >= 0 && listNoDone">
+                <div class="item-nodone" ng-repeat="nD in listNoDone">
+                    <div class="infor-item-for-eval-nodone">
+                        <img src="" alt="anh sp">
+                        <p>{{nD.sp.tenSP}}</p>
+                        <p>{{nD.ctsp.soNgaySuDung}} ngày</p>
+                    </div>
+                    <button class="btn-evaluate" ng-click="takeEvaluate(nD.id)">Đánh giá</button>
                 </div>
-                <button class="btn-evaluate" ng-click="takeEvaluate()">Đánh giá</button>
             </div>
         </div>
 
         <div class="form-done-aval f-evaluate">
-            <div class="item-done">
-                <div class="infor-item-for-eval-done">
-                    <img src="" alt="anh sp">
-                    <p>Tên sản phẩm</p>
-                    <p>Loại sản phẩm</p>
-                </div>
-                <div class="star-evaluate-done">
-                    <p class="text-result-star">{{star}} <i class='bx bxs-star'></i></p>
-                    |
-                    <pre class="content-text-evaluate">{{danhgia}} đánh giá</pre>
-                </div>
+            <div ng-if="listDone.length == 0 || !listDone">
+                <h3 style="color: red; text-align: center;">
+                    Bạn chưa đánh giá sản phẩm nào
+                </h3>
             </div>
-            <div class="item-done">
-                <div class="infor-item-for-eval-done">
-                    <img src="" alt="anh sp">
-                    <p>Tên sản phẩm</p>
-                    <p>Loại sản phẩm</p>
-                </div>
-                <div class="star-evaluate-done">
-                    <p class="text-result-star">{{star}} <i class='bx bxs-star'></i></p>
-                    |
-                    <pre class="content-text-evaluate">{{danhgia}} đánh giá</pre>
-                </div>
-            </div>
-            <div class="item-done">
-                <div class="infor-item-for-eval-done">
-                    <img src="" alt="anh sp">
-                    <p>Tên sản phẩm</p>
-                    <p>Loại sản phẩm</p>
-                </div>
-                <div class="star-evaluate-done">
-                    <p class="text-result-star">{{star}} <i class='bx bxs-star'></i></p>
-                    |
-                    <pre class="content-text-evaluate">{{danhgia}} đánh giá</pre>
-                </div>
-            </div>
-            <div class="item-done">
-                <div class="infor-item-for-eval-done">
-                    <img src="" alt="anh sp">
-                    <p>Tên sản phẩm</p>
-                    <p>Loại sản phẩm</p>
-                </div>
-                <div class="star-evaluate-done">
-                    <p class="text-result-star">{{star}} <i class='bx bxs-star'></i></p>
-                    |
-                    <pre class="content-text-evaluate">{{danhgia}} đánh giá</pre>
+            <div ng-if="listDone.length >= 0 && listDone">
+                <div class="item-done" ng-repeat="d in listDone">
+                    <div class="infor-item-for-eval-done">
+                        <img src="" alt="anh sp">
+                        <p>{{d.sp.tenSP}}</p>
+                        <p>{{d.ctsp.soNgaySuDung}} ngày</p>
+                    </div>
+                    <div class="star-evaluate-done">
+                        <p class="text-result-star">{{d.sao}} <i class='bx bxs-star'></i></p>
+                        |
+                        <pre class="content-text-evaluate">Đánh giá: {{d.nhanXet}}</pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,8 +56,8 @@
             <h3>Sản phẩm</h3>
             <div>
                 <img src="" alt="anh sp">
-                <p>Tên sản phẩm</p>
-                <p>Loại sản phẩm</p>
+                <p>{{detailEval.sp.tenSP}}</p>
+                <p>{{detailEval.ctsp.soNgaySuDung}} ngày</p>
             </div>
         </div>
         <hr>
