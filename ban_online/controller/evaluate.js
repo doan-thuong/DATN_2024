@@ -36,7 +36,11 @@ window.evaluateCtrl = function ($scope) {
         })
 
         postEval.addEventListener('click', () => {
-            evalService.getDataEvaluate(idEval)
+            evalService.getDataEvaluate(idEval, resp => {
+                $scope.$apply(() => {
+                    $scope.listNoDone = resp
+                })
+            })
         })
     }
 }

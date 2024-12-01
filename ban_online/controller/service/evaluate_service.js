@@ -108,7 +108,7 @@ export async function getEvaluateDone(idClient) {
     }
 }
 
-export function getDataEvaluate(idEval) {
+export function getDataEvaluate(idEval, callback) {
     const result = document.querySelector('.text-result-star')
     const resultText = document.querySelector('.text-evaluate')
 
@@ -140,9 +140,16 @@ export function getDataEvaluate(idEval) {
             body: JSON.stringify(dataEvaluate)
         }
     ).then(response => {
-        if (response.ok)
+        if (response.ok) {
             noti.configNotificationSuccess('Cập nhật đánh giá thành công')
+            return response.json()
+        }
         else
-            noti.configNotificationError('Lỗi (' + response.status + ')')
+            throw new Error('Http error: ' + response.status)
+
+    }).then(data => {
+        callback(data)
+    }).catch(er => {
+        noti.configNotificationError('Cập nhật đánh giá thất bại (' + er + ')')
     })
 }

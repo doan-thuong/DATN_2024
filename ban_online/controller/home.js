@@ -4,6 +4,13 @@ window.homeCtrl = function ($scope, $http, $timeout) {
 
     $scope.noDataNewProduct = true
     $scope.checkFind = false
+    const user = JSON.parse(sessionStorage.getItem('user')) || "?"
+    const textAcc = document.querySelector('#text-acc')
+    if (user != '?') {
+        textAcc.textContent = user.ten[0]
+    } else {
+        textAcc.textContent = '?'
+    }
 
     homeService.handleShoWHiddenFormFilter()
 
@@ -19,10 +26,28 @@ window.homeCtrl = function ($scope, $http, $timeout) {
     // // ghep api page
     $http.get('http://localhost:8083/san-pham/getSanPham-online')
         .then((response) => {
-            const data = response.data.data
-            const totalPages = response.data.total
+            const data = response.data.content
+            console.log(response)
+            const totalPages = response.data.totalPages
+
+            const currentDate = new Date()
+
+            data.forEach((item) => {
+                if (item.giaGiam === null) {
+                    item.isDiscount = false
+                } else {
+                    const ngayBatDau = new Date(item.ngayBatDau)
+                    const ngayKetThuc = new Date(item.ngayKetThuc)
+                    if (currentDate >= ngayBatDau && currentDate <= ngayKetThuc) {
+                        item.isDiscount = true
+                    } else {
+                        item.isDiscount = false
+                    }
+                }
+            })
 
             $scope.listSP = data
+
 
             homeService.generatePagination(1, totalPages)
         }).catch((err) => {

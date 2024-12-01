@@ -2,32 +2,14 @@
     <div class="image">
         <div class="list-img-category">
             <!-- ng-repeat để hiển thị ảnh -->
-            <div class="over-img">
-                <img class="img-category"
-                    src="https://media.hcdn.vn/catalog/product/v/i/vien-uong-dhc-bo-sung-vitamin-c-20-ngay-40-vien_img_680x680_d30c8d_fit_center.jpg">
+            <!-- <div ng-if="listAnh && listAn.lenght > 0"> -->
+            <div class="over-img" ng-repeat="lA in listAnh track by $index">
+                <img class="img-category" ng-src="{{lA}}">
                 <div class="overlay"></div>
-            </div>
-
-            <div class="over-img">
-                <img class="img-category"
-                    src="https://product.hstatic.net/1000141988/product/vien_uong_dhc_bo_sung_vitamin_c_goi_30_vien___30_ngay__53d8a89de20d4a58bc863600bebd3da5_1024x1024.png">
-                <div class="overlay"></div>
-            </div>
-
-            <div class="over-img">
-                <img class="img-category"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/267/273/products/7a93ab6f-b6fb-479a-93a6-3e3a62beb909.png?v=1633583531857">
-                <div class="overlay"></div>
-            </div>
-
-            <div class="over-img">
-                <img class="img-category"
-                    src="https://nhathuoc365.vn/images/products/2020/05/28/original/vien-uong-vitamin-c-dhc-hard-capsule-90-ngay-1590639121.jpg">
-                <div class="overlay"></div>
+                <!-- </div> -->
             </div>
         </div>
-        <img id="review-image-product"
-            src="https://media.hcdn.vn/catalog/product/v/i/vien-uong-dhc-bo-sung-vitamin-c-20-ngay-40-vien_img_680x680_d30c8d_fit_center.jpg">
+        <img id="review-image-product" ng-src="{{listAnh[0]}}">
     </div>
     <div class="description">
         <div class="title-desciption">
@@ -42,7 +24,7 @@
 
         <div class="price-product-in-warehouse">
             <p ng-class="{'text-discount' : sp.giamGia != 0}" style="font-size: 20px; color: rgb(15, 30, 65);">
-                Giá: ₫{{gia}}
+                Giá: ₫{{giaBanDau}}
             </p>
             <p ng-class="{'hidden' : sp.giamGia == 0}" style="font-size: 20px; color: rgb(255, 70, 70);">
                 Giá ưu đãi: ₫{{gia}}

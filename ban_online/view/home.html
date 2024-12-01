@@ -86,15 +86,14 @@
         <h3 id="text-all-product">Tất cả sản phẩm</h3>
     </div>
     <hr>
-    <div class="list-product"> <!-- ng-repeat=""-->
+    <div class="list-product" ng-if="listSP && listSP.length > 0"> <!-- ng-repeat=""-->
         <div class="form-product" ng-repeat="sp in listSP">
-            <div class="ribbon-wrapper" ng-class="{'hidden' : sp.giamgia == 0}">
-                <div class="ribbon">-{{sp.giamgia}}%</div>
+            <div class="ribbon-wrapper" ng-class="{'hidden' : !sp.isDiscount}">
+                <div class="ribbon">-{{sp.giaGiam}}%</div>
             </div>
 
             <div class="img">
-                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/267/273/products/7a93ab6f-b6fb-479a-93a6-3e3a62beb909.png?v=1633583531857"
-                    alt="">
+                <img ng-src="{{sp.linkAnh}}" alt="Ảnh sản phẩm">
             </div>
 
             <div class="infor-product">
@@ -103,10 +102,10 @@
                 </div>
                 <div class="buy">
                     <div>
-                        <p class="price" ng-class="{'text-discount' : sp.giamgia != 0}">Chỉ từ: ₫{{sp.gia}}</p>
-                        <h3 class="price-discount" ng-class="{'hidden' : sp.giamgia == 0}" style="color: red;">
-                            Giá ưu đãi ₫{{ ((sp.gia || 0) - ((sp.gia || 0) * (sp.giamgia || 0) / 100)) > 0
-                            ? ((sp.gia || 0) - ((sp.gia || 0) * (sp.giamgia || 0) / 100))
+                        <p class="price" ng-class="{'text-discount' : sp.isDiscount}">Chỉ từ: ₫{{sp.gia}}</p>
+                        <h3 class="price-discount" ng-class="{'hidden' : !sp.isDiscount}" style="color: red;">
+                            Giá ưu đãi ₫{{ ((sp.gia || 0) - ((sp.gia || 0) * (sp.giaGiam || 0) / 100)) > 0
+                            ? ((sp.gia || 0) - ((sp.gia || 0) * (sp.giaGiam || 0) / 100))
                             : 0 }}
                         </h3>
                     </div>
@@ -117,7 +116,7 @@
             </div>
         </div>
     </div>
-    <div class="no-data-from-be" ng-if="noData">
+    <div class="no-data-from-be" ng-if="noData || listSP.length == 0">
         <h3>Không có dữ liệu</h3>
     </div>
     <div class="page">

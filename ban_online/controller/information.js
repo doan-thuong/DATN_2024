@@ -15,13 +15,20 @@ window.informationCtrl = function ($scope, $http, $location) {
     api_getSPCT
         .then(function (response) {
             data = response.data
+            console.log(data)
 
             if (!data) return
 
             $scope.categorys = []
             $scope.soLuong = data[0].soLuong
+            $scope.giaBanDau = Number(data[0].gia) + Number(data[0].tienGiam)
             $scope.gia = data[0].gia
             $scope.idCTSP = data[0].id
+            $scope.listAnh = []
+            data.forEach(item => {
+                $scope.listAnh.push(item.linkAnhList[0])
+            })
+
 
             data.forEach((ctps) => {
                 $scope.categorys.push(ctps.soNgaySuDung)

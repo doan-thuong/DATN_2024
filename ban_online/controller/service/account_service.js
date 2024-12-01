@@ -336,3 +336,17 @@ export function handleFormCancelOrder() {
         //
     }
 }
+
+export function logOut() {
+    const logout = document.querySelector('#logout')
+
+    logout.addEventListener('click', () => {
+        noti.getConfirm(check => {
+            if (check) {
+                sessionStorage.removeItem('check_account')
+                sessionStorage.removeItem('user')
+                window.location.hash = '#!home'
+            }
+        })
+    })
+}

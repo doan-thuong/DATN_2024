@@ -118,4 +118,6 @@ window.accountCtrl = function ($scope, $http) {
         detailOd.style.display = 'none'
         overlayAcc.style.display = 'none'
     }
+
+    accService.logOut()
 }

@@ -179,6 +179,8 @@ window.payCtrl = function ($scope, $location, $http) {
                         })
 
                 } else {
+                    console.log(dataPay)
+                    return
                     payService.postDataPay(dataPay, check => {
                         if (check) {
                             sessionStorage.removeItem("product_buy_now")
