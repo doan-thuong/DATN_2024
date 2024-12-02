@@ -68,15 +68,13 @@ window.homeCtrl = function ($scope, $http, $timeout) {
             item.addEventListener('click', () => {
                 let page = item.innerText
 
-                console.log(ind)
-
                 if (Number.isInteger(parseInt(page))) {
                     $http.get("http://localhost:8083/san-pham/getSanPham-online?page=" + (parseInt(page) - 1))
                         .then((response) => {
-                            const data = response.data
-                            const total = response.data.total
+                            const data = response.data.content
+                            const total = response.data.totalPages
 
-                            $scope.listSP = data.data
+                            $scope.listSP = data
 
                             homeService.generatePagination(ind, total)
                         })

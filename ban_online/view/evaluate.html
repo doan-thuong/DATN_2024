@@ -19,7 +19,8 @@
             <div ng-if="listNoDone.length >= 0 && listNoDone">
                 <div class="item-nodone" ng-repeat="nD in listNoDone">
                     <div class="infor-item-for-eval-nodone">
-                        <img src="" alt="anh sp">
+                        <img ng-src="{{nD.ctsp.anhCTSP && nD.ctsp.anhCTSP.length > 1 ? nD.ctsp.anhCTSP[0] : nD.ctsp.anhCTSP}}"
+                            alt="anh sp">
                         <p>{{nD.sp.tenSP}}</p>
                         <p>{{nD.ctsp.soNgaySuDung}} ngày</p>
                     </div>
@@ -37,7 +38,8 @@
             <div ng-if="listDone.length >= 0 && listDone">
                 <div class="item-done" ng-repeat="d in listDone">
                     <div class="infor-item-for-eval-done">
-                        <img src="" alt="anh sp">
+                        <img ng-src="{{d.ctsp.anhCTSP && d.ctsp.anhCTSP.length > 1 ? d.ctsp.anhCTSP[0] : d.ctsp.anhCTSP}}"
+                            alt="anh sp">
                         <p>{{d.sp.tenSP}}</p>
                         <p>{{d.ctsp.soNgaySuDung}} ngày</p>
                     </div>

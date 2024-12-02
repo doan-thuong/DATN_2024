@@ -3,8 +3,7 @@
     <div class="redirect-order" ng-if="!checkAccount">
         <p class="text-url-order">Kiểm tra đơn hàng <a href="#!/order" class="order-url">Tại đây</a></p>
     </div>
-    <!-- ng-repeat -->
-    <!-- <div ng-repeat="item in listCart track by $index"> -->
+
     <div ng-if="!checkList">
         <hr>
         <h4 style="text-align: center; color: rgb(255, 70, 70); margin: 50px 0;">
@@ -12,6 +11,7 @@
         </h4>
         <hr>
     </div>
+
     <div ng-if="checkList">
         <div class="cart-item" ng-repeat="cart in litsCart track by $index">
             <div class="check-box">
@@ -21,8 +21,7 @@
                 </label>
             </div>
             <div class="product-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGsLekIAnS67lv6lPbK8VciW9aJaRoFoZ28w&s"
-                    alt="">
+                <img ng-src="{{cart.linkAnh && cart.linkAnh.length > 1 ? cart.linkAnh[0] : cart.linkAnh}}" alt="ảnh">
                 <div class="information-product">
                     <h4>{{cart.tenSanPhamTrongGio}}</h4>
                     <div>
@@ -50,7 +49,6 @@
         </div>
     </div>
 
-    <!-- </div> -->
     <div class="buy-cart" ng-if="checkList">
         <button class="btn-buy-cart">Mua hàng <i class="total-item-cart">{{totalList}}</i></button>
     </div>
