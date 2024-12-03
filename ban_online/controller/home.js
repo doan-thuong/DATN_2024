@@ -1,6 +1,6 @@
 import * as homeService from "./service/home_service.js"
 
-window.homeCtrl = function ($scope, $http, $timeout) {
+window.homeCtrl = function ($scope, $http) {
 
     $scope.noDataNewProduct = true
     $scope.checkFind = false
@@ -27,21 +27,21 @@ window.homeCtrl = function ($scope, $http, $timeout) {
     $http.get('http://localhost:8083/san-pham/getSanPham-online')
         .then((response) => {
             const data = response.data.content
-            console.log(response)
             const totalPages = response.data.totalPages
 
             const currentDate = new Date()
 
             data.forEach((item) => {
-                if (item.giaGiam === null) {
-                    item.isDiscount = false
+                if (item.giaGiam == null) {
+                    item['isDiscount'] = false
                 } else {
                     const ngayBatDau = new Date(item.ngayBatDau)
                     const ngayKetThuc = new Date(item.ngayKetThuc)
+
                     if (currentDate >= ngayBatDau && currentDate <= ngayKetThuc) {
-                        item.isDiscount = true
+                        item['isDiscount'] = true
                     } else {
-                        item.isDiscount = false
+                        item['isDiscount'] = false
                     }
                 }
             })
@@ -74,7 +74,26 @@ window.homeCtrl = function ($scope, $http, $timeout) {
                             const data = response.data.content
                             const total = response.data.totalPages
 
+                            const currentDate = new Date()
+
+                            data.forEach((item) => {
+                                if (item.giaGiam == null) {
+                                    item['isDiscount'] = false
+                                } else {
+                                    const ngayBatDau = new Date(item.ngayBatDau)
+                                    const ngayKetThuc = new Date(item.ngayKetThuc)
+
+                                    if (currentDate >= ngayBatDau && currentDate <= ngayKetThuc) {
+                                        item['isDiscount'] = true
+                                    } else {
+                                        item['isDiscount'] = false
+                                    }
+                                }
+                            })
+
                             $scope.listSP = data
+
+                            console.log(data)
 
                             homeService.generatePagination(ind, total)
                         })

@@ -73,20 +73,20 @@
             </div>
             <div class="content-evaluate">
                 <p>Đánh giá: {{danhGia}}<i class='bx bxs-star' style="color: yellow;"></i></p>
-                <p>Số lượt đánh giá: {{soLuotDanhGia}}</p>
+                <p>Số lượt đánh giá: {{soLuot}}</p>
             </div>
         </div>
         <div class="comment-evaluate">
-            <div class="item-evaluate"> <!--ng-repeat: lặp lượt đánh giá-->
-                <p>nguoiDanhGia</p>
+            <div class="item-evaluate" ng-repeat="eval in listEvaluate"> <!--ng-repeat: lặp lượt đánh giá-->
+                <p>{{eval.khachHang.ten}}</p>
                 <p>
                     <ng-container ng-repeat="star in [1,2,3,4,5]">
-                        <i class="bx bxs-star" style="color: yellow;"></i> <!-- ng-if="star <= evaluate.soSao " -->
+                        <i class="bx bxs-star" ng-if="star <= eval.sao" style="color: yellow;"></i>
 
-                        <i class="bx bx-star" style="color: yellow;"></i> <!-- ng-if="star > evaluate.soSao" -->
+                        <i class="bx bx-star" ng-if="star > eval.sao" style="color: yellow;"></i>
                     </ng-container>
                 </p>
-                <p>noiDungDanhGia</p>
+                <p>{{eval.nhanXet}}</p>
                 <hr>
             </div>
         </div>

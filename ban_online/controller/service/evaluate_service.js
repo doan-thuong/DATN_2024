@@ -153,3 +153,14 @@ export function getDataEvaluate(idEval, callback) {
         noti.configNotificationError('Cập nhật đánh giá thất bại (' + er + ')')
     })
 }
+
+export async function getEvaluateByIdCTSP(idCTSP, callback) {
+    const response = await fetch('http://localhost:8083/danh-gia/detailByCTSP?idCTSP=' + idCTSP)
+
+    if (response.status == 200) {
+        const data = await response.json()
+        callback(data)
+    } else {
+        noti.configNotificationError('Lỗi (' + response.status + '): ' + await response.text())
+    }
+}

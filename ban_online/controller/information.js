@@ -1,4 +1,5 @@
 import * as inforService from './service/information_service.js'
+import * as evalService from './service/evaluate_service.js'
 
 window.informationCtrl = function ($scope, $http, $location) {
 
@@ -29,6 +30,20 @@ window.informationCtrl = function ($scope, $http, $location) {
                 $scope.listAnh.push(item.linkAnhList[0])
             })
 
+            evalService.getEvaluateByIdCTSP(data[0].id, (dataEval) => {
+                let starTotal = 0
+
+                dataEval.forEach((itemEval) => {
+                    starTotal += itemEval.sao
+                })
+
+                $scope.$apply(() => {
+                    $scope.listEvaluate = dataEval
+
+                    $scope.soLuot = dataEval.length
+                    $scope.danhGia = starTotal / dataEval.length
+                })
+            })
 
             data.forEach((ctps) => {
                 $scope.categorys.push(ctps.soNgaySuDung)
@@ -69,6 +84,21 @@ window.informationCtrl = function ($scope, $http, $location) {
                     $scope.idCTSP = data[index].id
                     $scope.soLuong = data[index].soLuong
                     $scope.gia = data[index].gia
+                })
+
+                evalService.getEvaluateByIdCTSP(data[index].id, (dataEval) => {
+                    let starTotal = 0
+
+                    dataEval.forEach((itemEval) => {
+                        starTotal += itemEval.sao
+                    })
+
+                    $scope.$apply(() => {
+                        $scope.listEvaluate = dataEval
+
+                        $scope.soLuot = dataEval.length
+                        $scope.danhGia = starTotal / (dataEval.length == 0 ? 1 : dataEval.length)
+                    })
                 })
             })
         })

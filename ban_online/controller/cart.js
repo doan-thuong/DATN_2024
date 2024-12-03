@@ -14,6 +14,9 @@ window.cartCtrl = function ($scope) {
             $scope.$apply(function () {
                 $scope.litsCart = data || []
                 $scope.checkList = $scope.litsCart.length > 0
+
+                console.log(data)
+
                 number_cart.textContent = $scope.litsCart.length
             })
         })

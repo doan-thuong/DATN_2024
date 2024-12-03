@@ -86,37 +86,6 @@ export function generatePagination(currentPage, totalPages) {
     }
 }
 
-// export function handleCallAPIPage() {
-//     const pageIndex = document.querySelectorAll('.page-item')
-//     let index = 0
-
-//     return new Promise((resolve) => {
-//         if (pageIndex.length == 0) {
-//             setTimeout(handleCallAPIPage, 800)
-//             return
-//         }
-
-//         pageIndex.forEach((item, ind) => {
-//             item.addEventListener('click', () => {
-//                 let page = item.innerHTML
-//                 index = ind
-//                 if (Number.isInteger(parseInt(page))) {
-//                     fetch("http://localhost:8083/san-pham/getSanPham-online?page=" + (parseInt(page) - 1))
-//                         .then((response) => response.json())
-//                         .then((data) => {
-//                             console.log("click")
-//                             let size = Array.isArray(data) ? data.length : 1
-//                             resolve({ data, index, size })
-//                         })
-//                         .catch((err) => {
-//                             console.error(err)
-//                         })
-//                 }
-//             })
-//         })
-//     })
-// }
-
 export function getDataForFilter() {
     const textFind = document.querySelector('#text-find')
     const categoryVitamin = document.querySelector('#vitamin')
