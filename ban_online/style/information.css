@@ -270,3 +270,19 @@
         display: none;
     }
 }
+
+.bxs-star,
+.bx-star {
+    font-size: 26px;
+    text-shadow:
+        2px 1px 3px black;
+    /* -2px -2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black; */
+}
+
+.content-item-eval {
+    padding: 5px 10px;
+    background-color: rgba(240, 245, 245, 0.7);
+    border-radius: 10px;
+}
