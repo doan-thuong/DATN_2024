@@ -52,7 +52,7 @@
             <div>
                 <p><b>Mã đơn hàng:</b> {{detailOrder.maHD}}</p>
                 <p><b>Ngày đặt hàng:</b> {{detailOrder.ngayTao}}</p>
-                <p><b>Trạng thái:</b> {{detailOrder.trangThai == 0 ? 'Đang chờ xác nhận' : 'Ok'}}</p>
+                <p><b>Trạng thái:</b> {{detailOrder.trangThai == 0 ? 'Đang chờ xác nhận' : 'Hoàn thành'}}</p>
             </div>
 
             <div>
@@ -69,8 +69,11 @@
         <div class="item-orderDtl" ng-repeat="oDtl in listOdDtl">
             <img src="" alt="anh">
             <p>{{oDtl.tenSP}} ({{oDtl.soNgaySuDung}} ngày)</p>
+            |
             <p>Số lượng: {{oDtl.soLuong}}</p>
+            |
             <p>₫{{oDtl.giaSauGiam}}</p>
+            |
             <p style="color: red;">- ₫{{oDtl.giaBan - oDtl.giaSauGiam}}</p>
         </div>
     </div>

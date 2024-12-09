@@ -31,7 +31,7 @@ window.orderCtrl = function ($scope) {
                         }
 
                         $scope.$apply(() => {
-                            $scope.detailOrder = order
+                            $scope.detailOrder = order.hoaDonRep
                             $scope.listOdDtl = orderDetails
                             $scope.tongTienDtl = tongTiens
                         })

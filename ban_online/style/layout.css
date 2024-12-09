@@ -127,7 +127,18 @@ nav {
     animation: ringBell 2s ease-in-out infinite;
 }
 
-.popup-confirm {
+#over-lay-layout {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 100, 100, 0.5);
+    z-index: 99;
+}
+
+.popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -148,7 +159,6 @@ nav {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    background-color: #30ff8a;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
@@ -157,6 +167,14 @@ nav {
     border-radius: 9999px;
     animation: animate .6s linear alternate-reverse infinite;
     transition: .6s ease;
+}
+
+.head-confirm {
+    background-color: #30ff8a;
+}
+
+.head-warning {
+    background-color: rgb(255, 240, 215);
 }
 
 @keyframes animate {
@@ -195,6 +213,14 @@ nav {
 }
 
 #cancel {
+    background-color: rgb(165, 165, 165);
+}
+
+#confirm-warning {
+    background-color: rgb(255, 190, 70);
+}
+
+#cancel-warning {
     background-color: rgb(165, 165, 165);
 }
 

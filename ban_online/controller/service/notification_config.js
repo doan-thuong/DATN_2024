@@ -54,10 +54,12 @@ export function getConfirm(callback) {
     const popup = document.querySelector('.popup-confirm')
     const btn_confirm = document.querySelector('#confirm')
     const btn_cancel = document.querySelector('#cancel')
+    const overlay = document.querySelector("#over-lay-layout")
     let checkConfirm = false
 
     // if (popup.style.display == 'none') {
     popup.style.display = 'flex'
+    overlay.style.display = 'block'
     // }
 
     btn_confirm.removeEventListener('click', () => handleConfirmClick(true))
@@ -71,6 +73,37 @@ export function getConfirm(callback) {
     const handleConfirmClick = (confirm) => {
         checkConfirm = confirm
         popup.style.display = 'none'
+        overlay.style.display = 'none'
+        callback(checkConfirm)
+    }
+}
+
+export function getWarningMessage(mess, callback) {
+    const popup = document.querySelector('.popup-warning')
+    const text_warning = document.querySelector("#text-warning")
+    const btn_warning = document.querySelector("#confirm-warning")
+    const btn_cancel_w = document.querySelector("#cancel-warning")
+    const overlay = document.querySelector("#over-lay-layout")
+
+    let checkConfirm = false
+
+    popup.style.display = 'flex'
+    overlay.style.display = 'block'
+
+    text_warning.textContent = mess
+
+    btn_warning.removeEventListener('click', () => handleConfirmClick(true))
+
+    btn_cancel_w.removeEventListener('click', () => handleConfirmClick(false))
+
+    btn_warning.addEventListener('click', () => { handleConfirmClick(true) })
+
+    btn_cancel_w.addEventListener('click', () => { handleConfirmClick(false) })
+
+    const handleConfirmClick = (confirm) => {
+        checkConfirm = confirm
+        popup.style.display = 'none'
+        overlay.style.display = 'none'
         callback(checkConfirm)
     }
 }

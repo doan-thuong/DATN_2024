@@ -2,12 +2,12 @@
     <div class="image">
         <div class="list-img-category">
             <!-- ng-repeat để hiển thị ảnh -->
-            <!-- <div ng-if="listAnh && listAn.lenght > 0"> -->
+            <!-- <div ng-if="listAnh.lenght > 0"> -->
             <div class="over-img" ng-repeat="lA in listAnh track by $index">
                 <img class="img-category" ng-src="{{lA}}">
                 <div class="overlay"></div>
-                <!-- </div> -->
             </div>
+            <!-- </div> -->
         </div>
         <img id="review-image-product" ng-src="{{listAnh[0]}}">
     </div>
@@ -77,19 +77,24 @@
             </div>
         </div>
         <div class="comment-evaluate">
-            <div class="item-evaluate" ng-repeat="eval in listEvaluate"> <!--ng-repeat: lặp lượt đánh giá-->
-                <div class="content-item-eval">
-                    <p>{{eval.khachHang.ten}}</p>
-                    <p>
-                        <ng-container ng-repeat="star in [1,2,3,4,5]">
-                            <i class="bx bxs-star" ng-if="star <= eval.sao" style="color: yellow;"></i>
+            <div ng-if="listEvaluate && listEvaluate.lenght > 0">
+                <div class="item-evaluate" ng-repeat="eval in listEvaluate"> <!--ng-repeat: lặp lượt đánh giá-->
+                    <div class="content-item-eval">
+                        <p>{{eval.khachHang.ten}}</p>
+                        <p>
+                            <ng-container ng-repeat="star in [1,2,3,4,5]">
+                                <i class="bx bxs-star" ng-if="star <= eval.sao" style="color: yellow;"></i>
 
-                            <i class="bx bx-star" ng-if="star > eval.sao" style="color: yellow;"></i>
-                        </ng-container>
-                    </p>
-                    <p>{{eval.nhanXet}}</p>
+                                <i class="bx bx-star" ng-if="star > eval.sao" style="color: yellow;"></i>
+                            </ng-container>
+                        </p>
+                        <p>{{eval.nhanXet}}</p>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
+            </div>
+            <div ng-if="!listEvaluate || listEvaluate.lenght == 0">
+                <p style="text-align: center; width: 100%;">--Chưa có đánh giá nào--</p>
             </div>
         </div>
     </div>

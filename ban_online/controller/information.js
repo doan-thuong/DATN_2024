@@ -1,5 +1,6 @@
 import * as inforService from './service/information_service.js'
 import * as evalService from './service/evaluate_service.js'
+import * as noti from './service/notification_config.js'
 
 window.informationCtrl = function ($scope, $http, $location) {
 
@@ -54,7 +55,9 @@ window.informationCtrl = function ($scope, $http, $location) {
             delay_spct
         })
         .catch((err) => {
-            console.error(err)
+            if (err.status == 400) {
+                noti.configNotificationError(err.data)
+            }
         })
 
     // delay để lấy data cho html
