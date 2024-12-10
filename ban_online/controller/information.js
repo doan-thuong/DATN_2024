@@ -171,15 +171,22 @@ window.informationCtrl = function ($scope, $http, $location) {
     const btn_buy = document.querySelector('#btn-buy-now')
     btn_buy.addEventListener('click', () => {
         let data_get = data[index_category]
-
+        let request = [
+            {
+                idCTSP: data_get.id,
+                soLuong: parseInt(document.querySelector("#input-quantity").value)
+            }
+        ]
         data_get['soLuongTrongGio'] = parseInt(document.querySelector("#input-quantity").value)
         data_get['tenSanPhamTrongGio'] = $scope.sp.tenSP
 
         sessionStorage.removeItem('product_buy_now')
         sessionStorage.setItem('product_buy_now', JSON.stringify(data_get))
 
-        setTimeout(() => {
-            window.location.hash = '#!/pay'
+        inforService.callApiCheckSL(request, response => {
+            if (response) {
+                window.location.hash = '#!/pay'
+            }
         })
     })
 }

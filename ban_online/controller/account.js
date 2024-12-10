@@ -60,8 +60,6 @@ window.accountCtrl = function ($scope, $http) {
     })
 
     accService.getOrderByClient('BFD28409', (order) => {
-
-        console.log(order)
         $scope.$apply(() => {
             $scope.listOrder = order
         })

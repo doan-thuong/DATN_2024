@@ -127,3 +127,32 @@ export async function handleAddCartForClient(data, callback) {
         console.error("Lỗi khi xử lý giỏ hàng:", error)
     }
 }
+
+export async function callApiCheckSL(mapProduct, callback) {
+    const response = await fetch('http://localhost:8083/chitiethoadon/checkSoLuong', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(mapProduct)
+    })
+
+    if (response.status == 400) {
+        const getResult = await response.text()
+
+        notiConfig.getWarningMessage("Vì số lượng nhiều!!! Bạn sẵn sàng nhận hàng có hạn sử dụng khác nhau chứ?", result => {
+            if (result) {
+                callback(true)
+            } else {
+                notiConfig.configNotificationWarning('Bạn hãy chọn lại số lượng (gợi ý ' + getResult + ')')
+            }
+        })
+    } else if (response.status == 200) {
+        const getText = await response.text()
+        if (getText == null) {
+            callback(true)
+        } else {
+            notiConfig.configNotificationWarning(getText)
+        }
+    }
+}

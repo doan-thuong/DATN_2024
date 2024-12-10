@@ -64,14 +64,43 @@ export function hanldeClickButtonBuy(listItem) {
         return
     }
 
-    btn_buy.addEventListener('click', () => {
+    btn_buy.addEventListener('click', async () => {
         try {
             sessionStorage.setItem('product_buy_now', null)
             sessionStorage.removeItem('listItemSelected')
             sessionStorage.setItem('listItemSelected', JSON.stringify(listItem))
 
-            console.log(listItem)
-            window.location.hash = '#!/pay'
+            let listMap = []
+
+            for (let item of listItem) {
+                listMap.push({
+                    idCTSP: item.id,
+                    soLuong: item.soLuongTrongGio
+                })
+            }
+
+            const checkSL = await fetch('http://localhost:8083/chitiethoadon/checkSoLuong', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(listMap)
+            })
+
+            if (checkSL.status != 200) {
+
+                const getResult = await checkSL.text()
+
+                notiConfig.getWarningMessage('Vì số lượng nhiều!!! Bạn sẵn sàng nhận hàng có hạn sử dụng khác nhau chứ?', check => {
+                    if (check) {
+                        window.location.hash = '#!/pay'
+                    } else {
+                        notiConfig.configNotificationWarning('Bạn hãy chọn lại số lượng (gợi ý ' + getResult + ')');
+                    }
+                })
+            } else {
+                window.location.hash = '#!/pay'
+            }
         } catch (error) {
             console.error('Lỗi khi lưu listItem vào sessionStorage:', error)
         }

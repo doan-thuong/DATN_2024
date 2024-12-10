@@ -50,6 +50,31 @@ export function configNotificationSuccess(message) {
     }, 3000)
 }
 
+export function configNotificationWarning(message) {
+    const warning_message = document.querySelector('.notification-warning')
+    const warning_text = document.querySelector('#content-warning')
+    const progress_warning = document.querySelector('.progress-bar-warning')
+
+    if (isTimeoutId) {
+        clearTimeout(isTimeoutId)
+        progress_warning.style.width = '0%'
+        warning_message.style.display = 'none'
+    }
+
+    warning_message.style.display = 'flex'
+    warning_text.textContent = message
+
+    progress_warning.style.width = '0%'
+    setTimeout(() => {
+        progress_warning.style.width = '100%'
+    }, 100)
+
+    isTimeoutId = setTimeout(() => {
+        warning_message.style.display = 'none'
+        progress_warning.style.width = '0%'
+    }, 3000)
+}
+
 export function getConfirm(callback) {
     const popup = document.querySelector('.popup-confirm')
     const btn_confirm = document.querySelector('#confirm')
