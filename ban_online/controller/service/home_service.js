@@ -1,3 +1,5 @@
+import * as noti from './notification_config.js'
+
 export function handleShoWHiddenFormFilter() {
     let btn_filter = document.querySelector("#btn-loc")
     let form_filter = document.querySelector("#filter")
@@ -95,36 +97,77 @@ export function getDataForFilter() {
     const priceMin = document.querySelector('#price-min')
     const priceMax = document.querySelector('#price-max')
 
-    return {
-        textFind: textFind.value.trim() ? textFind.value.trim() : null,
-        vitamin: categoryVitamin.checked ? true : false,
-        improveSkin: categoryImproveSkin.checked ? true : false,
-        healthCare: categoryHealthCare.checked ? true : false,
-        other: categoryOther.checked ? true : false,
-        priceMin: priceMin.value.trim() ? textFind.value.trim() : null,
-        priceMax: priceMax.value.trim() ? textFind.value.trim() : null
+    const filters = {
+        textFind: textFind.value.trim() || null,
+        vitamin: categoryVitamin.checked || false,
+        improveSkin: categoryImproveSkin.checked || false,
+        healthCare: categoryHealthCare.checked || false,
+        other: categoryOther.checked || false,
+        priceMin: priceMin.value.trim() || null,
+        priceMax: priceMax.value.trim() || null
     }
-}
 
-export function callAPIgetDataFilter() {
-    const btn_find = document.querySelector('#btn-find')
+    const isEmptyFilter = Object.values(filters).every(value => value == null || value == false)
 
-    btn_find.addEventListener('click', (e) => {
-        e.preventDefault()
+    if (isEmptyFilter) {
+        return { default: true }
+    }
 
-        let dataFormFilter = getDataForFilter()
-        //call api để lấy data
-        console.log(dataFormFilter)
-
-        //sử lý ẩn table data new product
-    })
+    return filters
 }
 
 export function handleClickButtonFind(callback) {
     const btn_find = document.querySelector('#btn-find')
 
-    btn_find.addEventListener('click', (e) => {
+    btn_find.addEventListener('click', async (e) => {
         e.preventDefault()
-        callback(true)
+
+        const checkboxes = document.querySelectorAll('.select-category input[type="checkbox"]')
+        const selectedValues = []
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedValues.push(checkbox.value)
+            }
+        })
+
+        const resultRequest = getDataForFilter()
+
+        if (resultRequest.default) {
+            noti.configNotificationWarning('Hãy nhập từ khóa để tìm kiếm')
+        } else {
+            let searchText = resultRequest.textFind
+            let danhMuc = selectedValues
+            let giaMin = resultRequest.priceMin
+            let giaMax = resultRequest.priceMax
+
+            const params = new URLSearchParams()
+
+            if (searchText) {
+                params.append('searchText', searchText)
+            }
+            if (giaMin) {
+                params.append('giaMin', giaMin)
+            }
+            if (giaMax) {
+                params.append('giaMax', giaMax)
+            }
+            if (danhMuc && danhMuc.length > 0) {
+                params.append('danhMuc', danhMuc.join(','))
+            }
+
+            const callApiSearch = await fetch(`http://localhost:8083/san-pham/tim-kiem?${params.toString()}`)
+            if (callApiSearch.status != 200) {
+                if (callApiSearch.status == 404) {
+                    noti.configNotificationWarning('Không tìm thấy sản phẩm phù hợp')
+                    return
+                }
+                noti.configNotificationError('Lỗi tìm kiếm')
+                return
+            } else {
+                const data = await callApiSearch.json()
+                console.log(data)
+                callback(data)
+            }
+        }
     })
 }

@@ -17,9 +17,9 @@ window.homeCtrl = function ($scope, $http) {
     //check input price
     homeService.handleCheckInputFindPrice()
 
-    homeService.handleClickButtonFind(check => {
+    homeService.handleClickButtonFind(data => {
         $scope.$apply(() => {
-            $scope.checkFind = check
+            $scope.listSP = data
         })
     })
 
@@ -51,7 +51,6 @@ window.homeCtrl = function ($scope, $http) {
 
             homeService.generatePagination(1, totalPages)
         }).catch((err) => {
-            console.error(err)
             $scope.noData = true
         })
 
@@ -93,8 +92,6 @@ window.homeCtrl = function ($scope, $http) {
 
                             $scope.listSP = data
 
-                            console.log(data)
-
                             homeService.generatePagination(ind, total)
                         })
                         .catch((err) => {
@@ -106,6 +103,4 @@ window.homeCtrl = function ($scope, $http) {
     }
 
     $scope.handleCallAPIPage()
-
-    homeService.callAPIgetDataFilter()
 }
