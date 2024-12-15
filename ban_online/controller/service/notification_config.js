@@ -82,34 +82,28 @@ export function getConfirm(title, mess, callback) {
     const title_cp = document.querySelector('#text-popup')
     const text_cp = document.querySelector('#text-content-popup')
     const overlay = document.querySelector("#over-lay-layout")
-    let checkConfirm = false
 
-    // if (popup.style.display == 'none') {
     popup.style.display = 'flex'
     overlay.style.display = 'block'
-    // }
 
-    if (!title) {
-        title_cp.textContent = title
-    }
+    title_cp.textContent = title
 
-    if (!mess) {
-        text_cp.textContent = mess
-    }
+    text_cp.textContent = mess
 
-    btn_confirm.removeEventListener('click', () => handleConfirmClick(true))
+    btn_confirm.removeEventListener('click', () => handleConfirmClick)
 
-    btn_cancel.removeEventListener('click', () => handleConfirmClick(false))
+    btn_cancel.removeEventListener('click', () => handleConfirmClick)
 
     btn_confirm.addEventListener('click', () => { handleConfirmClick(true) })
 
     btn_cancel.addEventListener('click', () => { handleConfirmClick(false) })
 
     const handleConfirmClick = (confirm) => {
-        checkConfirm = confirm
         popup.style.display = 'none'
         overlay.style.display = 'none'
-        callback(checkConfirm)
+        if (confirm) {
+            callback(true)
+        }
     }
 }
 

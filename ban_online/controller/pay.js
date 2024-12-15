@@ -53,7 +53,7 @@ window.payCtrl = function ($scope, $location, $http) {
     })
 
     if ($scope.check_account) {
-        idClient = sessionStorage.getItem('check_account')
+        idClient = JSON.parse(sessionStorage.getItem('user')).id
 
         $http.get('http://localhost:8083/thongtingiaohang/detailByKhach/' + idClient)
             .then(res => {
@@ -171,7 +171,6 @@ window.payCtrl = function ($scope, $location, $http) {
 
     btn_pay.addEventListener('click', () => {
         let inforClient = null
-        let checkConfirm = false
 
         let getPayment
 
@@ -181,7 +180,7 @@ window.payCtrl = function ($scope, $location, $http) {
 
             if ($scope.index_address != 0) {
                 // nếu địa chỉ khách chọn khác 0 thì sẽ lấy index để gửi sang backend xử lý
-                dataPay.indexAddress = $scope.index_address
+                dataPay.indexAddress = $scope.index_address || 0
             }
 
             // add mã giảm vào data
@@ -213,10 +212,12 @@ window.payCtrl = function ($scope, $location, $http) {
         //add payment vào data
         dataPay.payment = getPayment
 
-        noti.getConfirm((check) => {
-            checkConfirm = check
+        let title = 'Thanh toán'
+        let content = 'Bạn có chắc chắn thanh toán?'
 
-            if (checkConfirm) {
+        noti.getConfirm(title, content, (check) => {
+
+            if (check) {
                 //check nếu payment là tt online sẽ sang bên vnpay
                 if (getPayment == 2) {
 
@@ -230,7 +231,7 @@ window.payCtrl = function ($scope, $location, $http) {
                         })
 
                 } else {
-                    // console.log(dataPay)
+                    console.log(dataPay)
                     // return
                     payService.postDataPay(dataPay, check => {
                         if (check) {

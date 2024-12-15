@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./dangky.css">
+
+</head>
+
+<body>
+    <div class="back-ground"></div>
+    <div class="form-register">
+        <h3>Đăng ký</h3>
+        <form class="form-user" id="registerForm">
+            <div class="name-account">
+                <label for="name" class="label-name">Họ và Tên</label>
+                <input type="text" id="name" name="name">
+                <span class="error-message" id="error-NAME"></span>
+            </div>
+            <div class="email-account">
+                <label for="email" class="label-email">Email</label>
+                <input type="email" id="email" name="email">
+                <span class="error-message" id="error-EMAIL"></span>
+            </div>
+            <div class="password-account">
+                <label for="password" class="label-password">Mật khẩu</label>
+                <input type="password" id="password" name="password">
+                <span class="error-message" id="error-PASSWORD"></span>
+            </div>
+
+            <div class="gender-account">
+                <p>Giới tính</p>
+                <div class="gender-options">
+                    <div>
+                        <!-- <label for="male">Nam</label> -->
+                        <input type="radio" id="male" name="gender" value="Nam" checked>
+                        <p>Nam</p>
+                    </div>
+                    <div>
+                        <!-- <label for="female">Nữ</label> -->
+                        <input type="radio" id="female" name="gender" value="Nữ">
+                        <p>Nữ</p>
+                    </div>
+                </div>
+                <span class="error-message" id="error-GENDER"></span>
+            </div>
+            <div class="phone-account">
+                <label for="phone" class="label-phone">Số điện thoại</label>
+                <input type="tel" id="phone" name="phone">
+                <span class="error-message" id="error-PHONE"></span>
+            </div>
+            <div class="address-account">
+                <label for="address" class="label-address">Địa chỉ</label>
+                <input type="text" id="address" name="address">
+                <span class="error-message" id="error-ADDRESS"></span>
+            </div>
+            <div class="button-next-step">
+                <button class="btn-next-step">Tiếp tục</button>
+            </div>
+        </form>
+        <form class="form-confirm">
+            <p>Chúng tôi đã gửi cho bạn mã xác nhận. Vui lòng hãy kiểm tra email của bạn.</p>
+            <div class="otp-input">
+                <label for="otp">Mã OTP</label>
+                <input type="text" id="otp" name="otp">
+                <span class="error-message" id="error-OTP"></span>
+            </div>
+            <button class="btn-submit-otp">Xác nhận OTP</button>
+        </form>
+    </div>
+
+    <script src="./dangky.js"></script>
+</body>
+
+</html>
