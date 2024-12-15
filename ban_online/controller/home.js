@@ -1,7 +1,8 @@
 import * as homeService from "./service/home_service.js"
 
-window.homeCtrl = function ($scope, $http) {
+window.homeCtrl = function ($scope, $http, $location) {
 
+    let isS = $location.search().isS
     $scope.noDataNewProduct = true
     $scope.checkFind = false
     const user = JSON.parse(sessionStorage.getItem('user')) || "?"
@@ -12,42 +13,48 @@ window.homeCtrl = function ($scope, $http) {
         textAcc.textContent = '?'
     }
 
+    let isSearch = JSON.parse(sessionStorage.getItem('formSearch'))
+    if (isSearch && !isS) {
+        isSearch.isBack = false
+        sessionStorage.setItem('formSearch', JSON.stringify(isSearch))
+    }
+
     homeService.handleShoWHiddenFormFilter()
 
     //check input price
     homeService.handleCheckInputFindPrice()
 
+    function setDiscountStatus(products) {
+        const currentDate = new Date();
+        products.forEach(item => {
+            const { giaGiam, ngayBatDau, ngayKetThuc } = item;
+            item['isDiscount'] = giaGiam && new Date(ngayBatDau) <= currentDate && currentDate <= new Date(ngayKetThuc);
+        })
+    }
+
     homeService.handleClickButtonFind(data => {
+        setDiscountStatus(data.result)
+        homeService.generatePagination(1, data.totalPages)
         $scope.$apply(() => {
-            $scope.listSP = data
+            $scope.listSP = data.result
         })
     })
 
-    // // ghep api page
-    $http.get('http://localhost:8083/san-pham/getSanPham-online')
+
+    let url = 'http://localhost:8083/san-pham/tim-kiem'
+    if (isS && isSearch) {
+        if (isSearch.isBack) {
+            url += '?' + isSearch.value
+        }
+    }
+    $http.get(url)
         .then((response) => {
-            const data = response.data.content
+            const data = response.data.result
             const totalPages = response.data.totalPages
 
-            const currentDate = new Date()
-
-            data.forEach((item) => {
-                if (item.giaGiam == null) {
-                    item['isDiscount'] = false
-                } else {
-                    const ngayBatDau = new Date(item.ngayBatDau)
-                    const ngayKetThuc = new Date(item.ngayKetThuc)
-
-                    if (currentDate >= ngayBatDau && currentDate <= ngayKetThuc) {
-                        item['isDiscount'] = true
-                    } else {
-                        item['isDiscount'] = false
-                    }
-                }
-            })
+            setDiscountStatus(data)
 
             $scope.listSP = data
-
 
             homeService.generatePagination(1, totalPages)
         }).catch((err) => {
@@ -55,50 +62,56 @@ window.homeCtrl = function ($scope, $http) {
         })
 
     // chuyen trang
+    let currentPage = 0
     $scope.handleCallAPIPage = function () {
-        const pageIndex = document.querySelectorAll('.page-item')
+        const paginationContainer = document.querySelector('.pagination')
 
-        if (pageIndex.length == 0) {
-            setTimeout($scope.handleCallAPIPage, 800)
-            return
+        if (!paginationContainer) {
+            setTimeout($scope.handleCallAPIPage, 800);
+            return;
         }
 
-        pageIndex.forEach((item, ind) => {
-            item.addEventListener('click', () => {
-                let page = item.innerText
+        paginationContainer.addEventListener('click', (event) => {
+            const item = event.target;
 
-                if (Number.isInteger(parseInt(page))) {
-                    $http.get("http://localhost:8083/san-pham/getSanPham-online?page=" + (parseInt(page) - 1))
-                        .then((response) => {
-                            const data = response.data.content
-                            const total = response.data.totalPages
+            if (!item.classList.contains('page-item')) {
+                return
+            }
 
-                            const currentDate = new Date()
+            let page = item.innerText
 
-                            data.forEach((item) => {
-                                if (item.giaGiam == null) {
-                                    item['isDiscount'] = false
-                                } else {
-                                    const ngayBatDau = new Date(item.ngayBatDau)
-                                    const ngayKetThuc = new Date(item.ngayKetThuc)
+            if (page == '«') {
+                page = currentPage - 1
+            } else if (page == '»') {
+                page = currentPage + 1
+            }
 
-                                    if (currentDate >= ngayBatDau && currentDate <= ngayKetThuc) {
-                                        item['isDiscount'] = true
-                                    } else {
-                                        item['isDiscount'] = false
-                                    }
-                                }
-                            })
+            currentPage = parseInt(page)
 
-                            $scope.listSP = data
+            let search = JSON.parse(sessionStorage.getItem('formSearch'))
+            let param = ''
+            let url = "http://localhost:8083/san-pham/tim-kiem?page=" + (parseInt(page) - 1)
 
-                            homeService.generatePagination(ind, total)
-                        })
-                        .catch((err) => {
-                            console.error("Error getting data:", err)
-                        })
+            if (search || isS) {
+                if (search.isBack || isS) {
+                    param = search.value
+                    url += '&' + param
                 }
-            })
+            }
+
+            $http.get(url)
+                .then((response) => {
+                    const data = response.data.result
+                    const total = response.data.totalPages
+
+                    setDiscountStatus(data)
+                    homeService.generatePagination(parseInt(page), total)
+
+                    $scope.listSP = data
+                })
+                .catch((err) => {
+                    console.error("Error getting data:", err)
+                })
         })
     }
 

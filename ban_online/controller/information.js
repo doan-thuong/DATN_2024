@@ -183,6 +183,7 @@ window.informationCtrl = function ($scope, $http, $location) {
         sessionStorage.removeItem('product_buy_now')
         sessionStorage.setItem('product_buy_now', JSON.stringify(data_get))
 
+        console.log(request)
         inforService.callApiCheckSL(request, response => {
             if (response) {
                 window.location.hash = '#!/pay'

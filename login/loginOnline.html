@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+    <div class="back-ground">
+    </div>
+    <div class="form-login" id="form-login">
+        <h3>Đăng nhập</h3>
+        <form class="form-user">
+            <div class="user-account">
+                <label for="username">Tài khoản</label>
+                <input type="text" id="username" name="username">
+                <span class="error-message" id="error-TK"></span>
+            </div>
+            <div class="pass-account">
+                <label for="current-password">Mật khẩu</label>
+                <input type="password" id="current-password" name="current-password">
+                <span class="error-message" id="error-PW"></span>
+            </div>
+            <a href="#" id="linkDoiMK" style="display: block; text-align: right; margin-top: 5px;">Quên mật khẩu?</a>
+            <div class="button-next-step">
+                <button class="btn-next-step">Tiếp tục</button>
+            </div>
+        </form>
+        <form class="form-confirm">
+            <p>Chúng tôi đã gửi cho bạn mã xác nhận. Vui lòng hãy kiểm tra email của bạn.</p>
+            <div class="otp-input">
+                <label for="otp">Mã OTP</label>
+                <input type="text" id="otp" name="otp">
+                <span class="error-message" id="error-OTP"></span>
+            </div>
+            <button class="btn-submit-otp">Xác nhận OTP</button>
+        </form>
+    </div>
+    <div class="forgot-password" id="form-forgot" style="display: none;">
+        <form id="forgot-password-form">
+            <div class="email-input">
+                <label for="emailfg">Nhập Email</label>
+                <input type="email" id="emailfg" name="email" placeholder="Nhập email của bạn" required>
+                <span class="error-message" id="error-email"></span>
+            </div>
+            <button type="button" id="send-otp-btn">Gửi OTP</button>
+        </form>
+
+        <!-- Nhập OTP -->
+        <form id="otp-verification-form" style="display: none;">
+            <p>Vui lòng kiểm tra email và nhập mã OTP:</p>
+            <div class="otp-input">
+                <label for="otp-code">Mã OTP</label>
+                <input type="text" id="otp-code" name="otp-code" placeholder="Nhập mã OTP" required>
+                <span class="error-message" id="error-otp-forgot"></span>
+            </div>
+            <button type="button" id="verify-otp-btn">Xác nhận OTP</button>
+        </form>
+
+        <!-- Đổi mật khẩu -->
+        <form id="reset-password-form" style="display: none;">
+            <div class="password-input">
+                <label for="new-password">Mật khẩu mới</label>
+                <input type="password" id="new-password" name="new-password" placeholder="Nhập mật khẩu mới" required>
+            </div>
+            <div class="password-confirm">
+                <label for="confirm-password">Xác nhận mật khẩu</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu"
+                    required>
+                <span class="error-message" id="error-password"></span>
+            </div>
+            <button type="button" id="reset-password-btn">Đổi mật khẩu</button>
+        </form>
+    </div>
+
+    <script src="./login.js"></script>
+</body>
+
+</html>

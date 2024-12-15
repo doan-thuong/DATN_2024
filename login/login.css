@@ -27,12 +27,12 @@
     box-shadow: 0 0 10px 6px rgb(190, 215, 215);
     background-color: rgb(220, 235, 235);
     overflow: hidden;
+}
 
-    h3 {
-        text-align: center;
-        top: 10%;
-        position: absolute;
-    }
+h3 {
+    text-align: center;
+    top: 10%;
+    position: absolute;
 }
 
 .form-login::before {
@@ -133,15 +133,15 @@
     transform: translateX(-50%);
     position: absolute;
     transition: all 2s ease;
-
-    p {
-        text-align: center;
-        margin-bottom: 40px;
-    }
 }
 
 .active-form-confirm {
     right: -50%;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .user-account,
@@ -151,27 +151,28 @@
     padding: 10px 0;
     width: 100%;
     justify-content: center;
-    align-items: center;
-
-    input {
-        width: 100%;
-        height: 45px;
-        border: .5px solid rgb(75, 170, 255);
-        border-radius: 15px;
-        padding-left: 10px;
-        font: 18px 'Times New Roman';
-        outline: none;
-    }
-
-    label {
-        position: absolute;
-        background-color: transparent transparent;
-        color: inherit;
-        font-size: 17px;
-        z-index: 1;
-        transition: all .4s ease-out;
-    }
+    flex-direction: column;
 }
+
+input {
+    width: 100%;
+    height: 45px;
+    border: .5px solid rgb(75, 170, 255);
+    border-radius: 15px;
+    padding-left: 10px;
+    font: 18px 'Times New Roman';
+    outline: none;
+}
+
+label {
+    position: absolute;
+    background-color: transparent;
+    color: inherit;
+    font-size: 17px;
+    z-index: 1;
+    transition: all .4s ease-out;
+}
+
 
 .active-label {
     top: 50%;
@@ -192,51 +193,149 @@
     justify-content: center;
     align-items: center;
     margin: 15px 0;
-
-    button {
-        height: 40px;
-        outline: none;
-        border: .5px solid rgb(75, 170, 255);
-        border-radius: 10px;
-        font: 16px 'Times New Roman';
-        padding: 0 15px;
-        cursor: pointer;
-    }
 }
 
-/* .confirm-account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 500px;
-    margin-bottom: 20px;
-
-    #passconfirm {
-        width: 200px;
-        height: 35px;
-        border: .5px solid rgb(75, 170, 255);
-        border-radius: 10px;
-        box-sizing: border-box;
-        padding-left: 10px;
-        outline: none;
-        filter: blur(0);
-        font: 18px 'Times New Roman';
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-.button-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-login {
+button {
+    height: 40px;
+    outline: none;
     border: .5px solid rgb(75, 170, 255);
     border-radius: 10px;
-    padding: 10px 15px;
+    font: 16px 'Times New Roman';
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 18px;
+    margin-left: 5px;
+    display: block;
+}
+
+.forgot-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    border: .5px solid rgb(200, 200, 200);
+    box-shadow: 0 0 10px 6px rgb(190, 215, 215);
+    background-color: rgb(220, 235, 235);
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.forgot-password h3 {
+    text-align: center;
+    top: 10%;
+    position: absolute;
+}
+
+.forgot-password form {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.forgot-password .email-input,
+.forgot-password .otp-input,
+.forgot-password .password-input,
+.forgot-password .password-confirm {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.forgot-password input {
+    width: 100%;
+    height: 45px;
+    border: .5px solid rgb(75, 170, 255);
+    border-radius: 15px;
+    padding-left: 10px;
+    font: 18px 'Times New Roman';
+    outline: none;
+}
+
+.forgot-password label {
+    position: absolute;
+    background-color: transparent;
+    color: inherit;
+    font-size: 17px;
+    top: -10px;
+    left: 15px;
+    padding: 0 5px;
+    background: linear-gradient(to top, white 50%, rgb(220, 235, 235) 50%);
+    z-index: 1;
+    transition: all .4s ease-out;
+}
+
+.forgot-password button {
+    height: 40px;
+    outline: none;
+    border: .5px solid rgb(75, 170, 255);
+    border-radius: 10px;
     font: 16px 'Times New Roman';
     cursor: pointer;
-} */
+    background-color: rgb(75, 170, 255);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.forgot-password button:hover {
+    background-color: rgb(50, 120, 200);
+}
+
+.forgot-password .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.overlay-load {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 110, 110, 0.5);
+    z-index: 99;
+}
+
+.loader {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 47%;
+    left: 47%;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border-top: 5px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 15px solid #ff00;
+    animation: loader 1.2s infinite linear;
+    z-index: 100;
+}
+
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+#confirm-warning {
+    background-color: rgb(255, 190, 70);
+}
+
+#cancel-warning {
+    background-color: rgb(165, 165, 165);
+}

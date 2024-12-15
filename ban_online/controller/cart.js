@@ -3,14 +3,14 @@ import * as noti from './service/notification_config.js'
 
 window.cartCtrl = function ($scope) {
 
-    $scope.checkAccount = sessionStorage.getItem('check_account')
+    $scope.checkAccount = JSON.parse(sessionStorage.getItem('user'))
     $scope.totalList = 0
 
     const number_cart = document.querySelector('#number-cart')
 
     if ($scope.checkAccount) {
         //call api để get list cart
-        cartService.getListCartClient($scope.checkAccount, function (data) {
+        cartService.getListCartClient($scope.checkAccount.id, function (data) {
             $scope.$apply(function () {
                 $scope.litsCart = data || []
                 $scope.checkList = $scope.litsCart.length > 0

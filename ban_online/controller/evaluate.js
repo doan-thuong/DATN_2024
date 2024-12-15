@@ -3,7 +3,12 @@ import * as evalService from './service/evaluate_service.js'
 window.evaluateCtrl = function ($scope) {
 
     $scope.star = 0
-    let idClient = 'BFD28409'
+    let user = JSON.parse(sessionStorage.getItem('user'))
+    if (!user) {
+        window.location.href = 'http://127.0.0.1:5501/ban_online/layout.html#!/home'
+    }
+
+    let idClient = user.id
     const postEval = document.querySelector('.post-result-avaluate')
 
     evalService.handleControlMenuClick(idClient, (noDone, done) => {

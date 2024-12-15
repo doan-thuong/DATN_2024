@@ -149,7 +149,7 @@ export async function callApiCheckSL(mapProduct, callback) {
         })
     } else if (response.status == 200) {
         const getText = await response.text()
-        if (getText == null) {
+        if (getText == null || getText == '') {
             callback(true)
         } else {
             notiConfig.configNotificationWarning(getText)

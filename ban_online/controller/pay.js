@@ -3,6 +3,23 @@ import * as noti from './service/notification_config.js'
 
 window.payCtrl = function ($scope, $location, $http) {
 
+    $scope.$on('$viewContentLoaded', () => {
+        let urlParam = $location.search()
+        let status = urlParam.vnp_ResponseCode
+
+        if (!status) return
+
+        if (status === '00') {
+            noti.showSuccess('Thanh toán thành công')
+            payService.postDataPay(dataPay)
+            // setTimeout(() => {
+            window.location.hash = '#!/home'
+            // }, 2000)
+        } else {
+            noti.showError('Thanh toán thất bại')
+        }
+    })
+
     let idClient = null
     const btn_pay = document.querySelector('#btn-pay')
     const payment = document.querySelectorAll('[name="payment"]')
@@ -29,6 +46,12 @@ window.payCtrl = function ($scope, $location, $http) {
 
     $scope.list_item_pay = check_single_sp ? [check_single_sp] : listItemSelectedArray
 
+    Array.from($scope.list_item_pay).forEach(element => {
+        let gia = parseInt(element.gia)
+        let soLuong = parseInt(element.soLuongTrongGio)
+        $scope.totalMoney += gia * soLuong
+    })
+
     if ($scope.check_account) {
         idClient = sessionStorage.getItem('check_account')
 
@@ -40,19 +63,50 @@ window.payCtrl = function ($scope, $location, $http) {
                 console.error(err)
             })
 
-        $http.get('http://localhost:8083/chi-tiet-voucher/getByIdKhach/' + idClient)
+        $http.get('http://localhost:8083/chi-tiet-voucher/getByIdKhach?idKh=' + idClient + '&gia=' + $scope.totalMoney)
             .then(res => {
                 if (res.status == 200) {
-                    $scope.check_discount = true
+                    if (res.data.length > 0) {
+                        $scope.check_discount = true
+                        const today = new Date();
+                        res.data.forEach(item => {
+                            const targetDay = new Date(item.ngayKetThuc)
+                            let deffDay = Math.ceil((targetDay - today) / (1000 * 60 * 60 * 24))
+                            item.deffDay = deffDay
+                        })
 
-                    const today = new Date();
-                    res.data.forEach(item => {
-                        const targetDay = new Date(item.ngayKetThuc)
-                        let deffDay = Math.ceil((targetDay - today) / (1000 * 60 * 60 * 24))
-                        item.deffDay = deffDay
-                    })
+                        $scope.list_voucher = res.data
+                        console.log(res.data)
 
-                    $scope.list_voucher = res.data
+                        let suggestVoucher = res.data[0]
+                        if (res.data.length > 1) {
+                            const calculateDiscount = (item) => {
+                                const reMoney = $scope.totalMoney * (item.giamGia / 100)
+                                return Math.min(reMoney, item.giamMax)
+                            }
+
+                            suggestVoucher = res.data.reduce((bestVoucher, currentVoucher) => {
+                                return calculateDiscount(currentVoucher) > calculateDiscount(bestVoucher)
+                                    ? currentVoucher
+                                    : bestVoucher
+                            }, suggestVoucher)
+                        }
+
+                        let title_popup = 'Bạn có gợi ý!!!'
+                        let content_popup = 'Gợi ý bạn dùng voucher ' + suggestVoucher.ma
+
+                        noti.getConfirm(title_popup, content_popup, result => {
+                            if (result) {
+                                $scope.$apply(() => {
+                                    $scope.useVoucher(suggestVoucher)
+                                })
+                            }
+                        })
+
+                    } else {
+                        $scope.check_discount = false
+                        $scope.list_voucher = []
+                    }
 
                 } else {
                     $scope.check_discount = false
@@ -64,7 +118,7 @@ window.payCtrl = function ($scope, $location, $http) {
     $scope.client = JSON.parse(sessionStorage.getItem('user'))
 
     if (!$scope.list_item_pay.length) {
-        window.location.href = '#web-null';
+        window.location.href = '#!/home';
         return
     }
 
@@ -84,7 +138,8 @@ window.payCtrl = function ($scope, $location, $http) {
 
             $scope.useVoucher = function (voucher) {
                 $scope.discountCode = voucher.ma
-                $scope.reducedMoney = $scope.totalMoney * (voucher.giamGia / 100)
+                let reduced = $scope.totalMoney * (voucher.giamGia / 100)
+                $scope.reducedMoney = reduced > voucher.giamMax ? voucher.giamMax : reduced
                 $scope.discountMoney = $scope.reducedMoney
                 $scope.totalLastMoney = $scope.totalMoney - $scope.discountMoney
             }
@@ -92,16 +147,18 @@ window.payCtrl = function ($scope, $location, $http) {
             // action cancel discount
             setTimeout(() => {
                 const btn_cancel_disc = document.querySelector('#cancel-discount')
-                btn_cancel_disc.addEventListener('click', () => {
-                    if ($scope.discountCode != 'Chưa có') {
-                        $scope.$apply(() => {
-                            $scope.discountCode = 'Chưa có'
-                            $scope.reducedMoney = 0
-                            $scope.discountMoney = 0
-                            $scope.totalLastMoney = $scope.totalMoney
-                        })
-                    }
-                })
+                if (btn_cancel_disc) {
+                    btn_cancel_disc.addEventListener('click', () => {
+                        if ($scope.discountCode != 'Chưa có') {
+                            $scope.$apply(() => {
+                                $scope.discountCode = 'Chưa có'
+                                $scope.reducedMoney = 0
+                                $scope.discountMoney = 0
+                                $scope.totalLastMoney = $scope.totalMoney
+                            })
+                        }
+                    })
+                }
             }, 500)
         } else {
             payService.animationInputName()
@@ -109,12 +166,6 @@ window.payCtrl = function ($scope, $location, $http) {
             payService.animationInputAddress()
         }
     }, 0)
-
-    Array.from($scope.list_item_pay).forEach(element => {
-        let gia = parseInt(element.gia)
-        let soLuong = parseInt(element.soLuongTrongGio)
-        $scope.totalMoney += gia * soLuong
-    })
 
     $scope.totalLastMoney = $scope.totalMoney - $scope.discountMoney
 
@@ -185,28 +236,11 @@ window.payCtrl = function ($scope, $location, $http) {
                         if (check) {
                             sessionStorage.removeItem("product_buy_now")
                             sessionStorage.removeItem("listItemSelected")
-                            window.location.hash = '#!home'
+                            window.location.hash = '#!/home'
                         }
                     })
                 }
             }
         })
-    })
-
-    $scope.$on('$viewContentLoaded', () => {
-        let urlParam = $location.search()
-        let status = urlParam.vnp_ResponseCode
-
-        if (!status) return
-
-        if (status === '00') {
-            noti.showSuccess('Thanh toán thành công')
-            payService.postDataPay(dataPay)
-            // setTimeout(() => {
-            window.location.hash = '#!/home'
-            // }, 2000)
-        } else {
-            noti.showError('Thanh toán thất bại')
-        }
     })
 }

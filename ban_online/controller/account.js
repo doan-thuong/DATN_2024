@@ -3,6 +3,14 @@ import * as noti from './service/notification_config.js'
 import * as orderService from './service/order_service.js'
 
 window.accountCtrl = function ($scope, $http) {
+    const account = JSON.parse(sessionStorage.getItem('user'))
+
+    if (!account) {
+        window.location.href = 'http://127.0.0.1:5501/login/loginOnline.html'
+        return
+    }
+
+    const idAcc = account.id
     const client = sessionStorage.getItem('client')
     const overlayAcc = document.querySelector('.overlay-address')
     const detailOd = document.querySelector('.detail-order')
@@ -12,13 +20,13 @@ window.accountCtrl = function ($scope, $http) {
 
     number_cart.textContent = ''
     if (!client) {
-        accService.getInformationClient('BFD28409')
-        sessionStorage.setItem('check_account', 'BFD28409')
+        accService.getInformationClient(idAcc)
+        sessionStorage.setItem('check_account', idAcc)
     }
 
     $scope.check_default = false
 
-    $http.get('http://localhost:8083/thongtingiaohang/detailByKhach/BFD28409')
+    $http.get('http://localhost:8083/thongtingiaohang/detailByKhach/' + idAcc)
         .then(res => {
             $scope.listTTGH = res.data
         })
@@ -43,7 +51,7 @@ window.accountCtrl = function ($scope, $http) {
 
     accService.handleCloseForm()
 
-    accService.getVoucherClient('BFD28409', (list) => {
+    accService.getVoucherClient(idAcc, (list) => {
         $scope.$apply(() => {
             $scope.listVC = list
             cachedVoucher = list
@@ -59,7 +67,7 @@ window.accountCtrl = function ($scope, $http) {
         })
     })
 
-    accService.getOrderByClient('BFD28409', (order) => {
+    accService.getOrderByClient(idAcc, (order) => {
         $scope.$apply(() => {
             $scope.listOrder = order
         })
@@ -111,7 +119,7 @@ window.accountCtrl = function ($scope, $http) {
         }
     })
 
-    accService.updateClient('BFD28409')
+    accService.updateClient(idAcc)
 
     $scope.closeFormOdDtl = function () {
         detailOd.style.display = 'none'

@@ -53,7 +53,10 @@ function createPageItem(page, text = page, isDisabled = false, isActive = false)
 export function generatePagination(currentPage, totalPages) {
     const paginationContainer = document.getElementById('pagination')
 
-    if (totalPages <= 1) return
+    paginationContainer.innerHTML = ''
+    if (totalPages <= 1) {
+        return
+    }
 
     if (!paginationContainer.innerHTML) {
 
@@ -93,27 +96,44 @@ export function getDataForFilter() {
     const categoryVitamin = document.querySelector('#vitamin')
     const categoryImproveSkin = document.querySelector('#cai-thien-da')
     const categoryHealthCare = document.querySelector('#cham-soc-suc-khoe')
-    const categoryOther = document.querySelector('#khac')
     const priceMin = document.querySelector('#price-min')
     const priceMax = document.querySelector('#price-max')
 
     const filters = {
-        textFind: textFind.value.trim() || null,
-        vitamin: categoryVitamin.checked || false,
-        improveSkin: categoryImproveSkin.checked || false,
-        healthCare: categoryHealthCare.checked || false,
-        other: categoryOther.checked || false,
-        priceMin: priceMin.value.trim() || null,
-        priceMax: priceMax.value.trim() || null
+        searchText: textFind.value.trim() || null,
+        danhMuc: [
+            categoryVitamin.checked ? categoryVitamin.value : null,
+            categoryImproveSkin.checked ? categoryImproveSkin.value : null,
+            categoryHealthCare.checked ? categoryHealthCare.value : null,
+        ].filter(value => value !== null), // Loại bỏ các giá trị null
+        giaMin: priceMin.value.trim() || null,
+        giaMax: priceMax.value.trim() || null,
     }
 
-    const isEmptyFilter = Object.values(filters).every(value => value == null || value == false)
+    const isEmptyFilter = Object.values(filters).every(value =>
+        value == null || (Array.isArray(value) && value.length === 0)
+    )
 
     if (isEmptyFilter) {
-        return { default: true }
+        return '' // Trả về chuỗi rỗng nếu không có bộ lọc nào
     }
 
-    return filters
+    let query = ''
+
+    if (filters.searchText) {
+        query += `searchText=${encodeURIComponent(filters.searchText)}&`
+    }
+    if (filters.danhMuc.length > 0) {
+        query += filters.danhMuc.map(dm => `danhMuc=${encodeURIComponent(dm)}`).join('&') + '&'
+    }
+    if (filters.giaMin) {
+        query += `giaMin=${encodeURIComponent(filters.giaMin)}&`
+    }
+    if (filters.giaMax) {
+        query += `giaMax=${encodeURIComponent(filters.giaMax)}&`
+    }
+
+    return query.endsWith('&') ? query.slice(0, -1) : query
 }
 
 export function handleClickButtonFind(callback) {
@@ -122,52 +142,25 @@ export function handleClickButtonFind(callback) {
     btn_find.addEventListener('click', async (e) => {
         e.preventDefault()
 
-        const checkboxes = document.querySelectorAll('.select-category input[type="checkbox"]')
-        const selectedValues = []
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedValues.push(checkbox.value)
-            }
-        })
-
         const resultRequest = getDataForFilter()
 
-        if (resultRequest.default) {
-            noti.configNotificationWarning('Hãy nhập từ khóa để tìm kiếm')
-        } else {
-            let searchText = resultRequest.textFind
-            let danhMuc = selectedValues
-            let giaMin = resultRequest.priceMin
-            let giaMax = resultRequest.priceMax
+        var formSearch = {}
+        formSearch['value'] = resultRequest
+        formSearch['isBack'] = true
+        sessionStorage.setItem('formSearch', JSON.stringify(formSearch))
 
-            const params = new URLSearchParams()
-
-            if (searchText) {
-                params.append('searchText', searchText)
-            }
-            if (giaMin) {
-                params.append('giaMin', giaMin)
-            }
-            if (giaMax) {
-                params.append('giaMax', giaMax)
-            }
-            if (danhMuc && danhMuc.length > 0) {
-                params.append('danhMuc', danhMuc.join(','))
-            }
-
-            const callApiSearch = await fetch(`http://localhost:8083/san-pham/tim-kiem?${params.toString()}`)
-            if (callApiSearch.status != 200) {
-                if (callApiSearch.status == 404) {
-                    noti.configNotificationWarning('Không tìm thấy sản phẩm phù hợp')
-                    return
-                }
-                noti.configNotificationError('Lỗi tìm kiếm')
+        const callApiSearch = await fetch(`http://localhost:8083/san-pham/tim-kiem?${resultRequest}`)
+        if (callApiSearch.status != 200) {
+            if (callApiSearch.status == 404) {
+                noti.configNotificationWarning('Không tìm thấy sản phẩm phù hợp')
                 return
-            } else {
-                const data = await callApiSearch.json()
-                console.log(data)
-                callback(data)
             }
+            noti.configNotificationError('Lỗi tìm kiếm')
+            return
+        } else {
+            const data = await callApiSearch.json()
+            console.log(data)
+            callback(data)
         }
     })
 }

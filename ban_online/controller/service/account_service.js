@@ -253,7 +253,7 @@ export function updateClient(idClient) {
 }
 
 export async function getVoucherClient(idClient, callback) {
-    const response = await fetch('http://localhost:8083/chi-tiet-voucher/getByIdKhach/' + idClient)
+    const response = await fetch('http://localhost:8083/chi-tiet-voucher/getByIdKhach?idKh=' + idClient)
 
     if (response.status == 200) {
         const data = await response.json()
@@ -341,10 +341,13 @@ export function logOut() {
     const logout = document.querySelector('#logout')
 
     logout.addEventListener('click', () => {
-        noti.getConfirm(check => {
+        let title = "Đăng xuất"
+        let content = "Bạn có chắc muốn đăng xuất?"
+        noti.getConfirm(title, content, (check) => {
             if (check) {
-                sessionStorage.removeItem('check_account')
-                sessionStorage.removeItem('user')
+                // sessionStorage.removeItem('check_account')
+                // sessionStorage.removeItem('user')
+                sessionStorage.clear()
                 window.location.hash = '#!home'
             }
         })

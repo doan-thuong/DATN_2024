@@ -75,10 +75,12 @@ export function configNotificationWarning(message) {
     }, 3000)
 }
 
-export function getConfirm(callback) {
+export function getConfirm(title, mess, callback) {
     const popup = document.querySelector('.popup-confirm')
     const btn_confirm = document.querySelector('#confirm')
     const btn_cancel = document.querySelector('#cancel')
+    const title_cp = document.querySelector('#text-popup')
+    const text_cp = document.querySelector('#text-content-popup')
     const overlay = document.querySelector("#over-lay-layout")
     let checkConfirm = false
 
@@ -86,6 +88,14 @@ export function getConfirm(callback) {
     popup.style.display = 'flex'
     overlay.style.display = 'block'
     // }
+
+    if (!title) {
+        title_cp.textContent = title
+    }
+
+    if (!mess) {
+        text_cp.textContent = mess
+    }
 
     btn_confirm.removeEventListener('click', () => handleConfirmClick(true))
 
