@@ -104,8 +104,14 @@
                     <div class="text-content-item">
                         <p>Tổng tiền: ₫{{order.tongTien}}</p>
                         <p>Trạng thái:
-                            {{order.trangThai == 0 ? 'Chờ xác nhận' :
-                            (order.trangThai == 4 ? 'Đã hủy' : 'Đã xác nhận')}}
+                            {{
+                            order.trangThai == 0 ? 'Đang chờ xác nhận' :
+                            order.trangThai == 1 ? 'Chờ thanh toán' :
+                            order.trangThai == 2 ? 'Đã xác nhận' :
+                            order.trangThai == 5 ? 'Đang giao hàng' :
+                            order.trangThai == 3 ? 'Hoàn thành' :
+                            order.trangThai == 4 ? 'Đã hủy' : 'Không xác định'
+                            }}
                         </p>
                     </div>
                 </div>
@@ -131,8 +137,14 @@
                         <p><b>Ngày đặt hàng:</b> {{detailOrder.ngayTao}}</p>
                         <p>
                             <b>Trạng thái:</b>
-                            {{detailOrder.trangThai == 0 ? 'Chờ xác nhận' :
-                            (detailOrder.trangThai == 4 ? 'Đã hủy' : 'Đã xác nhận')}}
+                            {{
+                            detailOrder.trangThai == 0 ? 'Đang chờ xác nhận' :
+                            detailOrder.trangThai == 1 ? 'Chờ thanh toán' :
+                            detailOrder.trangThai == 2 ? 'Đã xác nhận' :
+                            detailOrder.trangThai == 5 ? 'Đang giao hàng' :
+                            detailOrder.trangThai == 3 ? 'Hoàn thành' :
+                            detailOrder.trangThai == 4 ? 'Đã hủy' : 'Không xác định'
+                            }}
                         </p>
                     </div>
 

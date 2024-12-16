@@ -292,6 +292,7 @@ export async function postDataPay(data, callback) {
         callback(true)
         noti.configNotificationSuccess('Đặt hàng thành công')
     } else {
-        noti.configNotificationError('Lỗi (' + apiPostPay.status + ')')
+        let textError = await apiPostPay.text()
+        noti.configNotificationError('Lỗi khi thanh toán (' + apiPostPay.status + ')' + ((!textError || textError == '') ? '' : ': ' + textError))
     }
 }
