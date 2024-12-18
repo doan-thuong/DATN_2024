@@ -80,15 +80,18 @@
             </div>
         </div>
         <div class="comment-evaluate">
-            <div ng-if="listEvaluate && listEvaluate.lenght > 0">
+            <div ng-if="listEvaluate && listEvaluate.length > 0">
                 <div class="item-evaluate" ng-repeat="eval in listEvaluate"> <!--ng-repeat: lặp lượt đánh giá-->
                     <div class="content-item-eval">
-                        <p>{{eval.khachHang.ten}}</p>
+                        <div style="display: flex; align-items: center;">
+                            <div class="avatar">{{eval.avatar}}</div>
+                            <p class="text-tenKhach">{{eval.tenKhach}}</p>
+                        </div>
                         <p>
                             <ng-container ng-repeat="star in [1,2,3,4,5]">
                                 <i class="bx bxs-star" ng-if="star <= eval.sao" style="color: yellow;"></i>
 
-                                <i class="bx bx-star" ng-if="star > eval.sao" style="color: yellow;"></i>
+                                <i class="bx bx-star" ng-if="star > eval.sao" style="color: rgb(255, 255, 135);"></i>
                             </ng-container>
                         </p>
                         <p>{{eval.nhanXet}}</p>
@@ -96,7 +99,7 @@
                     <hr>
                 </div>
             </div>
-            <div ng-if="!listEvaluate || listEvaluate.lenght == 0">
+            <div ng-if="!listEvaluate || listEvaluate.length == 0">
                 <p style="text-align: center; width: 100%;">--Chưa có đánh giá nào--</p>
             </div>
         </div>

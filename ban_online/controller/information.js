@@ -39,7 +39,13 @@ window.informationCtrl = function ($scope, $http, $location) {
                 })
 
                 $scope.$apply(() => {
+                    if (dataEval.length > 0) {
+                        dataEval.forEach((itemEval) => {
+                            itemEval['avatar'] = itemEval.tenKhach[0]
+                        })
+                    }
                     $scope.listEvaluate = dataEval
+                    console.log(dataEval)
 
                     $scope.soLuot = dataEval.length
                     $scope.danhGia = starTotal / dataEval.length
