@@ -95,6 +95,11 @@ export function handleAddNewAddress(callback) {
             noti.configNotificationError(mess)
             input_new_name.style.borderBottom = '1px solid red'
             return
+        } else if (input_new_name.value.trim().length > 255) {
+            let mess = "Tên đã quá 255 ký tự!"
+            noti.configNotificationError(mess)
+            input_new_name.style.borderBottom = '1px solid red'
+            return
         } else {
             input_new_name.style.borderBottom = '1px solid rgb(45, 130, 255)'
         }
@@ -104,12 +109,22 @@ export function handleAddNewAddress(callback) {
             noti.configNotificationError(mess)
             input_new_phone.style.borderBottom = '1px solid red'
             return
+        } else if (input_new_phone.value.trim().length != 10) {
+            let mess = "Số điện thoại phải có 10 chữ số!"
+            noti.configNotificationError(mess)
+            input_new_phone.style.borderBottom = '1px solid red'
+            return
         } else {
             input_new_phone.style.borderBottom = '1px solid rgb(45, 130, 255)'
         }
 
         if (input_new_address.value.trim() == '' || !input_new_address.value) {
             let mess = "Hãy nhập địa chỉ của bạn!"
+            noti.configNotificationError(mess)
+            input_new_address.style.borderBottom = '1px solid red'
+            return
+        } else if (input_new_address.value.trim().length > 255) {
+            let mess = "Địa chỉ đã quá 255 ký tự!"
             noti.configNotificationError(mess)
             input_new_address.style.borderBottom = '1px solid red'
             return
@@ -312,23 +327,54 @@ export function filterVouchers(listCachedVC, query, callback) {
     callback(listFind)
 }
 
-export function handleFormCancelOrder() {
+export function handleFormCancelOrder(idHD, trangThai) {
     const btn_cancel_order = document.querySelector('.btn-cancel-order')
     const contReason = document.querySelector('.content-reason')
     const textReason = document.querySelector('#inp-reason')
 
+    if (trangThai != 1) {
+        btn_cancel_order.style.display = 'none'
+        contReason.style.display = 'none'
+        return
+    }
+
     try {
-        btn_cancel_order.addEventListener('click', () => {
+        btn_cancel_order.addEventListener('click', async () => {
 
             if (contReason.style.display == 'none' || contReason.style.display == "") {
                 contReason.style.display = 'flex'
             } else {
                 let valueReason = textReason.value
+                if (valueReason.trim().length > 255) {
+                    noti.configNotificationError('Lý do hủy đơn hàng phải dưới 255 ký tự!')
+                    return
+                }
                 if (valueReason.trim() == "") {
                     noti.configNotificationError('Vui lòng nhập lý do hủy đơn hàng!')
+                    return
+                }
+
+                //sẽ call api để gửi thông tin hủy đơn
+                let request = {
+                    idHD: idHD,
+                    reason: valueReason
+                }
+                let url = 'http//localhost:8083/hoadon/huyHD'
+
+                let response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(request),
+                })
+
+                if (response.status == 200) {
+                    noti.configNotificationSuccess('Hủy đơn hàng thành công!')
+                    contReason.style.display = 'none'
                 } else {
-                    //sẽ call api để gửi thông tin hủy đơn
-                    console.log(valueReason)
+                    let text = await response.text()
+                    noti.configNotificationError('Hủy đơn hàng thất bại! (' + text + ')')
                 }
             }
         })

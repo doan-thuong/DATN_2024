@@ -19,6 +19,9 @@ const inpOtp = document.querySelector('#otp');
 const btnSubmitOtp = document.querySelector('.btn-submit-otp');
 const errorOTP = document.querySelector('#error-OTP');
 
+const overlayLoad = document.querySelector('.overlay-load')
+const loader = document.querySelector('.loader')
+
 lbPass.classList.add('active-label')
 lbUser.classList.add('active-label')
 
@@ -60,6 +63,8 @@ btnNextStep.addEventListener('click', (e) => {
     }
 
     if (email !== '' && password !== '') {
+        overlayLoad.style.display = 'block'
+        loader.style.display = 'block'
         fetch('http://localhost:8083/login/onlineSale', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -79,7 +84,11 @@ btnNextStep.addEventListener('click', (e) => {
             .catch(error => {
                 console.error('Error:', error);
                 errorTK.innerText = 'Đã xảy ra lỗi, vui lòng thử lại';
-            });
+            })
+            .finally(() => {
+                overlayLoad.style.display = 'none'
+                loader.style.display = 'none'
+            })
     }
 })
 
@@ -97,6 +106,9 @@ btnSubmitOtp.addEventListener('click', async (e) => {
 
     // Gửi yêu cầu kiểm tra OTP
     const otpRequest = { email: email, otp: otpValue };
+
+    overlayLoad.style.display = 'block';
+    loader.style.display = 'block';
     const response = await fetch('http://localhost:8083/login/checkOtpOl', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -104,6 +116,10 @@ btnSubmitOtp.addEventListener('click', async (e) => {
     });
 
     const result = await response.json();
+
+    overlayLoad.style.display = 'none';
+    loader.style.display = 'none';
+
     if (result.success === false) {
         errorOTP.innerText = result.message || 'Mã OTP không chính xác';
     } else {

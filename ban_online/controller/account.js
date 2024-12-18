@@ -76,8 +76,6 @@ window.accountCtrl = function ($scope, $http) {
     function attachOrderClickHandler() {
         let btnOrder = document.querySelectorAll(".text-detail-order-acc")
 
-        accService.handleFormCancelOrder()
-
         btnOrder.forEach(ele => {
             ele.addEventListener("click", async () => {
                 let idOrd = ele.dataset.orderIdAcc
@@ -85,6 +83,8 @@ window.accountCtrl = function ($scope, $http) {
 
                 const order = await orderService.getDataOrderByOrderId(idOrd)
                 const orderDetails = await orderService.getDataOrderDetails(idOrd)
+
+                accService.handleFormCancelOrder(order.id, order.trangThai)
 
                 let tongTiens = 0
                 for (const cthd of orderDetails) {

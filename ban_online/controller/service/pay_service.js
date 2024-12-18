@@ -31,7 +31,7 @@ export function animationInputName() {
     input_name_address_nologin.addEventListener('input', () => {
         const value = input_name_address_nologin.value
         const regex = /^[a-zA-Z\s]+$/
-        if (regex.test(value) && value.trim() !== "") {
+        if (regex.test(value) && value.trim() !== "" && value.length <= 255) {
             input_name_address_nologin.style.borderBottom = '.5px solid rgb(155, 215, 255)'
         } else {
             input_name_address_nologin.style.borderBottom = '.5px solid red'
@@ -58,7 +58,7 @@ export function animationInputPhone() {
     input_phone_address_nologin.addEventListener('input', () => {
         const value = input_phone_address_nologin.value
         const regex = /^(?:\+84|0)(?:\d{9}|\d{2}-\d{7,8})$/
-        if (regex.test(value) && value.trim() !== "") {
+        if (regex.test(value) && value.trim() !== "" && value.length == 10) {
             input_phone_address_nologin.style.borderBottom = '.5px solid rgb(155, 215, 255)'
         } else {
             input_phone_address_nologin.style.borderBottom = '.5px solid red'
@@ -83,7 +83,7 @@ export function animationInputAddress() {
     })
 
     input_address_address_nologin.addEventListener('input', () => {
-        if (input_address_address_nologin.value.trim() !== "") {
+        if (input_address_address_nologin.value.trim() !== "" && value.length <= 255) {
             input_address_address_nologin.style.borderBottom = '.5px solid rgb(155, 215, 255)'
         } else {
             input_address_address_nologin.style.borderBottom = '.5px solid red'

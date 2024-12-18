@@ -11,12 +11,16 @@ window.evaluateCtrl = function ($scope) {
     let idClient = user.id
     const postEval = document.querySelector('.post-result-avaluate')
 
-    evalService.handleControlMenuClick(idClient, (noDone, done) => {
+    evalService.handleControlMenuClick(idClient, (noDone) => {
         $scope.$apply(() => {
             $scope.listNoDone = noDone
-            $scope.listDone = done
         })
-    })
+    },
+        (done) => {
+            $scope.$apply(() => {
+                $scope.listDone = done
+            })
+        })
 
     evalService.getEvaluateNoDone(idClient)
         .then(response => {

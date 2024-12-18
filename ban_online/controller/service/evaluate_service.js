@@ -111,6 +111,8 @@ export async function getEvaluateDone(idClient) {
 export function getDataEvaluate(idEval, callback) {
     const result = document.querySelector('.text-result-star')
     const resultText = document.querySelector('.text-evaluate')
+    const popupEvaluate = document.querySelector(".popup-evaluate")
+    const overlayEvaluate = document.querySelector(".overlay-eval")
 
     let resultStar = result.textContent[0]
     let comment = resultText.value
@@ -142,6 +144,11 @@ export function getDataEvaluate(idEval, callback) {
     ).then(response => {
         if (response.ok) {
             noti.configNotificationSuccess('Cập nhật đánh giá thành công')
+            popupEvaluate.style.display = 'none'
+            overlayEvaluate.style.display = 'none'
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000)
             return response.json()
         }
         else
@@ -150,7 +157,7 @@ export function getDataEvaluate(idEval, callback) {
     }).then(data => {
         callback(data)
     }).catch(er => {
-        noti.configNotificationError('Cập nhật đánh giá thất bại (' + er + ')')
+        // noti.configNotificationError('Đánh giá thất bại (' + er + ')')
     })
 }
 
