@@ -135,7 +135,7 @@ export function handleAddNewAddress(callback) {
         let dataFormAddress = getFormAddInForAddress(input_new_name, input_new_phone, input_new_address)
 
         try {
-            const res = await fetch('https://localhost:8083/', {
+            const res = await fetch('https://localhost:8083/thongtingiaohang/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
